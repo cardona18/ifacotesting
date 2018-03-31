@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR PERIODIC PAYMENT VIEWS -->
+
+        <record id="hr_periodic_payment_action" model="ir.actions.act_window">
+            <field name="name">Entradas programadas</field>
+            <field name="res_model">hr.periodic.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_periodic_payment_form">
+            <field name="name">hr_periodic_payment_form</field>
+            <field name="model">hr.periodic.payment</field>
+            <field name="arch" type="xml">
+                <form name="Entradas programadas">
+                    <group>
+                        <field name="employee_id" required="1" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                        <field name="company_id" readonly="1"/>
+                        <field name="concept_id" required="1" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                        <field name="amount" required="1" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                        <field name="mtype" required="1" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                        <field name="apply_date" attrs="{'invisible':[('mtype','!=','ONE_DATE')], 'required':[('mtype','=','ONE_DATE')]}"/>
+                        <field name="stop_date" attrs="{'invisible':[('mtype','!=','DATE')]}"/>
+                        <field name="amount_start" attrs="{'invisible':[('mtype','!=','AMOUNT')]}"/>
+                        <field name="current_amount" readonly="1" attrs="{'invisible':[('mtype','!=','AMOUNT')]}"/>
+                        <field name="amount_limit" attrs="{'invisible':[('mtype','!=','AMOUNT')]}"/>
+                        <field name="paid" attrs="{'invisible':[('mtype','!=','AMOUNT')]}"/>
+                        <field name="struct_id"/>
+                        <field name="is_readonly" invisible="1"/>
+                    </group>
+                    <group string="Póliza">
+                        <field name="account1_id"/>
+                        <field name="account2_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_periodic_payment_tree">
+            <field name="name">"hr_periodic_payment_tree"</field>
+            <field name="model">hr.periodic.payment</field>
+            <field name="arch" type="xml">
+                <tree name="Entradas programadas">
+                    <field name='name'/>
+                    <field name="employee_id"/>
+                    <field name="mtype"/>
+                    <field name="concept_id"/>
+                    <field name="struct_id"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_periodic_payment_menu" name="Entradas programadas" parent="hr_payroll_main_menu" action="hr_periodic_payment_action" sequence="30"/>
+
+    </data>
+</openerp>
+

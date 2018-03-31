@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- MAIL DOMAIN ROUTE VIEWS -->
+
+        <record id="mail_domain_route_action" model="ir.actions.act_window">
+            <field name="name">Rutas de salida</field>
+            <field name="res_model">mail.domain.route</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="mail_domain_route_form">
+            <field name="name">mail_domain_route_form</field>
+            <field name="model">mail.domain.route</field>
+            <field name="arch" type="xml">
+                <form name="Rutas de salida">
+                    <group>
+                        <field name="name"/>
+                        <field name="domain_regex" required="1"/>
+                        <field name="server_id" required="1"/>
+                        <field name='sequence'/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mail_domain_route_tree">
+            <field name="name">"mail_domain_route_tree"</field>
+            <field name="model">mail.domain.route</field>
+            <field name="arch" type="xml">
+                <tree name="Rutas de salida">
+                    <field name='sequence' widget='handle'/>
+                    <field name='name'/>
+                    <field name="domain_regex"/>
+                    <field name="server_id"/>
+                    <field name='sequence'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="mail_domain_route_menu" name="Rutas de salida" action="mail_domain_route_action" parent="base.menu_email" sequence="10"/>
+
+    </data>
+</openerp>

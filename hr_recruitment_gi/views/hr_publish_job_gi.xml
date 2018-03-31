@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR REQUEST VIEWS -->
+        <record id="request_publish_job_gi_action" model="ir.actions.act_window">
+            <field name="name">Publicación de vacantes</field>
+            <field name="res_model">hr.publish.job.gi</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_request_publish_gi_form">
+            <field name="name">hr_publish_job_gi_form</field>
+            <field name="model">hr.publish.job.gi</field>
+            <field name="arch" type="xml">
+                <form name="Requisición de personal">
+                    <header>
+                        <button name="published" type="object" string="Publicar" states="draft,not_published" class="oe_highlight"/>
+                        <button name="not_published" type="object" string="Cancelar publicación" states="published"/>
+                        <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,published,not_published"/>
+                    </header>
+
+                    <group>
+                        <!-- <field name='publica'/> -->
+                        <!-- <field name='backgrou'/> -->
+                        <field name='name'/>
+                        <field name='Requ_job'/>
+                        <field name='experi_job'/>
+                        <field name='fun_job'/>
+                        <field name='Knowle_job'/>
+                    </group>
+                </form>           
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_request_publish_gi_tree">
+            <field name="name">hr_publish_job_gi_tree</field>
+            <field name="model">hr.publish.job.gi</field>
+            <field name="arch" type="xml">
+                <tree name="Requisición de personal">
+                        <field name='name' domain="[('state','in',('draft'))]"/>
+                        <!-- <field name='publica'/> -->
+                        <field name='state'/>
+                </tree>
+            </field>
+        </record>
+
+        
+        <menuitem id="hr_publish_job_gi_menu_wqeqwe" name="Publicar vacantes intranet" sequence="4" parent="base.menu_crm_case_job_req_main" action="hr_recruitment_gi.request_publish_job_gi_action" groups="hr_recruitment_gi.group_director,base.group_hr_manager,hr_recruitment_gi.group_rsp"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,18 @@
+<openerp>
+    <data>
+    	<record id="hr_evaluation_360.group_do" model="res.groups">
+            <field name="name">Jefe Desarrollo Organizacional</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> 
+            <field name="comment">El rol de DO tendrán permisos especiales para RH</field>
+        </record>
+
+        <record id="hr_evaluation_360.group_curs" model="res.groups">
+            <field name="name">Auxiliar DO</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> 
+            <field name="comment">El rol de DO tendrán permisos de consulta para RH</field>
+        </record>
+        
+   	</data>
+</openerp>

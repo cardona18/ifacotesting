@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR BUSINESS SEGMENT VIEWS -->
+
+        <record id="hr_business_segment_action" model="ir.actions.act_window">
+            <field name="name">Segmentos de negocio</field>
+            <field name="res_model">hr.business.segment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_business_segment_form">
+            <field name="name">hr_business_segment_form</field>
+            <field name="model">hr.business.segment</field>
+            <field name="arch" type="xml">
+                <form name="HR BUSINESS SEGMENT">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_business_segment_tree">
+            <field name="name">"hr_business_segment_tree"</field>
+            <field name="model">hr.business.segment</field>
+            <field name="arch" type="xml">
+                <tree name="HR BUSINESS SEGMENT">
+                    <field name='name'/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_business_segment_menu" name="Segmentos de negocio" parent="hr.menu_human_resources_configuration" action="hr_business_segment_action" sequence="9"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR TIMECHECK TURN VIEWS -->
+
+        <record id="hr_timecheck_turn_action" model="ir.actions.act_window">
+            <field name="name">Turnos</field>
+            <field name="res_model">hr.timecheck.turn</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_timecheck_turn_form">
+            <field name="name">hr_timecheck_turn_form</field>
+            <field name="model">hr.timecheck.turn</field>
+            <field name="arch" type="xml">
+                <form name="Turnos">
+                    <group>
+                        <field name="name"/>
+                        <field name="start_turn" widget="float_time" required="1"/>
+                        <field name="end_turn" widget="float_time" required="1"/>
+                        <field name="has_break"/>
+                        <field name="start_break" widget="float_time" attrs="{'invisible': [('has_break', '=', False)], 'required': [('has_break', '=', True)]}"/>
+                        <field name="end_break" widget="float_time" attrs="{'invisible': [('has_break', '=', False)], 'required': [('has_break', '=', True)]}"/>
+                        <field name="hour_mode"/>
+                        <field name="work_hours"/>
+                        <field name="work_shift"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_timecheck_turn_tree">
+            <field name="name">"hr_timecheck_turn_tree"</field>
+            <field name="model">hr.timecheck.turn</field>
+            <field name="arch" type="xml">
+                <tree name="Turnos">
+                    <field name='name'/>
+                    <field name="start_turn" widget="float_time" required="1"/>
+                    <field name="end_turn" widget="float_time" required="1"/>
+                    <field name="has_break"/>
+                    <field name="start_break" widget="float_time"/>
+                    <field name="end_break" widget="float_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_timecheck_turn_menu" name="Turnos" action="hr_timecheck_turn_action" parent="hr_timecheck_main_menu" sequence="10"/>
+
+    </data>
+</openerp>

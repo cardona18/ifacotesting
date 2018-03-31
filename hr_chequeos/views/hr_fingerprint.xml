@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR FINGERPRINT VIEWS -->
+
+        <record id="hr_fingerprint_action" model="ir.actions.act_window">
+            <field name="name">Biometrías</field>
+            <field name="res_model">hr.fingerprint</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_fingerprint_form">
+            <field name="name">hr_fingerprint_form</field>
+            <field name="model">hr.fingerprint</field>
+            <field name="arch" type="xml">
+                <form name="Biometrías">
+                    <group>
+                        <field name="employee_id" required="1"/>
+                        <field name="name"/>
+                        <field name="hash_value"/>
+                        <field name="is_check"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_fingerprint_tree">
+            <field name="name">"hr_fingerprint_tree"</field>
+            <field name="model">hr.fingerprint</field>
+            <field name="arch" type="xml">
+                <tree name="Biometrías">
+                    <field name="employee_id" required="1"/>
+                    <field name="name"/>
+                    <field name="is_check"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_fingerprint_menu" name="Biometrías" parent="hr_timecheck_main_menu" action="hr_fingerprint_action" sequence="50"/>
+
+    </data>
+</openerp>

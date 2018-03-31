@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR ACADEMIC INSTITUTION VIEWS -->
+
+        <record id="hr_academic_institution_action" model="ir.actions.act_window">
+            <field name="name">Institución academica</field>
+            <field name="res_model">hr.academic.institution</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_academic_institution_form">
+            <field name="name">hr_academic_institution_form</field>
+            <field name="model">hr.academic.institution</field>
+            <field name="arch" type="xml">
+                <form name="HR ACADEMIC INSTITUTION">
+                    <group>
+                        <field name="name"/>
+                        <field name='short_name'/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_academic_institution_tree">
+            <field name="name">"hr_academic_institution_tree"</field>
+            <field name="model">hr.academic.institution</field>
+            <field name="arch" type="xml">
+                <tree name="HR ACADEMIC INSTITUTION">
+                    <field name='name'/>
+                    <field name='short_name'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_academic_institution_menu" name="Institución academica" parent="hr_school_main_menu" action="hr_academic_institution_action" sequence="10"/>
+
+    </data>
+</openerp>

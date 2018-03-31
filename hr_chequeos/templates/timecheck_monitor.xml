@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- MAIN TEMPLATE -->
+
+        <template id="timecheck_monitor">
+
+        <head>
+          <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+          <link t-attf-href="/hr_chequeos/static/src/css/{{browser}}.css" rel="stylesheet" type="text/css"/>
+
+          <!-- Style Includes -->
+          <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        </head>
+
+        <body>
+
+            <div id="clock"></div>
+
+            <hr/>
+
+            <div id="monitor">
+            </div>
+
+            <script type="text/javascript">
+                function startMonitor() {
+
+                    $.ajax({
+                      type: "POST",
+                      url: '/web/timechecker/current_date',
+                      data: {
+                        'csrf_token': '<t t-esc="request.csrf_token()"/>'
+                      },
+                      success: function(response){
+                        document.getElementById("clock").innerHTML = response;
+                      }
+                    });
+
+                    $.ajax({
+                      type: "POST",
+                      url: '/web/timechecker/content',
+                      data: {
+                        'csrf_token': '<t t-esc="request.csrf_token()"/>'
+                      },
+                      success: function(response){
+                        document.getElementById("monitor").innerHTML = response;
+                      }
+                    });
+
+                    var t = setTimeout(function(){ startMonitor() }, 4000);
+                }
+
+                startMonitor();
+            </script>
+
+        </body>
+
+        </template>
+
+        <!-- CONTENT TEMPLATE -->
+
+        <template id="timecheck_monitor_content">
+
+            <t t-foreach="nodes" t-as="node">
+
+                <t t-set="state" t-value="node.status_class()"/>
+
+                <table>
+                  <tr>
+                      <td><image src="/hr_chequeos/static/src/img/clock.png" width="30" height="30"/></td>
+                      <td class="big_text sm_bottom_space"><t t-esc="node.name"/></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" t-attf-class="{{state[0]}}"><t t-esc="state[1]"/></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" class="small_text first_line"><t t-esc="node.get_ip_str()"/></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" class="small_text"><t t-esc="node.sync_txt()"/></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" class="small_text"><t t-esc="node.sync_count"/></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" class="small_text"><t t-esc="node.sync_count2"/></td>
+                  </tr>
+                </table>
+
+            </t>
+
+        </template>
+
+    </data>
+</openerp>

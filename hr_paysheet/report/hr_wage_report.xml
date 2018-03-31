@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record model ="ir.ui.view" id="hr_wage_report_graph">
+            <field name="name">hr.wage.report.graph</field>
+            <field name="model">hr.wage.report</field>
+            <field name="arch" type="xml">
+                <graph string="Análisis de sueldos" type="pivot">
+                    <field name="sdii" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_wage_report">
+            <field name="name">Análisis de sueldos</field>
+            <field name="res_model">hr.wage.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_hr_wage_report_graph">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="hr_wage_report_graph"/>
+            <field name="act_window_id" ref="action_hr_wage_report"/>
+        </record>
+
+        <menuitem parent="hr_reports_main_menu" action="action_hr_wage_report" id="menu_hr_wage_report" sequence="20" groups="hr.group_hr_manager"/>
+
+    </data>
+</openerp>

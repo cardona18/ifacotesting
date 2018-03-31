@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- ADMIN ANSWERS VIEWS -->
+
+        <record id="admin_answers_action" model="ir.actions.act_window">
+            <field name="name">Gestión de respuestas</field>
+            <field name="res_model">admin.answers</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="admin_answers_form">
+            <field name="name">admin_answers_form</field>
+            <field name="model">admin.answers</field>
+            <field name="arch" type="xml">
+                <form name="ADMIN ANSWERS">
+                    <group>
+                        <field name="empl_evalu"/>
+                        <field name="evalu_plan"/>
+                        <field name="id_excute_plan"/>
+                        <field name="employee_evaluator"/>
+                        <field name="type_evaluators"/>
+                        <field name="quest"/>
+                        <field name="quest_gen"/>
+                        <field name="comp"/>
+                        <field name="name"/>
+                        <field name="is_general"/>
+                        <field name="general_type"/>
+                    </group>
+                </form>           
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="admin_answers_tree">
+            <field name="name">"admin_answers_tree"</field>
+            <field name="model">admin.answers</field>
+            <field name="arch" type="xml">
+                <tree name="ADMIN ANSWERS">
+                    <field name="empl_evalu"/>
+                    <field name="evalu_plan"/>
+                    <field name="id_excute_plan"/>
+                    <field name="employee_evaluator"/>
+                    <field name="type_evaluators"/>
+                    <field name="quest"/>
+                    <field name="comp"/>
+                    <field name="name"/>
+                    <field name="is_general"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="admin_answers_menu" name="Gestión de respuestas" parent="hr_evaluation_360_menu" action="admin_answers_action" sequence="11"/>
+
+    </data>
+</openerp>

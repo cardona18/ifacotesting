@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<openerp>
+    <data>
+
+        <!-- HR PROFESSION VIEWS -->
+
+        <record id="hr_profession_action" model="ir.actions.act_window">
+            <field name="name">Profesión</field>
+            <field name="res_model">hr.profession</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_profession_form">
+            <field name="name">hr_profession_form</field>
+            <field name="model">hr.profession</field>
+            <field name="arch" type="xml">
+                <form name="HR PROFESSION">
+                    <group>
+                        <field name="name"/>
+                        <field name='short_name'/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_profession_tree">
+            <field name="name">"hr_profession_tree"</field>
+            <field name="model">hr.profession</field>
+            <field name="arch" type="xml">
+                <tree name="HR PROFESSION">
+                    <field name='name'/>
+                    <field name='short_name'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_profession_menu" name="Profesión" parent="hr_school_main_menu" action="hr_profession_action" sequence="10"/>
+
+    </data>
+</openerp>
+
+
+

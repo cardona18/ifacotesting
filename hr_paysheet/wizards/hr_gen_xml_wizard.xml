@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR GEN XML WIZARD -->
+
+        <act_window id="hr_gen_xml_wizard_action" name="Generar XML" res_model="hr.gen.xml.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="hr_gen_xml_wizard_form_view">
+            <field name="name">hr_gen_xml_wizard_form</field>
+            <field name="model">hr.gen.xml.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Generar XML">
+
+                  <group attrs="{'invisible': [('state', '!=', 'L')]}">
+                    <field name="cfdi_action" attrs="{'required': [('state', '=', 'L')]}"/>
+                    <field name="csv_file" filename="csv_filename"/>
+                    <field name="csv_filename" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                  </group>
+                  <separator string="Resultado" attrs="{'invisible': [('state', '=', 'L')]}"/>
+                  <field name="process_log" attrs="{'invisible': [('state', '=', 'L')]}" readonly="1"/>
+
+                  <footer>
+                      <button name="gen_xml_files" type="object" string="Generar XML" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'L')]}"/>
+                      <button special="cancel" string="Terminar" class="oe_highlight" attrs="{'invisible': [('state', '=', 'L')]}"/>
+                      or
+                      <button special="cancel" string="Cancel"/>
+                  </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- <menuitem id="hr_gen_xml_wizard_menu" name="Generar XML" sequence="130" parent="hr_payroll_main_menu" action="hr_gen_xml_wizard_action"/> -->
+
+    </data>
+</openerp>

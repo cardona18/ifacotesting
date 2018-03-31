@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- GENERAL ROUTE TEMPLATES -->
+
+        <template id="my_reports">
+          <t t-call="website.layout">
+            <html lang="es">
+            <head>
+              <title>Tipos de reportes</title>
+
+            </head>
+            <body>
+              <div class="container" style="padding-top:50px;">
+
+              <form action="/web/reports/" method="POST" name="select_report">
+
+                <h1 class="center-block" style="text-align: center !important;">Mis evaluaciones</h1>
+                <hr/>
+                <br/>
+                <label class="control-label" style="text-align: center !important;">Selecciona la evaluación a consultar</label>
+                <br />
+                <select name="evaluation_com" class="form-control" required="true">
+                  <option></option>
+                  <t t-foreach="my_evaluations" t-as="my_evaluations_ids">
+                    <t t-esc="my_evaluations_ids.id"/>
+                    <option t-att-value="my_evaluations_ids.id">Evaluación <fiel t-esc="my_evaluations_ids.get_date_end()"/></option>
+                  </t>
+                </select>      
+
+
+          
+
+                <div class="center-block text-center col-md-12" style="display:none;">
+                    <label class="control-label" style="text-align: center !important;">Selecciona el tipo de reporte generar</label>
+                    <br />
+                    <select name="report_sel" class="form-control" required="true">
+                      <option value="selc_3">Reporte para el empleado</option>
+                    </select>
+                </div>
+                <center style="padding-top:100px;"> 
+                  <input type="submit" class="btn btn-success" name="Consultar" value="Consultar evaluación"/>
+                </center>
+                </form>
+
+              </div>
+              <br/>
+              <br/>
+              <br/>
+            </body>
+            </html>
+            </t>
+
+        </template>
+
+
+
+        <template id="my_reports_no_eval">
+          <t t-call="website.layout">
+                  <head>
+                  <!--   <link href="/hr_evaluation_360/static/src/css/styles.css" rel="stylesheet" type="text/css"/>
+                    <link href="/hr_evaluation_360/static/src/css/estilos.css" rel="stylesheet" type="text/css"/> -->
+                  </head>
+                  <div style="text-align:center;">
+                    <h1 class="element-animation">Por el momento no has <br/> sido evaluado</h1>
+                    <br/>
+                    <br/>
+                    <h5 style="color:#4e4e4e;">No tienes ninguna Evaluación para mas información comunicarse al departamento de desarrollo organizacional</h5>
+                  </div>
+          </t>
+          <br/>
+          <br/>
+          <br/>
+        </template>
+
+    </data>
+</openerp>

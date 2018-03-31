@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR YEAR BONUS VIEWS -->
+
+        <record id="hr_year_bonus_action" model="ir.actions.act_window">
+            <field name="name">Bono de antigüedad</field>
+            <field name="res_model">hr.year.bonus</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_year_bonus_form">
+            <field name="name">hr_year_bonus_form</field>
+            <field name="model">hr.year.bonus</field>
+            <field name="arch" type="xml">
+                <form name="Bono de antigüedad">
+                    <group>
+                        <field name="profession"/>
+                        <field name="years"/>
+                        <field name="days"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_year_bonus_tree">
+            <field name="name">"hr_year_bonus_tree"</field>
+            <field name="model">hr.year.bonus</field>
+            <field name="arch" type="xml">
+                <tree name="Bono de antigüedad" editable="top">
+                    <field name="profession"/>
+                    <field name="years"/>
+                    <field name="days"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_year_bonus_menu" name="Bono de antigüedad" parent="hr_payroll_config_menu" action="hr_year_bonus_action" sequence="90"/>
+
+    </data>
+</openerp>

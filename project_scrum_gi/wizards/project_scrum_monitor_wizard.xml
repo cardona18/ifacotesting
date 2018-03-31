@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PROJECT SCRUM MONITOR WIZARD -->
+
+        <act_window id="project_scrum_monitor_wizard_action" name="Monitor SCRUM" res_model="project.scrum.monitor.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="project_scrum_monitor_wizard_form_view">
+            <field name="name">project_scrum_monitor_wizard_form</field>
+            <field name="model">project.scrum.monitor.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Monitor SCRUM">
+
+                  <group>
+                    <field name="project_id" required="1"/>
+                    <field name="task_type_id" required="1"/>
+                  </group>
+
+                  <footer>
+                      <button name="show_monitor" type="object" string="Mostrar" class="oe_highlight"/>
+                      or
+                      <button special="cancel" string="Cancel"/>
+                  </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="project_scrum_monitor_wizard_menu" name="Monitor" action="project_scrum_monitor_wizard_action" parent="project_scrum_main_menu" sequence="30"/>
+
+    </data>
+</openerp>

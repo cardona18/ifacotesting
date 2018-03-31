@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR PAYSHEET MONTH VIEWS -->
+
+        <record id="hr_paysheet_month_action" model="ir.actions.act_window">
+            <field name="name">Periodos de nómina</field>
+            <field name="res_model">hr.paysheet.month</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_month_form">
+            <field name="name">hr_paysheet_month_form</field>
+            <field name="model">hr.paysheet.month</field>
+            <field name="arch" type="xml">
+                <form name="Periodos de nómina">
+                    <group>
+                        <field name="name"/>
+                        <field name="fdate"/>
+                        <field name="tdate"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_month_tree">
+            <field name="name">hr_paysheet_month_tree</field>
+            <field name="model">hr.paysheet.month</field>
+            <field name="arch" type="xml">
+                <tree name="Periodos de nómina">
+                    <field name="name"/>
+                    <field name="fdate"/>
+                    <field name="tdate"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

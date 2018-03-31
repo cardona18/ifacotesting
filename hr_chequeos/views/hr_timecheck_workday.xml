@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR TIMECHECK WORKDAY VIEWS -->
+
+        <record id="hr_timecheck_workday_search" model="ir.ui.view">
+            <field name="name">hr_timecheck_workday_search</field>
+            <field name="model">hr.timecheck.workday</field>
+            <field name="arch" type="xml">
+                <search string="Tiempo trabajado">
+                    <field name="name" filter_domain="[('name','ilike',self)]"/>
+                    <filter string="Completos" name="hr_timecheck_workday_complete" domain="[('is_complete', '=', True)]"/>
+                    <separator/>
+                    <filter string="Sin excepción" name="hr_timecheck_workday_without_exception" domain="[('except_type', '=', False)]"/>
+                    <separator/>
+                    <filter string="Excepción" name="hr_timecheck_workday_exception" domain="[('except_type', '!=', False)]"/>
+                    <separator/>
+                    <filter string="Sin procesar" name="no_processed_days" domain="[('state', '!=', 'P')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_timecheck_workday_action" model="ir.actions.act_window">
+            <field name="name">Tiempo trabajado</field>
+            <field name="res_model">hr.timecheck.workday</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_no_processed_days':1}</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_timecheck_workday_form">
+            <field name="name">hr_timecheck_workday_form</field>
+            <field name="model">hr.timecheck.workday</field>
+            <field name="arch" type="xml">
+                <form name="Tiempo trabajado">
+                    <header>
+                        <button name="calc_workedtime" type="object" string="Cálcular Tiempo"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="employee_id" readonly="1"/>
+                        <field name="company_id" readonly="1"/>
+                        <field name="start_date" readonly="1"/>
+                        <field name="turn_id" readonly="1"/>
+                        <field name="worked_hours" readonly="1"/>
+                        <field name="extra_hours" readonly="1"/>
+                        <field name="period_id"/>
+                    </group>
+                    <separator string="Registros de tiempo"/>
+                    <field name="check_ids">
+                        <tree editable="top">
+                            <field name="name"/>
+                            <field name="check_time"/>
+                        </tree>
+                        <form>
+                            <field name="name"/>
+                            <field name="check_time"/>
+                        </form>
+                    </field>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_timecheck_workday_tree">
+            <field name="name">"hr_timecheck_workday_tree"</field>
+            <field name="model">hr.timecheck.workday</field>
+            <field name="arch" type="xml">
+                <tree name="Tiempo trabajado">
+                    <field name='name'/>
+                    <field name="employee_id"/>
+                    <field name="start_date"/>
+                    <field name="worked_hours"/>
+                    <field name="extra_hours"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- RELATE TO PERIOD -->
+
+        <record model="ir.values" id="hr_timecheck_workday_assign_period_action">
+            <field name="model_id" ref="hr_chequeos.model_hr_timecheck_workday"/>
+            <field name="name">Asignar periodo</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('hr_assign_period_wizard_action'))" />
+            <field name="key">action</field>
+            <field name="model">hr.timecheck.workday</field>
+        </record>
+
+        <!-- WORK PERIOD REQUEST -->
+
+        <record id="hr_timecheck_workday_period_request" model="ir.actions.act_window">
+            <field name="name">Tiempo trabajado</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.timecheck.workday</field>
+            <field name="src_model">hr.work.period</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_period_id': active_id}</field>
+            <field name="domain">[('period_id', '=', active_id)]</field>
+            <field name="view_id" eval="hr_timecheck_workday_tree"/>
+        </record>
+
+        <menuitem id="hr_timecheck_workday_menu" name="Tiempo trabajado" parent="hr_timecheck_main_menu" action="hr_timecheck_workday_action" sequence="10"/>
+
+    </data>
+</openerp>

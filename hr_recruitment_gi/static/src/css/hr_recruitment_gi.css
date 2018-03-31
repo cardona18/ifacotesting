@@ -1,0 +1,25 @@
+[data-id="requiered_doc"]{
+	width: 100px;
+}
+
+[data-id="name_doc"]{
+	width: 240px;
+}
+
+.field_binary{
+	width: 20px;
+}
+
+.documents_hr_job{
+	position: relative;
+	top: -7px !important;
+}
+/*.openerp .oe_hidden_input_file{
+	position: absolute;
+	z-index: 1000;
+}
+.oe_hidden_input_file {
+
+}*/
+
+

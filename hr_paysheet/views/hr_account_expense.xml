@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR ACCOUNT EXPENSE VIEWS -->
+
+        <record id="hr_account_expense_action" model="ir.actions.act_window">
+            <field name="name">Gasto contable</field>
+            <field name="res_model">hr.account.expense</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_account_expense_form">
+            <field name="name">hr_account_expense_form</field>
+            <field name="model">hr.account.expense</field>
+            <field name="arch" type="xml">
+                <form name="HR ACCOUNT EXPENSE">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <separator string="Contabilidad"/>
+                    <field name="old_conf_ids" colspan="3" nolabel="1">
+                        <tree string="Configuraciones" editable="bottom">
+                            <field name="company_id"/>
+                            <field name="base_account"/>
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_account_expense_tree">
+            <field name="name">"hr_account_expense_tree"</field>
+            <field name="model">hr.account.expense</field>
+            <field name="arch" type="xml">
+                <tree name="HR ACCOUNT EXPENSE">
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_account_expense_menu" name="Gasto contable" parent="hr.menu_human_resources_configuration" action="hr_account_expense_action" sequence="9"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR PUBLIC HOLIDAY CATEGORY VIEWS -->
+
+        <record id="hr_public_holiday_category_action" model="ir.actions.act_window">
+            <field name="name">Categorías</field>
+            <field name="res_model">hr.public.holiday.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_public_holiday_category_form">
+            <field name="name">hr_public_holiday_category_form</field>
+            <field name="model">hr.public.holiday.category</field>
+            <field name="arch" type="xml">
+                <form name="Categorías">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_public_holiday_category_tree">
+            <field name="name">"hr_public_holiday_category_tree"</field>
+            <field name="model">hr.public.holiday.category</field>
+            <field name="arch" type="xml">
+                <tree name="Categorías">
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- <menuitem id="hr_public_holiday_category_menu" name="Categorías" action="hr_public_holiday_category_action" parent="hr_public_leaves_main_menu" sequence="20"/> -->
+
+    </data>
+</openerp>

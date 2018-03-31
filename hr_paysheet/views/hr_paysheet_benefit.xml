@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PAYSHEET CONCEPT VIEWS -->
+
+        <record id="hr_paysheet_benefit_action" model="ir.actions.act_window">
+            <field name="name">Prestaciones</field>
+            <field name="res_model">hr.paysheet.benefit</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_benefit_tree">
+            <field name="name">hr_paysheet_benefit_tree</field>
+            <field name="model">hr.paysheet.benefit</field>
+            <field name="arch" type="xml">
+                <tree name="Prestaciones" create="0" edit="0">
+                    <field name="contract_id"/>
+                    <field name="concept_id"/>
+                    <field name="code"/>
+                    <field name="btype"/>
+                    <field name="amount"/>
+                    <field name="table_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_paysheet_benefit_menu" name="Prestaciones" parent="hr_reports_main_menu" groups="hr.group_hr_manager" action="hr_paysheet_benefit_action" sequence="25"/>
+
+    </data>
+</openerp>

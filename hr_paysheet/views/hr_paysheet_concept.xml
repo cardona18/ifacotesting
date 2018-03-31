@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PAYSHEET CONCEPT VIEWS -->
+
+        <record id="hr_paysheet_concept_action" model="ir.actions.act_window">
+            <field name="name">Conceptos de nómina</field>
+            <field name="res_model">hr.paysheet.concept</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_concept_form">
+            <field name="name">hr_paysheet_concept_form</field>
+            <field name="model">hr.paysheet.concept</field>
+            <field name="arch" type="xml">
+                <form name="Conceptos de nómina">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Configuración">
+                            <group>
+                                <group string="Nómina">
+                                    <field name="ctype"/>
+                                    <field name="is_benefit"/>
+                                    <field name="printable"/>
+                                    <field name="report_print"/>
+                                    <field name="pantry_card"/>
+                                    <field name="free_concept_id"/>
+                                    <field name="tax_concept_id"/>
+                                    <field name="sdi_integration"/>
+                                    <field name="active"/>
+                                </group>
+                                <group string="CFDI">
+                                    <field name="sat_concept_id"/>
+                                    <field name="other_payments"/>
+                                    <field name="other_payments_type" attrs="{'invisible': [('other_payments', '!=', True)], 'required': [('other_payments', '=', True)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Contabilidad">
+
+                            <field name="old_conf_ids" colspan="3" nolabel="1">
+                                <tree string="Configuraciones" editable="bottom">
+                                    <field name="company_id"/>
+                                    <field name="account1"/>
+                                    <field name="type1"/>
+                                    <field name="sign1"/>
+                                    <field name="account2"/>
+                                    <field name="type2"/>
+                                    <field name="sign2"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_concept_tree">
+            <field name="name">hr_paysheet_concept_tree</field>
+            <field name="model">hr.paysheet.concept</field>
+            <field name="arch" type="xml">
+                <tree name="Conceptos de nómina">
+                    <field name='name'/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_paysheet_concept_menu" name="Conceptos de nómina" parent="hr_payroll_config_menu" groups="hr.group_hr_user" action="hr_paysheet_concept_action" sequence="40"/>
+
+    </data>
+</openerp>

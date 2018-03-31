@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR DEPARTMENT GI VIEWS -->
+
+        <record model="ir.ui.view" id="view_department_form">
+            <field name="name">hr_department_gi_form</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='name']" position="after">
+                    <field name="type_department"/>
+                    <field name="old_id"/>
+                </xpath>
+            </field>
+        </record>
+        
+
+        <record model="ir.ui.view" id="view_department_tree">
+            <field name="name">hr_department_gi_tree</field>
+            <field name="model">hr.department</field>
+            <field name="arch" type="xml">
+                <tree name="Departamentos">
+                    <field name="name"/>
+                    <field name="manager_id"/>
+                    <field name="type_department"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

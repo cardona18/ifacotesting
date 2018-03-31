@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR MEDICAL INSURANCE VIEWS -->
+
+        <record id="hr_medical_insurance_action" model="ir.actions.act_window">
+            <field name="name">Seguro de gastos médicos</field>
+            <field name="res_model">hr.medical.insurance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_medical_insurance_form">
+            <field name="name">hr_medical_insurance_form</field>
+            <field name="model">hr.medical.insurance</field>
+            <field name="arch" type="xml">
+                <form name="Seguro de gastos médicos">
+                    <group>
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="from_years"/>
+                        <field name="to_years"/>
+                        <field name="male"/>
+                        <field name="female"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_medical_insurance_tree">
+            <field name="name">"hr_medical_insurance_tree"</field>
+            <field name="model">hr.medical.insurance</field>
+            <field name="arch" type="xml">
+                <tree name="Seguro de gastos médicos" editable="top">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="from_years"/>
+                    <field name="to_years"/>
+                    <field name="male"/>
+                    <field name="female"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_medical_insurance_menu" name="Seguro de gastos médicos" action="hr_medical_insurance_action" parent="hr_medical_insurance_main_menu" sequence="10"/>
+
+    </data>
+</openerp>

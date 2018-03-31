@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR PAYSHEET CFDI WIZARD -->
+
+        <act_window id="hr_paysheet_cfdi_wizard_action" name="Inconcistencias CFDI" res_model="hr.paysheet.cfdi.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="hr_paysheet_cfdi_wizard_form_view">
+            <field name="name">hr_paysheet_cfdi_wizard_form</field>
+            <field name="model">hr.paysheet.cfdi.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Inconcistencias CFDI">
+
+                  <group>
+                    <field name="export_type" required="1"/>
+                  </group>
+
+                  <footer>
+                      <button name="check_duplicated_data" type="object" string="Buscar" class="oe_highlight"/>
+                      or
+                      <button special="cancel" string="Cancel"/>
+                  </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- <menuitem id="hr_paysheet_cfdi_wizard_menu" name="Inconcistencias CFDI" parent="hr_payroll_main_menu" sequence="110" action="hr_paysheet_cfdi_wizard_action" /> -->
+
+    </data>
+</openerp>

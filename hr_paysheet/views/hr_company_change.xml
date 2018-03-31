@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR COMPANY CHANGE VIEWS -->
+
+        <record id="hr_company_change_action" model="ir.actions.act_window">
+            <field name="name">Cambio de empresa</field>
+            <field name="res_model">hr.company.change</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_company_change_form">
+            <field name="name">hr_company_change_form</field>
+            <field name="model">hr.company.change</field>
+            <field name="arch" type="xml">
+                <form name="Cambio de empresa">
+                    <group>
+                        <field name="name"/>
+                        <field name="employee_id"/>
+                        <field name="last_company_id"/>
+                        <field name="new_company_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_company_change_tree">
+            <field name="name">"hr_company_change_tree"</field>
+            <field name="model">hr.company.change</field>
+            <field name="arch" type="xml">
+                <tree name="Cambio de empresa">
+                    <field name='name'/>
+                    <field name="employee_id"/>
+                    <field name="last_company_id"/>
+                    <field name="new_company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_company_change_menu" name="Cambio de empresa" action="hr_company_change_action" parent="hr_incidents_main_menu" sequence="50"/>
+
+    </data>
+</openerp>

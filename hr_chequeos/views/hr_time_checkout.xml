@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR TIME CHECKOUT VIEWS -->
+
+        <record id="hr_time_checkout_action" model="ir.actions.act_window">
+            <field name="name">Rondas</field>
+            <field name="res_model">hr.time.checkout</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_time_checkout_form">
+            <field name="name">hr_time_checkout_form</field>
+            <field name="model">hr.time.checkout</field>
+            <field name="arch" type="xml">
+                <form name="Rondas" create="false" edit="false" delete="false">
+                    <group>
+                        <field name="name"/>
+                        <field name="employee_id"/>
+                        <field name="company_id" readonly="1"/>
+                        <field name="check_time"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_time_checkout_tree">
+            <field name="name">"hr_time_checkout_tree"</field>
+            <field name="model">hr.time.checkout</field>
+            <field name="arch" type="xml">
+                <tree name="Rondas" create="false" edit="false" delete="false">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="company_id"/>
+                    <field name="check_time"/>
+                    <field name="node_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_time_checkout_graph">
+            <field name="name">"hr_time_checkout_graph"</field>
+            <field name="model">hr.time.checkout</field>
+            <field name="arch" type="xml">
+                <graph type= "pivot">
+                    <field name="employee_id" type="row"/>
+                 </graph>
+            </field>
+        </record>
+
+        <menuitem id="hr_time_checkout_menu" name="Rondas" parent="hr_timecheck_main_menu" action="hr_time_checkout_action" sequence="30"/>
+
+    </data>
+</openerp>

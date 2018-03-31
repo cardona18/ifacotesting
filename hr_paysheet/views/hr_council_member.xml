@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR COUNCIL MEMBER VIEWS -->
+
+        <record id="hr_council_member_action" model="ir.actions.act_window">
+            <field name="name">Miembros del consejo</field>
+            <field name="res_model">hr.council.member</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_council_member_form">
+            <field name="name">hr_council_member_form</field>
+            <field name="model">hr.council.member</field>
+            <field name="arch" type="xml">
+                <form name="Miembros del consejo">
+                    <sheet>
+                        <group>
+                            <group string="General">
+                                <field name="name"/>
+                                <field name="rfc"/>
+                                <field name="curp"/>
+                                <field name="regime_id" required="1"/>
+                                <field name="state_tax"/>
+                            </group>
+                            <group string="CFDI">
+                                <field name="zip_code"/>
+                                <field name="work_state_id" required="1"/>
+                                <field name="period"/>
+                                <field name="contract_type_id" required="1"/>
+                            </group>
+                        </group>
+                        <field name="payment_ids" nolabel="1">
+                            <tree string="Pagos" editable="bottom">
+                                <field name="company_id"/>
+                                <field name="bank_id" required="1"/>
+                                <field name="bank_account"/>
+                                <field name="amount"/>
+                                <field name="concept"/>
+                                <field name="state_tax"/>
+                                <field name="tax_amount"/>
+                            </tree>
+                            <form string="Pagos">
+                                <group>
+                                    <field name="company_id"/>
+                                    <field name="bank_id" required="1"/>
+                                    <field name="bank_account"/>
+                                    <field name="amount"/>
+                                    <field name="concept"/>
+                                    <field name="state_tax"/>
+                                    <field name="tax_amount"/>
+                                </group>
+                            </form>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_council_member_tree">
+            <field name="name">"hr_council_member_tree"</field>
+            <field name="model">hr.council.member</field>
+            <field name="arch" type="xml">
+                <tree name="Miembros del consejo">
+                    <field name='name'/>
+                    <field name="rfc"/>
+                    <field name="curp"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_council_member_menu" name="Miembros del consejo" parent="hr_council_payments_main_menu" action="hr_council_member_action" sequence="30"/>
+
+    </data>
+</openerp>

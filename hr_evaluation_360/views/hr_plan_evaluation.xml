@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR JOB EVALUATION VIEWS -->
+
+        <record id="hr_plan_evaluation_action" model="ir.actions.act_window">
+            <field name="name">Evaluadores</field>
+            <field name="res_model">hr.plan.evaluation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_plan_evaluation_form">
+            <field name="name">hr_plan_evaluation_form</field>
+            <field name="model">hr.plan.evaluation</field>
+            <field name="arch" type="xml">
+                <form name="Evaluadores">
+                    <header>
+                        <field name="state" nolabel="1" widget="statusbar" statusbar_visible="executed"/>
+                    </header>
+                    <group>
+                        <field name="name" attrs="{'readonly':[('state','=','executed')]}"/>
+                        <field name="evaluated" options="{'no_create':True, 'create_edit': false,'no_open': True}" attrs="{'readonly':[('state','=','executed')]}"/>
+                        <field name='department_id' options="{'no_create':True, 'create_edit': false,'no_open': True}"/>
+                        <field name='start_eval'/>
+                        <field name='end_eval'/>
+                        <field name='competences' widget="many2many_tags" invisible="1"/>
+
+                        <field name="config_ids" colspan="3" nolabel="1" attrs="{'readonly':[('state','=','executed')]}">
+                            <tree string="Competencias" editable="bottom">
+                                <field name="comp_id" required="1"/>
+                                <field name="question_ids"  widget="many2many_tags"/>
+                                <field name="point_comp" required="1" min="1" max="5"/>
+                            </tree>
+                            <form string="Competencias">
+                                <group col="3">
+                                    <field name="comp_id"/>
+                                    <field name="question_ids"  widget="many2many_tags"/>
+                                    <field name="point_comp" required="1" min="1" max="5"/>
+                                </group>
+                            </form>
+                        </field>
+                        <field name="job_boss" options="{'no_create':True, 'create_edit': false,'no_open': True}"/>
+                    </group>
+                </form>           
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_plan_evaluation_tree">
+            <field name="name">"hr_plan_evaluation_tree"</field>
+            <field name="model">hr.plan.evaluation</field>
+            <field name="arch" type="xml">
+                <tree name="Evaluadores">
+                    <field name='name'/>
+                    <field name='evaluated'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_plan_evaluation_menu" name="Plan de evaluaciones" action="hr_plan_evaluation_action" parent="hr_evaluation_360_menu" sequence="1"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PAYSHEET CONCEPT VIEWS -->
+
+        <record id="hr_paysheet_rule_action" model="ir.actions.act_window">
+            <field name="name">Reglas salariales</field>
+            <field name="res_model">hr.paysheet.rule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_rule_form">
+            <field name="name">hr_paysheet_rule_form</field>
+            <field name="model">hr.paysheet.rule</field>
+            <field name="arch" type="xml">
+                <form name="Reglas salariales">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="vtype"/>
+                            <field name="replace_method"/>
+                            <field name="concept_id"/>
+                            <field name="based_on"/>
+                            <field name="based_code" attrs="{'invisible':[('based_on','!=','PYC')],'required':[('based_on','=','PYC')]}"/>
+                            <field name="ctype"/>
+                            <field name="fixed_value" attrs="{'invisible':[('ctype','!=','FIX')]}"/>
+                            <field name="percent_value" attrs="{'invisible':[('ctype','!=','PER')]}"/>
+                            <field name="percent_rule" attrs="{'invisible':[('ctype','!=','PER')]}"/>
+                            <field name="py_code" widget="ace" options="{'mode': 'python'}" attrs="{'invisible':[('ctype','!=','PYC')],'required':[('ctype','=','PYC')]}"/>
+                            <field name="has_free_limit"/>
+                            <field name="free_limit_code" attrs="{'invisible': [('has_free_limit', '=', False)], 'required': [('has_free_limit', '=', True)]}"/>
+                            <field name="ignore_zero" attrs="{'invisible':[('ctype','!=','PYC')]}"/>
+                            <field name="input_priority"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_rule_tree">
+            <field name="name">hr_paysheet_rule_tree</field>
+            <field name="model">hr.paysheet.rule</field>
+            <field name="arch" type="xml">
+                <tree name="Reglas salariales">
+                    <field name="priority" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="ctype"/>
+                    <field name="vtype"/>
+                    <field name="priority"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_paysheet_rule_menu" name="Reglas salariales" parent="hr_payroll_config_menu" action="hr_paysheet_rule_action" sequence="60"/>
+
+    </data>
+</openerp>

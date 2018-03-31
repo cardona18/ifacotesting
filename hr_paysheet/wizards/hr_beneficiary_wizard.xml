@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR BENEFICIARY WIZARD -->
+
+        <act_window id="hr_beneficiary_wizard_action" name="Archivo de beneficiarios" res_model="hr.beneficiary.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="hr_beneficiary_wizard_form_view">
+            <field name="name">hr_beneficiary_wizard_form</field>
+            <field name="model">hr.beneficiary.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Archivo de beneficiarios">
+
+                  <group>
+                    <field name="from_date" attrs="{'required': [('all_employees', '=', False)], 'invisible': [('all_employees', '=', True)]}"/>
+                    <field name="all_employees"/>
+                  </group>
+
+                  <footer>
+                      <button name="export_file" type="object" string="Exportar" class="oe_highlight"/>
+                      or
+                      <button special="cancel" string="Cancel"/>
+                  </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="hr_beneficiary_wizard_menu" name="Archivo de beneficiarios" sequence="100" parent="hr_payroll_main_menu" action="hr_beneficiary_wizard_action" groups="hr.group_hr_user"/>
+
+    </data>
+</openerp>

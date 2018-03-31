@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR SUA STATE VIEWS -->
+
+        <record id="hr_sua_state_action" model="ir.actions.act_window">
+            <field name="name">Estados SUA</field>
+            <field name="res_model">hr.sua.state</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_sua_state_form">
+            <field name="name">hr_sua_state_form</field>
+            <field name="model">hr.sua.state</field>
+            <field name="arch" type="xml">
+                <form name="Estados SUA">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_sua_state_tree">
+            <field name="name">"hr_sua_state_tree"</field>
+            <field name="model">hr.sua.state</field>
+            <field name="arch" type="xml">
+                <tree name="Estados SUA">
+                    <field name='name'/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_sua_state_menu" name="Estados SUA" action="hr_sua_state_action" groups="base.group_no_one" parent="hr_location_main_menu" sequence="50"/>
+
+    </data>
+</openerp>

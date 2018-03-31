@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PAYSHEET CATEGORY VIEWS -->
+
+        <record id="hr_paysheet_category_action" model="ir.actions.act_window">
+            <field name="name">Categoria de nómina</field>
+            <field name="res_model">hr.paysheet.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_category_form">
+            <field name="name">hr_paysheet_category_form</field>
+            <field name="model">hr.paysheet.category</field>
+            <field name="arch" type="xml">
+                <form name="Categoria de nómina">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <separator string="Conceptos"/>
+                        <field name="concept_ids" colspan="3" nolabel="1">
+                            <tree string="Conceptos">
+                                <field name="name"/>
+                                <field name="code"/>
+                            </tree>
+                        </field>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_category_tree">
+            <field name="name">hr_paysheet_category_tree</field>
+            <field name="model">hr.paysheet.category</field>
+            <field name="arch" type="xml">
+                <tree name="Categoria de nómina">
+                    <field name='name'/>
+                    <field name='code'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_paysheet_category_menu" name="Categoria de nómina" parent="hr_payroll_config_menu" action="hr_paysheet_category_action" sequence="30"/>
+
+    </data>
+</openerp>

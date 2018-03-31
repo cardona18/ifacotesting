@@ -1,0 +1,5 @@
+#!/bin/bash
+
+LAST_MESSAGE=$(git log -1 HEAD --pretty=format:%s)
+
+php $(pwd)/.git/hooks/create_task.php "$LAST_MESSAGE"

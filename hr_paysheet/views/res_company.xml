@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- RES COMPANY INHERIT VIEWS -->
+
+        <record id="res_company_paysheet_form" model="ir.ui.view">
+            <field name="name">res_company_paysheet_form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='internal_config']/group[1]" position="inside">
+                    <group string="Nómina">
+                        <field name="old_id"/>
+                        <field name="old_db"/>
+                        <field name="old_db_name"/>
+                        <field name="payment_account_id" domain="[('partner_id','=', partner_id)]"/>
+                        <field name="bank_account_id" domain="[('company_id','=', id)]"/>
+                        <field name="bank_flow"/>
+                        <field name="cash_account_id" domain="[('company_id','=', id)]"/>
+                        <field name="cash_flow"/>
+                        <field name="has_ptu"/>
+                    </group>
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+</openerp>

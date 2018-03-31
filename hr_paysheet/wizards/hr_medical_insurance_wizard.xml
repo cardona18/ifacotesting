@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR MEDICAL INSURANCE WIZARD -->
+
+        <act_window id="hr_medical_insurance_wizard_action" name="Calcular prima de seguro" res_model="hr.medical.insurance.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="hr_medical_insurance_wizard_form_view">
+            <field name="name">hr_medical_insurance_wizard_form</field>
+            <field name="model">hr.medical.insurance.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Calcular prima de seguro">
+
+                    <group>
+                        <field name="limit_date" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="compute_medical_insurance" type="object" string="Calcular" class="oe_highlight" icon="fa-calculator"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="hr_medical_insurance_wizard_menu" name="Calcular prima de seguro" sequence="20" action="hr_medical_insurance_wizard_action" parent="hr_medical_insurance_main_menu" />
+
+    </data>
+</openerp>

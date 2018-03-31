@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR EMPLOYEE INHERIT VIEWS -->
+
+
+        <record id="hr_contract_gi_form" model="ir.ui.view">
+            <field name="name">hr.contract.gi.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="/form/*" position="before">
+                    <header>
+                        <button name="action_approve" type="object" string="Aprobar" class="oe_highlight" icon="fa-check-circle" states="draft" groups="hr.group_hr_user"/>
+                        <button name="action_update_benefits" type="object" string="Actualizar prestaciones" groups="hr.group_hr_user" class="oe_highlight" icon="fa-refresh"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                </xpath>
+
+                <xpath expr="//field[@name='wage']" position="after">
+                    <field name="sdi"/>
+                    <field name="sdi_real"/>
+                    <field name="factor"/>
+                    <field name="for_paysheet"/>
+                </xpath>
+
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="company_id"/>
+                </xpath>
+
+                <xpath expr="//page[1]" position="after">
+                    <page string="Prestaciones">
+                        <field name="benefit_ids" colspan="3" nolabel="1">
+                            <tree string="Prestaciones" editable="bottom">
+                                <field name="state" required="1"/>
+                                <field name="code"/>
+                                <field name="concept_id" widget="selection"/>
+                                <field name="btype"/>
+                                <field name="table_id"/>
+                                <field name="amount"/>
+                            </tree>
+                            <form string="Prestaciones">
+                                <group col="3">
+                                    <field name="concept_id" readonly="1"/>
+                                    <field name="code"/>
+                                    <field name="table_id"/>
+                                    <field name="amount"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Cambios de salario">
+                        <field name="salary_change_ids" colspan="3" nolabel="1">
+                            <tree string="Cambios de salario">
+                                <field name="name"/>
+                                <field name="move_date"/>
+                                <field name="old_salary"/>
+                                <field name="new_salary"/>
+                                <field name="old_sdi"/>
+                                <field name="new_sdi"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[3]" position="after">
+                    <page string="Configuración">
+                        <group string="Activo">
+                            <field name="active"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+
+        </record>
+
+        <record id="hr_contract_type_gi_form" model="ir.ui.view">
+            <field name="name">hr_contract_type_gi_form</field>
+            <field name="model">hr.contract.type</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_type_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[1]" position="inside">
+                    <field name="code"/>
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+</openerp>

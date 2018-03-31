@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="menu_help_custom" name="help_menu_custom assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/help_custom/static/src/js/menu_help.js"></script>
+            </xpath>
+        </template>
+
+        <template id="help_user_main">
+
+            <style type="text/css">
+                .padd_div{
+                    padding: 5px;
+                }
+
+                li.manual a{
+                    font-size: 20px;
+                }
+            </style>
+
+            <t t-call="website.layout">
+                <t t-set="title">Ayuda</t>
+                <div class="oe_structure">
+                    <div class="container padd_div">
+                        <h3>Manuales de usuario</h3>
+                        <br/>
+                        <ul>
+                            <t t-foreach="manuals" t-as="manual">
+                                <li class="manual"><a t-attf-href="/web/help/show/{{ manual.id }}"><t t-esc="manual.name"/></a></li>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </t>
+
+        </template>
+
+    </data>
+</openerp>

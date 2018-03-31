@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR LOT POLICY VIEWS -->
+
+        <record id="hr_lot_policy_action" model="ir.actions.act_window">
+            <field name="name">HR LOT POLICY</field>
+            <field name="res_model">hr.lot.policy</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_lot_policy_form">
+            <field name="name">hr_lot_policy_form</field>
+            <field name="model">hr.lot.policy</field>
+            <field name="arch" type="xml">
+                <form name="HR LOT POLICY">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>           
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_lot_policy_tree">
+            <field name="name">"hr_lot_policy_tree"</field>
+            <field name="model">hr.lot.policy</field>
+            <field name="arch" type="xml">
+                <tree name="HR LOT POLICY">
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_lot_policy_menu" name="HR LOT POLICY" action="hr_lot_policy_action" sequence="10"/>
+
+    </data>
+</openerp>

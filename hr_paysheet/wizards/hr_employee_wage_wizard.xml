@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR EMPLOYEE WAGE WIZARD -->
+
+        <act_window id="hr_employee_wage_wizard_action" name="Reporte de sueldos" res_model="hr.employee.wage.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="hr_employee_wage_wizard_form_view">
+            <field name="name">hr_employee_wage_wizard_form</field>
+            <field name="model">hr.employee.wage.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Reporte de sueldos">
+
+                    <field name="rtype" required="1"/>
+                    <separator string="Compañías"/>
+                    <field name="company_ids" required="1" domain="[('short_name', '!=', False)]"/>
+
+                    <footer>
+                        <button name="build_report_action" type="object" string="Generar reporte" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="hr_employee_wage_wizard_menu" name="Reporte de sueldos" parent="hr_reports_main_menu" groups="hr.group_hr_manager,hr_paysheet.group_hr_costs" sequence="40" action="hr_employee_wage_wizard_action"/>
+
+    </data>
+</openerp>

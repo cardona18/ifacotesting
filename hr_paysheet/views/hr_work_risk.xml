@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR WORK RISK VIEWS -->
+
+        <record id="hr_work_risk_action" model="ir.actions.act_window">
+            <field name="name">Riesgo de trabajo</field>
+            <field name="res_model">hr.work.risk</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_work_risk_form">
+            <field name="name">hr_work_risk_form</field>
+            <field name="model">hr.work.risk</field>
+            <field name="arch" type="xml">
+                <form name="HR WORK RISK">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_work_risk_tree">
+            <field name="name">"hr_work_risk_tree"</field>
+            <field name="model">hr.work.risk</field>
+            <field name="arch" type="xml">
+                <tree name="HR WORK RISK">
+                    <field name='name'/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_work_risk_menu" name="Riesgo de trabajo" action="hr_work_risk_action" parent="hr_sat_config_menu" sequence="10"/>
+
+    </data>
+</openerp>

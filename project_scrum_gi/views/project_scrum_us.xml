@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PROJECT SCRUM US VIEWS -->
+
+        <record id="project_scrum_us_action" model="ir.actions.act_window">
+            <field name="name">Historias de usuario</field>
+            <field name="res_model">project.scrum.us</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="project_scrum_us_form">
+            <field name="name">project_scrum_us_form</field>
+            <field name="model">project.scrum.us</field>
+            <field name="arch" type="xml">
+                <form name="Historias de usuario">
+                    <header>
+                        <button name="close_action" type="object" string="Cerrar" states="open" icon="fa-archive"/>
+                        <button name="open_action" type="object" string="Abrir" states="closed" icon="fa-undo"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="project_id"/>
+                            <field name="sprint_id"/>
+                            <field name="description"/>
+                            <field name="story_points"/>
+                        </group>
+                        <separator string="Incidencias"/>
+                        <field name="issue_ids" readonly="1"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_scrum_us_tree">
+            <field name="name">"project_scrum_us_tree"</field>
+            <field name="model">project.scrum.us</field>
+            <field name="arch" type="xml">
+                <tree name="Historias de usuario">
+                    <field name='name'/>
+                    <field name="story_points"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="project_scrum_us_request" model="ir.actions.act_window">
+            <field name="name">Historias</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.scrum.us</field>
+            <field name="src_model">project.scrum.sprint</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_sprint_id': active_id}</field>
+            <field name="domain">[('sprint_id', '=', active_id)]</field>
+            <field name="view_id" eval="project_scrum_us_tree"/>
+        </record>
+
+        <menuitem id="project_scrum_us_menu" name="Historias de usuario" action="project_scrum_us_action" parent="project_scrum_main_menu" sequence="20"/>
+
+    </data>
+</openerp>

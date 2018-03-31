@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <menuitem id="menu_staff_root" name="Sistemas"/>
+
+        <menuitem id="menu_help_main" name="Ayuda" parent="menu_staff_root"/>
+
+    </data>
+</openerp>

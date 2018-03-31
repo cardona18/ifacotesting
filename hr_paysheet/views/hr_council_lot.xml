@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR COUNCIL LOT VIEWS -->
+
+        <record id="hr_council_lot_action" model="ir.actions.act_window">
+            <field name="name">Recibos de consejo</field>
+            <field name="res_model">hr.council.lot</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_council_lot_form">
+            <field name="name">hr_council_lot_form</field>
+            <field name="model">hr.council.lot</field>
+            <field name="arch" type="xml">
+                <form name="Recibos de consejo">
+                    <header>
+                        <button
+                            name="action_generate"
+                            type="object"
+                            string="Generar"
+                            icon="fa-cogs"
+                            class="oe_highlight"
+                            confirm="Los CFDI serán considerados como nuevos comprobantes ¿ Desea continuar ?"
+                            states="GEN"/>
+
+                        <button
+                            name="action_sign"
+                            type="object"
+                            string="Timbrar"
+                            icon="fa-qrcode"
+                            class="oe_highlight"
+                            confirm="Desea continuar ?"
+                            states="GEN"/>
+
+                        <button
+                            name="action_download"
+                            type="object"
+                            string="Descargar XML"
+                            icon="fa-download"
+                            class="oe_highlight"
+                            states="SIG"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_right oe_button_box" name="button_box" style="margin-bottom: 20px">
+                            <button name="hr_paysheet.hr_council_voucher_request" type="action" class="oe_stat_button" icon="fa-money">
+                                <field string="Recibos" name="vouchers_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="from_date" required="1"/>
+                            <field name="to_date" required="1"/>
+                            <field name="payment_date" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_council_lot_tree">
+            <field name="name">"hr_council_lot_tree"</field>
+            <field name="model">hr.council.lot</field>
+            <field name="arch" type="xml">
+                <tree name="Recibos de consejo">
+                    <field name='name'/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="payment_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_council_lot_menu" name="Recibos de consejo" parent="hr_council_payments_main_menu" action="hr_council_lot_action" sequence="60"/>
+
+    </data>
+</openerp>

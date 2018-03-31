@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- RES COUNTRY VIEWS -->
+
+        <record id="res_country_hr_action" model="ir.actions.act_window">
+            <field name="name">Países</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="res_country_hr_tree">
+            <field name="name">res_country_hr_tree</field>
+            <field name="model">res.country</field>
+            <field name="arch" type="xml">
+                <tree name="Países" create="false">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_country_main_menu" name="Países" parent="hr_location_main_menu" groups="hr.group_hr_user" action="res_country_hr_action" sequence="10"/>
+
+    </data>
+</openerp>

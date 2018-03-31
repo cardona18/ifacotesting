@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR POLICY LINE VIEWS -->
+
+        <record id="hr_policy_line_action" model="ir.actions.act_window">
+            <field name="name">Cuenta de póliza</field>
+            <field name="res_model">hr.policy.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_policy_line_form">
+            <field name="name">hr_policy_line_form</field>
+            <field name="model">hr.policy.line</field>
+            <field name="arch" type="xml">
+                <form name="Cuenta de póliza">
+                    <group>
+                        <field name="account"/>
+                        <field name="mtype"/>
+                        <field name="sign"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_policy_line_tree">
+            <field name="name">hr_policy_line_tree</field>
+            <field name="model">hr.policy.line</field>
+            <field name="arch" type="xml">
+                <tree name="Cuenta de póliza">
+                    <field name="account"/>
+                    <field name="mtype"/>
+                    <field name="sign"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_policy_line_menu" name="Cuentas de pagos" parent="hr_payroll_main_menu" action="hr_policy_line_action" sequence="100"/>
+
+    </data>
+</openerp>

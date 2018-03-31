@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR PAYSHEET LOT VIEWS -->
+
+        <record id="hr_paysheet_lot_action" model="ir.actions.act_window">
+            <field name="name">Lote de nómina</field>
+            <field name="res_model">hr.paysheet.lot</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_lot_form">
+            <field name="name">hr_paysheet_lot_form</field>
+            <field name="model">hr.paysheet.lot</field>
+            <field name="arch" type="xml">
+                <form name="HR PAYSHEET LOT">
+                    <header>
+
+                        <button
+                            name="calculate_lot"
+                            groups="hr.group_hr_user"
+                            type="object" string="Calcular"
+                            states="draft"  class="oe_highlight"
+                            icon="fa-calculator"/>
+
+                        <button
+                            name="%(hr_lot_report_wizard_action)d"
+                            type="action"
+                            string="Reportes"
+                            class="oe_highlight"
+                            icon="fa-print"
+                            context="{'default_lot_id': active_id}"/>
+
+                        <button
+                            name="accumulate_lot"
+                            groups="hr.group_hr_user"
+                            type="object"
+                            string="Bloquear"
+                            states="draft"
+                            icon="fa-lock"/>
+
+                        <button
+                            name="sign_lot"
+                            groups="hr.group_hr_user"
+                            type="object"
+                            string="Timbrar"
+                            states="locked"
+                            class="oe_highlight"
+                            icon="fa-qrcode"
+                            confirm="Desea continuar ?"/>
+
+                        <button
+                            name="unlock_lot"
+                            groups="hr.group_hr_user"
+                            type="object"
+                            string="Desbloquear"
+                            states="locked"
+                            icon="fa-unlock"/>
+
+                        <button
+                            name="close_lot"
+                            groups="hr.group_hr_user"
+                            type="object"
+                            string="Cerrar"
+                            states="signed,locked"
+                            icon="fa-archive"
+                            confirm="Desea continuar ?"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,locked,signed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_right oe_button_box" name="button_box" style="margin-bottom: 20px">
+                            <button name="hr_paysheet.hr_paysheet_request" type="action" class="oe_stat_button" icon="fa-money" groups="hr.group_hr_user">
+                                <field string="Nóminas" name="paysheets_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group string="Nómina">
+                            <field name="ltype"/>
+                            <field name="name"/>
+                            <field name="company_id" required="1" domain="[('short_name', '!=', False)]"/>
+                            <field name="paycheck_text" attrs="{'invisible': [('ltype', '!=', 'ES')], 'required': [('ltype', '=', 'ES')]}"/>
+                            <field name="old_id"/>
+                            <field name="struct_id"/>
+                        </group>
+                        <group string="Avanzado">
+                            <field name="period_id"/>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="payment_date"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Cierre de conceptos">
+                                <field name="close_ids" nolabel="1">
+                                    <tree string="Cerrar conceptos" editable="bottom">
+                                        <field name="name" readonly="1"/>
+                                        <field name="concept_id"/>
+                                        <field name="year_id" readonly="1"/>
+                                    </tree>
+                                    <form string="Cerrar conceptos">
+                                        <group col="3">
+                                            <field name="name" readonly="1"/>
+                                            <field name="concept_id"/>
+                                            <field name="year_id" readonly="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_paysheet_lot_tree">
+            <field name="name">"hr_paysheet_lot_tree"</field>
+            <field name="model">hr.paysheet.lot</field>
+            <field name="arch" type="xml">
+                <tree name="HR PAYSHEET LOT" colors="blue:state in ('locked','signed');">
+                    <field name='name'/>
+                    <field name="state"/>
+                    <field name="struct_id"/>
+                    <field name="ltype"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="payment_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_paysheet_lot_menu" name="Lotes de nómina" parent="hr_payroll_main_menu" action="hr_paysheet_lot_action" sequence="10"/>
+
+    </data>
+</openerp>
+

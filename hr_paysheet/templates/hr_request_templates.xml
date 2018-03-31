@@ -1,0 +1,22 @@
+<openerp>
+    <data>
+
+        <!-- MESSAGE TEMPLATE -->
+
+        <template id="message_template">
+
+            <body>
+
+                <div style="height: auto;width:800px; margin:0 auto; padding-top:20px;padding-bottom:40px; text-align: center;">
+                    <img t-attf-src="/hr_paysheet/static/src/img/{{type}}.svg" width="300" height="300"/>
+                    <h1 style="font-size: 50px">
+                        <t t-esc="message"/>
+                    </h1>
+                </div>
+
+            </body>
+
+        </template>
+
+    </data>
+</openerp>

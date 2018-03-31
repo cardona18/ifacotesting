@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR CONTRACT REGIME VIEWS -->
+
+        <record id="hr_contract_regime_action" model="ir.actions.act_window">
+            <field name="name">Regimen de contratación</field>
+            <field name="res_model">hr.contract.regime</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_contract_regime_form">
+            <field name="name">hr_contract_regime_form</field>
+            <field name="model">hr.contract.regime</field>
+            <field name="arch" type="xml">
+                <form name="HR CONTRACT REGIME">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_contract_regime_tree">
+            <field name="name">"hr_contract_regime_tree"</field>
+            <field name="model">hr.contract.regime</field>
+            <field name="arch" type="xml">
+                <tree name="HR CONTRACT REGIME">
+                    <field name='name'/>
+                    <field name='code'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_contract_regime_menu" name="Regimen de contratación" parent="hr_sat_config_menu" action="hr_contract_regime_action" sequence="10"/>
+
+    </data>
+</openerp>

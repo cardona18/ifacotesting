@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="hr_xml_cfdi_report"
+            model="hr.xml.cfdi"
+            string="CFDI"
+            report_type="qweb-pdf"
+            name="hr_paysheet.cfdi_print"
+            file="hr_paysheet.cfdi_print"
+        />
+
+        <template id="cfdi_print">
+
+            <t t-foreach="docs" t-as="doc">
+
+                <div class="page">
+
+                    <style type="text/css">
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+
+                        .border{
+                            border: solid 1px;
+                        }
+
+                        td span{
+                            display:block;
+                            word-break:break-all;
+                        }
+
+                        .blue_back{
+                            background: #195099;
+                            color: #FFF;
+                        }
+
+                        .gray_back{
+                            background: #dfdddf;
+                        }
+
+                        .large_text{
+                            font-size: 16px;
+                        }
+
+                        .padding_right{
+                            padding-right: 5px;
+                        }
+
+                        .small_text{
+                            font-size: 9px;
+                        }
+
+                        .middle_text{
+                            font-size: 10px;
+                        }
+
+                        .blue_font{
+                            color: #195099;
+                        }
+
+                        .bold_text{
+                            font-weight: bold;
+                        }
+
+                        .inline{
+                            display: inline-block;
+                        }
+
+                        .separe_small{
+                            margin: 5px;
+                        }
+
+                        .border_radius{
+                            border-radius: 5px;
+                        }
+
+                        body{
+                            font-size: 12px;
+                        }
+                    </style>
+
+                    <t t-set="xml_tree" t-value="doc.parse_xml()"/>
+                    <t t-set="emisor" t-value="xml_tree.find('.//{http://www.sat.gob.mx/cfd/3}Emisor')"/>
+                    <t t-set="receptor" t-value="xml_tree.find('.//{http://www.sat.gob.mx/cfd/3}Receptor')"/>
+                    <t t-set="timbre" t-value="xml_tree.find('.//{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital')"/>
+                    <t t-set="impuestos" t-value="xml_tree.find('.//{http://www.sat.gob.mx/cfd/3}Impuestos')"/>
+
+                    <table>
+                        <tr>
+                            <td>
+
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td class="large_text bold_text blue_font" align="right">
+                                            <div t-esc="emisor.get('nombre')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="large_text bold_text blue_font" align="right">
+                                            <div t-esc="emisor.get('rfc')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="small_text blue_font" align="right">
+                                            Lugar de expedición
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">
+                                            <div t-esc="xml_tree.get('LugarExpedicion')"/>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+
+                            <td>
+
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td class="blue_back border_radius padding_right" align="right">FOLIO FISCAL</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><div t-esc="timbre.get('UUID')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_back border_radius padding_right" align="right">CERTIFICADO SAT</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><div t-esc="timbre.get('noCertificadoSAT')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_back border_radius padding_right" align="right">FECHA Y HORA DE EMISION</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><div t-esc="xml_tree.get('fecha')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_back border_radius padding_right" align="right">FECHA Y HORA DE CERTIFICACION</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><div t-esc="timbre.get('FechaTimbrado')"/></td>
+                                    </tr>
+                                </table>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+                    <br/>
+                    <table>
+
+                        <tr>
+                            <td colspan="2">
+                                <span class="blue_font inline middle_text">Régimen fiscal</span> <span class="inline middle_text"><div t-esc="emisor[0].get('Regimen')"/></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+
+                                <table style="width: 100%;" class="gray_back separe_small border_radius">
+                                    <tr>
+                                        <td class="blue_font" colspan="2">Receptor</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><div t-esc="receptor.get('nombre')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font" colspan="2">R.F.C.</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><div t-esc="receptor.get('rfc')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font" colspan="2">Domicilio</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><![CDATA[&nbsp;]]></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font" colspan="2">Ciudad</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><![CDATA[&nbsp;]]></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font">Localidad</td><td class="blue_font">Referencia</td>
+                                    </tr>
+                                    <tr>
+                                        <td><![CDATA[&nbsp;]]></td><td><![CDATA[&nbsp;]]></td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                            <td>
+
+                                <table style="width: 100%;" class="gray_back separe_small border_radius">
+                                    <tr>
+                                        <td class="blue_font">Serie/Folio</td>
+                                        <td class="blue_font">Moneda</td>
+                                        <td class="blue_font">Tipo de cambio</td>
+                                    </tr>
+                                    <tr>
+                                        <td><div t-esc="xml_tree.get('serie') + '/'+ xml_tree.get('folio')"/></td><td><div t-esc="xml_tree.get('Moneda')"/></td><td><div t-esc="xml_tree.get('TipoCambio')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font" colspan="3">Tipo de Comprobante</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><div t-esc="xml_tree.get('tipoDeComprobante')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font" >No. cuenta de pago</td><td class="blue_font" colspan="2">Método de pago</td>
+                                    </tr>
+                                    <tr>
+                                        <td><![CDATA[&nbsp;]]></td><td colspan="2"><div t-esc="xml_tree.get('metodoDePago')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font" colspan="3">Condiciones de pago</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><![CDATA[&nbsp;]]></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font" colspan="3">Motivo de descuento</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><div t-esc="xml_tree.get('motivoDescuento')"/></td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+
+                    </table>
+                    <br/>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="blue_back bold_text" align="center">Cantidad</td>
+                            <td class="blue_back bold_text" align="center">Concepto</td>
+                            <td class="blue_back bold_text" align="center">Unidad</td>
+                            <td class="blue_back bold_text" align="center">Precio</td>
+                            <td class="blue_back bold_text" align="center">Importe</td>
+                        </tr>
+
+                        <t t-foreach="xml_tree.findall('.//{http://www.sat.gob.mx/cfd/3}Concepto')" t-as="concepto">
+                            <tr>
+                                <td align="right"><div t-esc="concepto.get('cantidad')"/></td>
+                                <td><div t-esc="concepto.get('descripcion')"/></td>
+                                <td><div t-esc="concepto.get('unidad')"/></td>
+                                <td align="right"><div t-esc="concepto.get('valorUnitario')"/></td>
+                                <td align="right"><div t-esc="concepto.get('importe')"/></td>
+                            </tr>
+                        </t>
+                    </table>
+
+                    <table style="width: 100%;">
+                        <tr>
+                            <td valign="top">
+
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td class="blue_font bold_text">Importe con letra</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="middle_text"><div t-esc="doc.num2text(xml_tree.get('total'))"/></td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                            <td>
+
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td class="blue_font bold_text">Subtotal</td><td align="right"><div t-esc="xml_tree.get('motivoDescuento')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font bold_text">Descuentos</td><td align="right"><div t-esc="xml_tree.get('descuento')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font bold_text">Total traslados</td><td align="right"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font bold_text">Total retenciones</td><td align="right"><div t-esc="impuestos.get('totalImpuestosRetenidos')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue_font bold_text">Importe total</td><td align="right"><div t-esc="xml_tree.get('total')"/></td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="blue_font">
+                                Desglose de impuestos retenidos
+                            </td>
+                        </tr>
+
+                        <t t-foreach="xml_tree.findall('.//{http://www.sat.gob.mx/cfd/3}Retencion')" t-as="retencion">
+                            <tr>
+                                <td>
+                                    <t t-esc="retencion.get('impuesto')"/><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;]]><t t-esc="retencion.get('importe')"/>
+                                </td>
+                            </tr>
+                        </t>
+
+                    </table>
+                    <br/>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="small_text blue_font">Forma de pago</td>
+                            <td class="small_text blue_font">Número de certificado digital</td>
+                            <td class="small_text blue_font">Fecha del folio fiscal original</td>
+                            <td class="small_text blue_font">Serie/Folio fiscal original</td>
+                            <td class="small_text blue_font">Total folio fiscal original</td>
+                        </tr>
+                        <tr>
+                            <td class="middle_text"><div t-esc="xml_tree.get('formaDePago')"/></td>
+                            <td class="middle_text"><div t-esc="xml_tree.get('noCertificado')"/></td>
+                            <td class="middle_text"><![CDATA[&nbsp;]]></td>
+                            <td class="middle_text"><![CDATA[&nbsp;]]></td>
+                            <td class="middle_text"><![CDATA[&nbsp;]]></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td class="blue_font">
+                                Cadena original del complemento del certificado digital del SAT
+                            </td>
+                            <td rowspan="7">
+                                <t t-set="qr_str" t-value="'?re=' + emisor.get('rfc') + '%26rr=' + receptor.get('rfc') + '%26tt=' + xml_tree.get('total') + '%26id=' + timbre.get('UUID') "/>
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', qr_str, 600, 600)" style="width:200px;height:200px"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="small_text"><div t-esc="'||' + timbre.get('version') + '|' + timbre.get('UUID') + '|' + timbre.get('FechaTimbrado') + '|' + timbre.get('selloCFD') + '|' + timbre.get('noCertificadoSAT')"/></span></td>
+                        </tr>
+                        <tr>
+                            <td class="blue_font">Sello Digital del Emisor</td>
+                        </tr>
+                        <tr>
+                            <td><span class="small_text"><div t-esc="timbre.get('selloCFD')"/></span></td>
+                        </tr>
+                        <tr>
+                            <td class="blue_font">
+                                Sello Digital SAT
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td valign="top"><span class="small_text"><div t-esc="timbre.get('selloSAT')"/></span></td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </t>
+
+        </template>
+
+    </data>
+</openerp>

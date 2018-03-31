@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR IMPORT CONCEPTS WIZARD -->
+
+        <act_window id="hr_import_concepts_wizard_action" name="Importar entradas" res_model="hr.import.concepts.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="hr_import_concepts_wizard_form_view">
+            <field name="name">hr_import_concepts_wizard_form</field>
+            <field name="model">hr.import.concepts.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Importar entradas">
+
+                  <group>
+                    <field name="import_type" required="1"/>
+                    <field name="b64_file" attrs="{'invisible': [('import_type', '!=', 'TXT')], 'required': [('import_type', '=', 'TXT')]}"/>
+                    <field name="csv_file" attrs="{'invisible': [('import_type', '!=', 'CSV')], 'required': [('import_type', '=', 'CSV')]}"/>
+                    <field name="apply_date"/>
+                    <field name="replace_type" required="1"/>
+                    <field name="import_zero"/>
+                  </group>
+
+                  <footer>
+                      <button name="import_file" type="object" string="Importar" icon="fa-upload" class="oe_highlight"/>
+                      or
+                      <button special="cancel" string="Cancel"/>
+                  </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="hr_import_concepts_wizard_menu" name="Importar entradas" parent="hr_payroll_main_menu" sequence="40" action="hr_import_concepts_wizard_action" />
+
+    </data>
+</openerp>

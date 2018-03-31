@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="hr_states_eval_tree">
+            <field name="name">"hr_states_eval_tree"</field>
+            <field name="model">hr.states.eval</field>
+            <field name="arch" type="xml">
+                <tree name="HR STATES EVAL">
+                    <field name='evaluators_id'/>
+                    <field name='state'/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
