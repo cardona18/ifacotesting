@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','project', 'project_issue'],
+    'depends': ['base','project'],
 
     # always loaded
     'data': [
@@ -27,7 +27,6 @@
         'views/project_scrum_gi_main.xml',
         'wizards/project_scrum_monitor_wizard.xml',
     	'views/project_task.xml',
-        'views/project_issue.xml',
         'views/project_scrum_us.xml',
         'views/project_scrum_sprint.xml',
         'templates/project_scrum_web.xml',

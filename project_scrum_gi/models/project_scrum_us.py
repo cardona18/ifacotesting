@@ -24,18 +24,12 @@ class project_scrum_us(models.Model):
     description = fields.Html(
         string='Descripción'
     )
-    issue_ids = fields.One2many(
-        string='Incidencias',
-        comodel_name='project.issue',
-        inverse_name='story_id'
-    )
     story_points = fields.Integer(
         string='Puntos de historia',
         default=0
     )
     sequence = fields.Integer(
-        string='Prioridad',
-        default=0
+        string='Prioridad'
     )
     state = fields.Selection(
         string='Estado',
@@ -50,13 +44,13 @@ class project_scrum_us(models.Model):
     @api.multi
     def close_action(self):
 
-        for issue_id in self.issue_ids:
-
-            if issue_id.state == 'O':
-                raise UserError('No es posible cerrar ya que existen incidencias abiertas')
-
         self.state = 'closed'
 
     @api.multi
     def open_action(self):
         self.state = 'open'
+
+    def _compute_sequence_num(self):
+
+        for item in self:
+            item.sequence_num = item.sequence

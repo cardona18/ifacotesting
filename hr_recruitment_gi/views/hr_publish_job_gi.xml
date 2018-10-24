@@ -47,7 +47,7 @@
         </record>
 
         
-        <menuitem id="hr_publish_job_gi_menu_wqeqwe" name="Publicar vacantes intranet" sequence="4" parent="base.menu_crm_case_job_req_main" action="hr_recruitment_gi.request_publish_job_gi_action" groups="hr_recruitment_gi.group_director,base.group_hr_manager,hr_recruitment_gi.group_rsp"/>
+        <menuitem id="hr_publish_job_gi_menu_wqeqwe" name="Publicar vacantes intranet" sequence="4" parent="hr_recruitment.menu_crm_case_categ0_act_job" action="hr_recruitment_gi.request_publish_job_gi_action" groups="hr_recruitment_gi.group_director,hr.group_hr_manager,hr_recruitment_gi.group_rsp"/>
 
     </data>
 </openerp>

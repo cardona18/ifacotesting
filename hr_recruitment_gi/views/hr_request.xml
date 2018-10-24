@@ -124,9 +124,9 @@ qweqweqweqwqweqweqw
         </record>
 
 
-        <menuitem id="base.menu_crm_case_job_req_main" name="Proceso de selección" parent="hr.menu_hr_root" sequence="1" groups="hr_recruitment_gi.group_director,base.group_hr_manager,gi_base.group_boss_area,hr_recruitment_gi.group_rsp"/>
+        <menuitem id="base.menu_crm_case_categ0_act_job" name="Proceso de selección" parent="hr.menu_hr_root" sequence="1" groups="hr_recruitment_gi.group_director,base.group_hr_manager,gi_base.group_boss_area,hr_recruitment_gi.group_rsp"/>
 
-        <menuitem id="hr_request_gi_menu" name="Requisición de personal" parent="base.menu_crm_case_job_req_main" sequence="-1" action="hr_request_gi_action" groups="hr_recruitment_gi.group_director,base.group_hr_manager,gi_base.group_boss_area,hr_recruitment_gi.group_rsp"/>
+        <menuitem id="hr_request_gi_menu" name="Requisición de personal" parent="base.menu_crm_case_categ0_act_job" sequence="-1" action="hr_request_gi_action" groups="hr_recruitment_gi.group_director,base.group_hr_manager,gi_base.group_boss_area,hr_recruitment_gi.group_rsp"/>
 
 
 

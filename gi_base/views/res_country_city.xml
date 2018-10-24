@@ -15,7 +15,7 @@
             <field name="name">res_country_city_form</field>
             <field name="model">res.country.city</field>
             <field name="arch" type="xml">
-                <form name="RES COUNTRY CITY">
+                <form name="Ciudades">
                     <group>
                         <field name="name"/>
                         <field name="short_name"/>
@@ -26,10 +26,10 @@
         </record>
 
         <record model="ir.ui.view" id="res_country_city_tree">
-            <field name="name">"res_country_city_tree"</field>
+            <field name="name">res_country_city_tree</field>
             <field name="model">res.country.city</field>
             <field name="arch" type="xml">
-                <tree name="RES COUNTRY CITY">
+                <tree name="Ciudades">
                     <field name='name'/>
                     <field name="short_name"/>
                 </tree>

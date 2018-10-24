@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- Cancelar factura -->
+         <act_window id="account_invoice_cancel_action" name="Motivo de la cancelación" res_model="cancel.account.invoice" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="cancel_account_invoice_form_view">
+            <field name="name">cancel_account_invoice_form</field>
+            <field name="model">cancel.account.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Cancelar factura">
+
+                  <group>
+                        <field name="commentary" required="1"/>
+                  </group>
+
+                  <footer>
+                      <button name="action_invoice_cancel_gi" type="object" string="Cancelar factura" class="oe_highlight"/>
+                      o
+                      <button special="cancel" string="Cancel"/>
+                  </footer>
+
+                </form>
+            </field>
+        </record>
+
+    <!--     <record id="account_invoice_cancel_action" model="ir.actions.act_window">
+            <field name="name">Cancelación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.invoice.cancel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+        </record>
+ -->
+
+    </data>
+</openerp>

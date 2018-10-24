@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- Entradas VIEWS -->
+
+        <record id="purchase_reception_action" model="ir.actions.act_window">
+            <field name="name">Entradas</field>
+            <field name="res_model">purchase.reception</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_reception_form">
+            <field name="name">purchase_reception_form</field>
+            <field name="model">purchase.reception</field>
+            <field name="arch" type="xml">
+                <form name="Entradas">
+                    <header>
+                        <button name="get_good" states="create" string="Recibir producto" type="object" class="oe_highlight"/>
+                        <button name="cancel" string="Cancelar recepción" type="object" class="oe_highlight" groups="purchases_gi.group_receptionist_con_ser, purchases_gi.group_receptionist_pro"/>
+                        <button name="force_unlink" string="Forzar eliminación" type="object" class="oe_highlight" groups="base.group_system"/>
+                        <field name="state" widget="statusbar" statusbar_visible="received,cancelled" readonly="1"/>
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <field name="product_id" attrs="{'readonly':[('state', '!=', 'create'),('qty', '!=', 0)]}"/>
+                            <field name="account_analytic_id"/>
+                            <field name="account_id"/>
+                            <field name="company_id" required="1"/>
+                            <field name="order_id" attrs="{'readonly':['|',('state', '!=', 'create'),('qty', '!=', 0)]}"/>
+                            <field name="purchase_line_id"/>
+                            <field name="qty" attrs="{'readonly':[('state', '!=', 'create')]}"/>
+                            <field name="get_qty" />
+                            <field name="tax"/>
+                            <field name="subtotal"/>
+                            <field name="c_exchangerate" digits="[12,6]" attrs="{'invisible':[('currency', '=', 'MXN')]}"/>
+                            <field name="exchangerate" digits="[12,6]" attrs="{'invisible':[('currency', '=', 'MXN')]}"/>
+                            <field name="date_request" readonly="0"/>
+                            <field name="doc" attrs="{'readonly':[('state', '!=', 'create')]}"/>
+                            <field name="coments" attrs="{'readonly':[('state', '!=', 'create')]}"/>
+                            <field name="move_line" invisible="1"/>
+                        </group>
+
+                        <separator string="Datos globales"/>
+                        <group>
+                            <field name="partner_name"/>  
+                            <field name="depto_name" invisible="1"/>
+                            <field name="folio_invoice"/>  
+                            <field name="Category_pdt"/>
+                            <field name="udm_pdt"/>
+                            <field name="currency"/>
+                            <field name="total_invoice"/>                                      
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_reception_tree">
+            <field name="name">purchase_reception_tree</field>
+            <field name="model">purchase.reception</field>
+            <field name="arch" type="xml">
+                <tree name="Entradas" decoration-danger="state=='cancel'" decoration-success="state=='received'">
+                    <field name='product_id'/>
+                    <field name='name'/>
+                    <field name="account_analytic_id"/>
+                    <field name='state'/>
+                    <field name='order_id'/>
+                    <field name='get_qty'/>
+                    <field name='date_request'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="purchase_reception_menu" name="Entradas" action="purchase_reception_action" sequence="55" web_icon="purchases_gi,static/description/icon_res.png"/>
+
+    </data>
+</odoo>

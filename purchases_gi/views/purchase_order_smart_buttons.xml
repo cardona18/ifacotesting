@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="purchase_purchase_order_form">
+            <field name="name">purchase_order_form_gi</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_2_stock_picking"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='invoice_open']" position="after">
+                    <div class="oe_right oe_button_box" name="buttons"  attrs="{'invisible': [('get_xml_no_val', '=', 0)]}">
+                        <button name="purchases_gi.xml_no_validated_action" type="action" class="oe_stat_button" icon="fa-code">
+                            <field string="Incidencias XML" name="get_xml_no_val" widget="statinfo"/>
+                            <field name="xml_no_ids" invisible="1"/>
+                        </button>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</openerp>

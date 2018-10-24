@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- HR DEPARTMENT GI VIEWS -->
+
+        <record model="ir.ui.view" id="view_department_form">
+            <field name="name">hr_department_gi_form</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='name']" position="after">
+                    <!-- <field name="account_exp" options="{'no_create':True, 'create_edit': false,'no_open': True}"/> -->
+                    <field name="hr_busi_segme" options="{'no_create':True, 'create_edit': false,'no_open': True}"/>
+                    <field name="project_development" />
+                     <field name="employee_assigned" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

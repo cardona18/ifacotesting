@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-import ir_mail_server
-import mail_domain_route
+from . import ir_mail_server
+from . import mail_domain_route

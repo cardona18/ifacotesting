@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-import project_scrum_monitor
+from . import project_scrum_monitor

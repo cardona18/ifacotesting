@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_picking_inherit_form2_gi">
+            <field name="name">stock_transfer_details_gi</field>
+            <field name="model">stock.transfer_details</field>
+            <field name="inherit_id" ref="stock.view_stock_enter_transfer_details"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='item_ids']/tree/field[@name='quantity']" position="attributes">
+                    <attribute name="string">Cantidad a recibir</attribute>
+                    <attribute name="attrs">{'readonly':[('what_to_be','=','all')]}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='item_ids']/tree/field[@name='quantity']" position="after">
+                    <field name="r_product_type" invisible="0"/>
+                </xpath>  
+
+                <xpath expr="//field[@name='item_ids']/tree/field[@name='quantity']" position="after">
+                    <field name="with_perm" invisible="0"/>
+                </xpath>  
+
+                <xpath expr="//field[@name='item_ids']/tree/field[@name='quantity']" position="after">
+                    <field name="what_to_be" invisible="0"/>
+                    <field name="max_quantity" invisible="1"/>
+                </xpath>  
+
+
+                <xpath expr="//field[@name='item_ids']/tree" position="attributes">
+                    <attribute name="attrs">{'invisible':[('with_perm','=',False)]}</attribute>
+                </xpath>   
+
+                <xpath expr="//field[@name='item_ids']" position="after">
+                    <field name="check_config" invisible="1"/>
+                </xpath>  
+
+                <xpath expr="//button[@name='do_detailed_transfer']" position="replace">
+                    <button name="create_request" type="object" string="Crear entrada" class="oe_highlight"/>
+                </xpath>
+
+
+
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

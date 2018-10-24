@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-import data_filemanager
+from . import data_filemanager

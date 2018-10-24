@@ -12,8 +12,6 @@ from openerp.osv import osv
 from openerp.tools.translate import _
 
 
-reload(sys)  
-sys.setdefaultencoding('utf8')
 _logger = logging.getLogger(__name__)
 
 ## Documentation for a class.

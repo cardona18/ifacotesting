@@ -2,7 +2,7 @@
 # © <2017> <Omar Torres Silva (otorres@grupoifaco.com.mx)>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import fields, models
+from odoo import fields, models
 
 class ireport_fixed_image(models.Model):
     _name = 'ireport.fixed.image'

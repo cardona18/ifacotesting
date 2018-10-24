@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.invoice.import</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='invoicing_settings']" position="after">
+                <h2>Facturación SIAGI</h2>
+                <div class="row mt16 o_settings_container" id="l10n_mx_edi_settings">
+                    <div class="col-xs-12 col-md-6 o_setting_box" title="Parametros de conexión a base de datos">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label string='Conexión'/>
+                            <div class="text-muted">
+                                Configurar conexión a base de datos
+                            </div>
+                            <div class="content-group">
+
+                                <div class="row mt16">
+                                    <label string="DB" for="invoice_import_invoice_db" class="col-md-3 o_light_label"/>
+                                    <field name="invoice_import_invoice_db"/>
+                                </div>
+                                <div class="row">
+                                    <label string="Servidor" for="invoice_import_server_id" class="col-md-3 o_light_label"/>
+                                    <field name="invoice_import_server_id"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 o_setting_box" title="Conexíon a servidor de archivos">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label string='Archivos XML'/>
+                            <div class="text-muted">
+                                Configurar conexión
+                            </div>
+                            <div class="content-group">
+
+                                <div class="row mt16">
+                                    <label string="Dominio" for="smb_domain" class="col-md-3 o_light_label"/>
+                                    <field name="smb_domain"/>
+                                </div>
+
+                                <div class="row">
+                                    <label string="Usuario" for="smb_user" class="col-md-3 o_light_label"/>
+                                    <field name="smb_user"/>
+                                </div>
+
+                                <div class="row">
+                                    <label string="Contraseña" for="smb_pass" class="col-md-3 o_light_label"/>
+                                    <field name="smb_pass" password="True"/>
+                                </div>
+
+                                <div class="row">
+                                    <label string="Ruta" for="smb_path" class="col-md-3 o_light_label"/>
+                                    <field name="smb_path"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

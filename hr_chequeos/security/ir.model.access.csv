@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_fingerprint,ir_model_access_hr_fingerprint,hr_chequeos.model_hr_fingerprint,base.group_user,1,0,0,0
-hr_timecheck_turn_hr_user,hr_timecheck_turn,model_hr_timecheck_turn,hr.group_hr_user,1,1,1,1
-hr_timecheck_node_hr_user,hr_timecheck_node,model_hr_timecheck_node,hr.group_hr_user,1,0,0,0

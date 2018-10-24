@@ -2,5 +2,24 @@
 <openerp>
     <data>
 
+        <record model="ir.ui.view" id="data_filemanager_form_gi">
+            <field name="name">data_filemanager_form_gi</field>
+            <field name="model">data.filemanager</field>
+            <field name="arch" type="xml">
+                <form  name="Archivos">
+                    <header>
+                        <button name="get_txt_path" type="object" string="Mostrar XML" class="oe_highlight" icon="gtk-stop"/>
+                    </header>
+                    <sheet>  
+                        <group>                      
+                            <field name="name" invisible="1"/>
+                            <field name="path" invisible="1"/>
+                            <field name="xml_file" filename="name" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
     </data>
 </openerp>

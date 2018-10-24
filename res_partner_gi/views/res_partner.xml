@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- RES PARTNER VIEWS -->
+
+        <record model="ir.ui.view" id="res_partner_gi_form">
+            <field name="name">res_partner_gi_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='category_id']" position="before">
+                    <field name="curp" attrs="{'invisible': [('is_company', '=', True)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

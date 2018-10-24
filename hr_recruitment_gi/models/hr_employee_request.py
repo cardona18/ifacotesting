@@ -9,9 +9,6 @@ from odoo.exceptions import UserError
 from openerp.exceptions import ValidationError
 
 
-reload(sys)
-sys.setdefaultencoding('utf8')
-
 _logger = logging.getLogger(__name__)
 
 class hr_employee_request(models.Model):

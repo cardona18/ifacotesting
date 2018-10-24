@@ -22,6 +22,7 @@
 
     # always loaded
     'data': [
-        'views/data_file_manager_main.xml'
+        'security/ir.model.access.csv',
+        'views/data_file_manager_main.xml',
     ]
 }

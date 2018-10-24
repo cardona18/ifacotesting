@@ -8,10 +8,10 @@ import logging
 import os
 import subprocess
 import uuid
-
 from openerp import fields, models, api
 from odoo.exceptions import UserError
 from openerp.tools import config
+from openerp.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -26,9 +26,32 @@ class data_filemanager(models.Model):
     path = fields.Char(
         string='Ruta',
     )
+    xml_file = fields.Binary(
+        string='Archivo',
+    )
+
+
+    @api.multi 
+    def get_txt_path(self):
+        try:
+            file = open(self.path, "r")
+        except FileNotFoundError:
+            raise ValidationError('No se puede mostrar el archivo.')
+
+
+        data = file.read()
+
+        data = data.replace("...",".")
+        data = data.replace("..",".")
+
+        _logger.warning("XD")
+        _logger.warning(data)
+        file.close()
+        self.xml_file = base64.b64encode(bytes(data, 'utf-8'))
+
 
     @api.multi
-    def remove_all(self):
+    def unlink(self):
 
         for item in self:
 
@@ -36,6 +59,35 @@ class data_filemanager(models.Model):
                 os.remove(item.path)
 
         return super(data_filemanager, self).sudo().unlink()
+
+
+    def save_xml(self, content, filename):
+
+        # SET SYSTEM TIMEZONE Guarda archivo
+        os.environ['TZ'] = "America/Mexico_City"
+
+        base_path = '%s/filestore' % config['data_dir']
+        repo_path = '%s/%s' % (base_path, self._name.replace('.','_'))
+        date_path = '%s/%s' % (repo_path,datetime.today().isoformat()[:10])
+
+        if not os.access(base_path, os.W_OK):
+            _logger.error("No hay permisos de escritura en: %s", base_path)
+            raise UserError('No hay permisos de escritura')
+
+        self.execute('mkdir -p %s' % date_path)
+
+        file_path = '%s/%s' % (date_path, uuid.uuid4())
+
+        f = open(file_path, 'wb')
+        f.write(content.encode())
+        f.close()
+
+        file_id = self.sudo().create({
+            'name': filename,
+            'path': file_path
+        })
+        return file_id.id
+        
 
     def save_base64(self, content, filename):
 
@@ -65,22 +117,6 @@ class data_filemanager(models.Model):
 
         return file_id.id
 
-    def update_base64(self, content, filename):
-
-        if not os.access(self.path, os.W_OK):
-            _logger.error("No hay permisos de escritura en: %s", self.path)
-            raise UserError('No hay permisos de escritura')
-
-        f = open(self.path, 'wb')
-        f.write(content.decode('base64'))
-        f.close()
-
-        self.sudo().write({
-            'name': filename
-        })
-
-        return True
-
     def file_read(self):
 
         if os.access(self.path, os.R_OK):
@@ -95,5 +131,5 @@ class data_filemanager(models.Model):
     def execute(self, _command):
         try:
             return subprocess.check_output(_command, shell=True, stderr=subprocess.STDOUT)
-        except Exception, e:
+        except Exception as e:
             _logger.error('EXECUTE ERROR: %s', e)

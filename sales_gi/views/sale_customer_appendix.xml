@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- SALE CUSTOMER APPENDIX VIEWS -->
+
+        <record id="sale_customer_appendix_action" model="ir.actions.act_window">
+            <field name="name">Adendas</field>
+            <field name="res_model">sale.customer.appendix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_customer_appendix_form">
+            <field name="name">sale_customer_appendix_form</field>
+            <field name="model">sale.customer.appendix</field>
+            <field name="arch" type="xml">
+                <form name="Adendas">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_customer_appendix_tree">
+            <field name="name">"sale_customer_appendix_tree"</field>
+            <field name="model">sale.customer.appendix</field>
+            <field name="arch" type="xml">
+                <tree name="Adendas">
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="sale_customer_appendix_menu" name="Adendas" parent="base.menu_sales" action="sale_customer_appendix_action" sequence="10"/>
+
+    </data>
+</openerp>

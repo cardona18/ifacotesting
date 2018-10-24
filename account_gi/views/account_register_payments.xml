@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+<!-- 
+        <record id="view_account_payment_from_invoices_inherit_gi" model="ir.ui.view">
+            <field name="name">account.register.payments.form.inherit</field>
+            <field name="model">account.register.payments</field>
+            <field name="inherit_id" ref="account.view_account_payment_from_invoices"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='currency_id']" position="replace">
+                    <field name="currency_id" invisible="0" required="1"/>
+                </xpath>
+
+
+            </field>
+        </record>
+ -->
+    </data>
+</odoo>
