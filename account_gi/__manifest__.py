@@ -7,6 +7,7 @@
         subtitle on modules listing or apps.odoo.com""",
 
     'description': """
+
     """,
 
     'author': "",
@@ -26,12 +27,14 @@
         'security/ir.model.access.csv',
         'wizards/cancel_account_invoice.xml',
         'wizards/account_common_report_view.xml',
-        'report/accoutn_report_payment_receipt.xml',
+        'report/account_report_payment_receipt.xml',
         'views/account_invoice.xml',
         'views/partner_view.xml',
         'views/account_report_partnerledger.xml',
         'views/account_report_trialbalance.xml',
         'views/account_register_payments.xml',
         'views/res_partner.xml',
+        'views/payment10.xml',
+        'views/account_payment_from_invoices.xml'
     ]
 }

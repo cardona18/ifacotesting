@@ -768,7 +768,7 @@ class purchase_order(models.Model):
         _logger.info("Se quito modifcacion que elimina impuestos")
 
     #Permite modifcar ordenes
-    change_purchase = fields.Boolean('Modificar datos de orden de compra',default=False)
+    #change_purchase = fields.Boolean('Modificar datos de orden de compra',default=False)
 
     #def change_purchase_order(self):
     #    self.change_purchase = True

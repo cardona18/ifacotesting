@@ -8,10 +8,10 @@
         <field name="inherit_id" ref="account.view_partner_property_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='credit_limit']" position="before">
+            <xpath expr="//field[@name='credit_limit']" position="replace">
                 <field name="credit_limit" groups="account.group_account_manager"/>
             </xpath>
-            <xpath expr="//field[@name='over_credit']" position="before">
+            <xpath expr="//field[@name='over_credit']" position="replace">
                 <field name="over_credit" groups="account.group_account_manager"/>
             </xpath>
 

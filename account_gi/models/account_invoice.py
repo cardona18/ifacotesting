@@ -65,6 +65,8 @@ class account_invoice_gi(models.Model):
         for self_id in self_account:
             partner_ids = self.env['account.invoice'].search([('partner_id', '=', self_id.partner_id.id), ('state', '=', 'paid')])
             
+            _logger.warning(self_id.name)
+            _logger.warning(len(partner_ids))
             average = self_id.day_trans_payment / len(partner_ids)
             self_id.aver_pay_part = average
 
@@ -86,4 +88,15 @@ class account_invoice_gi(models.Model):
 
     def l10n_mx_edi_update_sat_status_gi(self):
         self.date_invoice = date.today()
+
+        _logger.warning(self.date_invoice)
+        _logger.warning(self.date_invoice)
+        _logger.warning(self.date_invoice)
+        _logger.warning(self.date_invoice)
+        _logger.warning(self.date_invoice)
         self.l10n_mx_edi_update_pac_status()
+
+
+    def action_invoice_open_gi(self):
+        self.date_invoice = datetime.now()
+        return self.action_invoice_open()

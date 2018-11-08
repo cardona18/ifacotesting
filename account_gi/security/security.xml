@@ -3,7 +3,7 @@
     <data>
 
         <record id="manager_bank" model="res.groups">
-                <field name="name">Tesorerero</field>
+                <field name="name">Tesorero</field>
                 <field name="category_id" ref="base.module_category_accounting_and_finance"/>
                 <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
                 <field name="comment">Rol de tesorería para que solo este pueda crear las cuentas bancarias.</field>
@@ -49,6 +49,7 @@
                 <field name="category_id" ref="base.module_category_accounting_and_finance"/>
                 <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
                 <field name="comment">Rol de consultor de ventas.</field>
+                <field name="menu_access" eval="[(4, ref('account.menu_action_invoice_tree1')),(4, ref('account.menu_finance_receivables_follow_up'))]"/>
         </record>
 
         <record id="consultant_purchase" model="res.groups">

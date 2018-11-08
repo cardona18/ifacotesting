@@ -3,13 +3,11 @@
     'name': "Compras GI",
 
     'summary': """
-
         Adecuaciones al modulo de compras GI
-        
         """,
 
     'description': """
-        Adecuaciones al modulo de compras GI
+        
     """,
 
     'author': "IACDev (iacdev@grupoifaco.com.mx)",

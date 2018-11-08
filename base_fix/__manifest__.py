@@ -7,7 +7,7 @@
         subtitle on modules listing or apps.odoo.com""",
 
     'description': """
-        Odoo borra automaticamente el módulo.
+
     """,
 
     'author': "",

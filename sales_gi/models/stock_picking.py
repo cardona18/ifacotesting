@@ -72,8 +72,6 @@ class stock_picking_gi(models.Model):
     def shipment_invoices(self, is_shipment = False):
 
 
-        _logger.warning("Holaaaaaaa")
-
         for picking in self:
 
             if not picking.sale_shipment:
@@ -89,18 +87,13 @@ class stock_picking_gi(models.Model):
 
         for picking in self:
 
-            _logger.warning("Hola mundo")
 
             if picking.picking_type_id.transfer:
 
 
-                _logger.warning(self.company_id)
                 picking.origin = self.name
                 picking.picking_type_code = 'outgoing'
                 picking.picking_type_code = 'outgoing'
-
-                _logger.warning("Que valor tiene esta cosa")
-                _logger.warning(picking.picking_type_code)
 
                 partner_id = self.env['res.partner'].sudo().search([('name', '=', picking.company_id.name)], limit=1)
                 picking.partner_id = partner_id.id
@@ -108,26 +101,16 @@ class stock_picking_gi(models.Model):
                 picking.type = 'out_invoice'
 
 
-                _logger.warning("--------------> "+ picking.partner_id.name)
-
-
                 picking.date_invoice = self.env['l10n_mx_edi.certificate'].sudo().get_mx_current_datetime().date()
                 picking.fiscal_position_id = self.company_id.partner_id.property_account_position_id.id
                 picking.l10n_mx_edi_usage = self.sale_id.partner_id.sale_invoice_usage or 'P01'
           
 
-                _logger.warning("TRuena al llamar al metodo")
-
-                _logger.warning(is_shipment)
                 self.sale_shipment = True
 
 
                 res = picking.make_picking_invoice_from_stock(is_shipment)
 
-                _logger.warning("REsultado...............")
-                _logger.warning("REsultado...............")
-                _logger.warning("REsultado...............")
-                _logger.warning(res)
 
     def make_picking_invoice_from_stock(self, is_shipment = False):
 

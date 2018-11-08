@@ -157,7 +157,7 @@
                     <field name="requisition_id" class="oe_field_name" attrs="{'readonly': [('state', 'in', ('related','approved','cancel'))]}"/>
                     <field name="create_directly"/>
                     <field name="approved_bloq" invisible="1"/>
-                    <field name="change_purchase" invisible="1"/>
+                   <!-- <field name="change_purchase" invisible="1"/> -->
                 </xpath>
 
                 <xpath expr="//field[@name='notes']" position="replace">
@@ -177,7 +177,7 @@
                 </xpath>
 
                 <xpath expr="//button[1]" position="before">
-                    <button name="authorize_order_requisition" type="object" states="draft" string="Crear orden de compra" class="b_color_red" groups="purchase.group_purchase_manager,purchases_gi.group_assistant" icon="fa-check-circle" />
+                    <button name="authorize_order_requisition" type="object" states="draft" string="Crear orden de compra" class="b_color_red" groups="purchase.group_purchase_manager,purchases_gi.group_assistant" icon="fa-check-circle" invisible="1"/>
                 </xpath>
 
                 <xpath expr="//button[1]" position="before">
@@ -292,13 +292,13 @@
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="after">
                     <field name="delivered" invisible="1"/>
                     <field name="remaining" invisible="1"/>
-                    <field name="change_purchase" invisible="1"/>
+                  <!--  <field name="change_purchase" invisible="1"/> -->
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
                     <field name="discount"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel')),('change_purchase','=',False)]}</attribute>
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
                     <attribute name="track_visibility">onchenge</attribute>
                 </xpath>
                 <!--Restricciones lineas de compra-->
@@ -307,7 +307,7 @@
                 </xpath>
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel')),('change_purchase','=',False)]}</attribute>
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
                     <attribute name="track_visibility">onchenge</attribute>
                 </xpath>
                 <!--
@@ -316,13 +316,13 @@
                 </xpath>
                 -->
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="attributes">
-                     <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel')),('change_purchase','=',False)]}</attribute>
+                     <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
                     <attribute name="track_visibility">onchenge</attribute>
                 </xpath>
 
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='taxes_id']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel')),('change_purchase','=',False)]}</attribute>
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
                     <attribute name="domain">[('type_tax_use','=','purchase'),('company_id','=',company_id)]</attribute>
                     <attribute name="track_visibility">onchenge</attribute>
                 </xpath> 
@@ -337,14 +337,14 @@
                 -->
                 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
-                    <field name="priceless" attrs="{'readonly': [('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase')),('change_purchase','=',False)]}"/>
-                    <field name="additional_costs" attrs="{'readonly': [('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase')),('change_purchase','=',False)]}"/>
+                    <field name="priceless" attrs="{'readonly': [('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase'))]}"/>
+                    <field name="additional_costs" attrs="{'readonly': [('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase'))]}"/>
                 </xpath> 
 
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
                     <!--<attribute name="attrs">{'readonly': ['|',('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase')),('priceless', '=',True)]}</attribute>-->
-                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel')),('change_purchase','=',False)]}</attribute>
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
                     <attribute name="track_visibility">onchenge</attribute>
                 </xpath>
 

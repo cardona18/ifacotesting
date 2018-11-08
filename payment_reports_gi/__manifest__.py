@@ -2,7 +2,7 @@
 {
     'name': "PAYMENT REPORTS GI",
 
-    'summary': """Se agregan nuevos formatos para imprimir cheques en el módulo de facturación """,
+    'summary': """Se agregan nuevos formatos para imprimir cheques en el módulo de facturación""",
 
     'description': """ El sistema tiene una opción de imprimir cheque  en el menú Compras → Pagos por cada uno de las siguientes plantillas:
         ◦ HSBC 2012

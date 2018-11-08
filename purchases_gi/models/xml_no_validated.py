@@ -200,13 +200,22 @@ class xml_no_validated(models.Model):
                         [('type_tax_use', '=', 'purchase'), ('company_id', '=', order_id.company_id.id),
                          ('amount', "=", amount)], limit=1)
 
-                    # Crea linead de factura
-                    account_invoice_line_ids.append((0, 0, {'name': item.attrib['Descripcion'],
-                                                            'date_planned': datetime.now(),
-                                                            'account_id': acco_acco_line_id.id,
-                                                            'quantity': float(quantity),
-                                                            'price_unit': float(unit_value),
-                                                            'invoice_line_tax_ids': [(6, 0, [account_tax_id.id])]}))
+                    if account_tax_id:
+                        # Crea linead de factura
+                        account_invoice_line_ids.append((0, 0, {'name': item.attrib['Descripcion'],
+                                                                'date_planned': datetime.now(),
+                                                                'account_id': acco_acco_line_id.id,
+                                                                'quantity': float(quantity),
+                                                                'price_unit': float(unit_value),
+                                                                'invoice_line_tax_ids': [(6, 0, [account_tax_id.id])]}))
+                    else:
+                        account_invoice_line_ids.append((0, 0, {'name': item.attrib['Descripcion'],
+                                                                'date_planned': datetime.now(),
+                                                                'account_id': acco_acco_line_id.id,
+                                                                'quantity': float(quantity),
+                                                                'price_unit': float(unit_value)}))
+                        order_id.sudo().message_post('Se ha creado la factura pero no se ha encontrado los impuestos en el sistema favor de verificarlos y agregarlos manualmente.')
+
                 else:
                     # Crea linead de factura
                     account_invoice_line_ids.append((0, 0, {'name': item.attrib['Descripcion'],
@@ -215,11 +224,15 @@ class xml_no_validated(models.Model):
                                                             'quantity': float(quantity),
                                                             'price_unit': float(unit_value)}))
 
-                _logger.warning("Lineas ---------------->")
-                _logger.warning(account_invoice_line_ids)
+
+            currency_format = self.currency_name.replace("[", '')
+            currency_format = currency_format.replace("]", '')
+            currency_format = currency_format.replace("'", '')
+
+            currency_id = self.env['res.currency'].search([('name', '=', currency_format.upper())], limit=1)
 
             account_journal = self.env['account.journal'].search(
-                [('company_id', '=', order_id.company_id.id), ('type', '=', 'purchase')], limit=1)
+                [('company_id', '=', order_id.company_id.id), ('type', '=', 'purchase'), ('currency_id', '=', currency_id.id)], limit=1)
 
             if not account_journal:
                 self.error_name = self.error_name + ' No se tiene configurado un diario en la empresa, para poder recibir el xml.'
@@ -238,56 +251,76 @@ class xml_no_validated(models.Model):
 
             status = self.update_sat_status(rfc, req_rfc, total, self.name)
 
-            currency_format = self.currency_name.replace("[", '')
-            currency_format = currency_format.replace("]", '')
-            currency_format = currency_format.replace("'", '')
+            status = 'valid'
 
-            currency_id = self.env['res.currency'].search([('name', '=', currency_format.upper())], limit=1)
+            _logger.warning("Estatus SAT")
+            _logger.warning(status)
 
-            if status == 'valid':
-
-                account_ids = self.env['account.invoice'].search([('reference', '=', self.name)])
-
-                if account_ids:
-                    order_id.sudo().message_post(
-                        'La factura fue creada sin especificar en el asunto la orden de compra, favor de relacionarla. :) ' + self.name)
-                    raise ValidationError('Ya existe esta factura creada apartir de este XML.')
-
-                account_invoice_id = self.sudo().env['account.invoice'].create({
-                    'partner_id': order_id.partner_id.id,
-                    'origin': order_id.name,
-                    'order_id': order_id.id,
-                    'account_id': account_account_id.id,
-                    'journal_id': account_journal.id,
-                    'currency_id': currency_id.id,
-                    'company_id': order_id.company_id.id,
-                    'invoice_line_ids': account_invoice_line_ids,
-                    'reference': self.name,
-                    'doc_xml': id_doc_xml,
-                    'payment_term_id': order_id.payment_term_id.id,
-                    'date_invoice': date_formated,
-                    'type': 'in_invoice',
-                    'name': self.folio_xml,
-                })
-
-            if status == 'not_found':
-                self.error_name = "La factura no funciona. No es valida ante el SAT"
-                return True
-
-            if status == 'cancelled':
-                self.error_name = "La factura fue cancelada. Esta cancelada ante el SAT"
-                return True
-
-            if self.error_name == '':
-                account_invoice_id.sudo().message_post('Se ha creado la factura.: ' + self.error_name)
+            if not status:
+                self.error_name = "El servicio de validación del SAT no funciona, inténtelo mas tarde. https://consultaqr.facturaelectronica.sat.gob.mx/"
             else:
+                account_invoice_id = None
+
+                if status == 'valid':
+
+                    account_ids = self.env['account.invoice'].search([('reference', '=', self.name)])
+
+                    if account_ids:
+                        order_id.sudo().message_post(
+                            'La factura fue creada sin especificar en el asunto la orden de compra, favor de relacionarla. :) ' + self.name)
+                        raise ValidationError('Ya existe esta factura creada apartir de este XML.')
+
+
+
+                    account_invoice_id = self.sudo().env['account.invoice'].create({
+                        'partner_id': order_id.partner_id.id,
+                        'origin': order_id.name,
+                        'order_id': order_id.id,
+                        'account_id': account_account_id.id,
+                        'journal_id': account_journal.id,
+                        'currency_id': currency_id.id,
+                        'company_id': order_id.company_id.id,
+                        'invoice_line_ids': account_invoice_line_ids,
+                        'reference': self.name,
+                        'doc_xml': id_doc_xml,
+                        'payment_term_id': order_id.payment_term_id.id,
+                        'date_invoice': date_formated,
+                        'type': 'in_invoice',
+                        'name': self.folio_xml,
+                    })
+
+                    _logger.warning("Por que no se crea :(")
+                    _logger.warning(account_invoice_id)
+
+                if status == 'not_found':
+                    self.error_name = "La factura no funciona. No es valida ante el SAT"
+                    return True
+
+                if status == 'cancelled':
+                    self.error_name = "La factura fue cancelada. Esta cancelada ante el SAT"
+                    return True
+
+                if self.error_name == '':
+                    _logger.warning("#####################")
+                    _logger.warning("#####################")
+                    _logger.warning("#####################")
+                    _logger.warning("#####################")
+                    _logger.warning(account_invoice_id)
+                    if account_invoice_id:
+                        account_invoice_id.message_post('Se ha creado la factura.: ' + self.error_name)
+                else:
+                    return True
+
+                _logger.warning("#####################")
+                _logger.warning("#####################")
+                _logger.warning("#####################")
+                _logger.warning("#####################")
+
+                order_id.invoice_ids = (4, account_invoice_id.id)
+
+                self.unlink()
+
                 return True
-
-            order_id.invoice_ids = (4, account_invoice_id.id)
-
-            self.unlink()
-
-            return True
 
 
 
@@ -333,17 +366,24 @@ class xml_no_validated(models.Model):
                          ('amount', "=", amount)], limit=1)
 
                 # Crea linead de factura
-                account_invoice_line_ids.append((0, 0,
-                                                 {'name': item.attrib['Descripcion'], 'date_planned': datetime.now(),
-                                                  'account_id': acco_acco_line_id.id, 'quantity': float(quantity),
-                                                  'price_unit': float(unit_value),
-                                                  'invoice_line_tax_ids': [(6, 0, [account_tax_id.id])]}))
 
-                _logger.warning("Lineas ---------------->")
-                _logger.warning(account_invoice_line_ids)
+                if account_tax_id:
+                    account_invoice_line_ids.append((0, 0,
+                                                     {'name': item.attrib['Descripcion'], 'date_planned': datetime.now(),
+                                                      'account_id': acco_acco_line_id.id, 'quantity': float(quantity),
+                                                      'price_unit': float(unit_value),
+                                                      'invoice_line_tax_ids': [(6, 0, [account_tax_id.id])]}))
+                else:
+                    account_invoice_line_ids.append((0, 0,
+                                                     {'name': item.attrib['Descripcion'], 'date_planned': datetime.now(),
+                                                      'account_id': acco_acco_line_id.id, 'quantity': float(quantity),
+                                                      'price_unit': float(unit_value)}))
+                    order_id.sudo().message_post('Se ha creado la factura pero no se ha encontrado los impuestos en el sistema favor de verificarlos y agregarlos manualmente.')
+
+
 
             account_journal = self.env['account.journal'].search(
-                [('company_id', '=', company_id.id), ('type', '=', 'purchase')], limit=1)
+                [('company_id', '=', company_id.id), ('type', '=', 'purchase'), ('currency_id', '=', currency_id.id)], limit=1)
 
             if not account_journal:
                 self.error_name = self.error_name + ' No se tiene configurado un diario en la empresa, para poder recibir el xml.'

@@ -830,7 +830,17 @@ class purchase_requisition_gi(models.Model):
                     if len(reg_draft) > 0:
                         requisition.write({'state': 'partially_authorized'})
                     else:
-                        requisition.write({'state': 'authorizes'})
+                        apag = False
+                        for line_id in requisition.line_ids:
+                            if line_id.state == 'done':
+                                for purch in line_id.purchase_ids:
+                                    if purch.state not in ('purchase','cancel'):
+                                        apag = True
+                                        break
+                        if apag == True:
+                            requisition.write({'state': 'authorizes'})
+                        else:
+                            requisition.write({'state': 'done'})
                 return
             raise ValidationError('No hay ninguna linea que se pueda cancelar')
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_account_payment_from_invoices_gi" model="ir.ui.view">
+            <field name="name">account_payment_from_invoices_gi</field>
+            <field name="model">account.register.payments</field>
+            <field name="inherit_id" ref="account.view_account_payment_from_invoices"/>
+            <field name="arch" type="xml">
+                <field name="l10n_mx_edi_payment_method_id" position="replace">
+                    <field name="l10n_mx_edi_payment_method_id"/>
+                    <field name="currency_id"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_account_payment_form_gi" model="ir.ui.view">
+            <field name="name">view_account_payment_form_gi</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+
+                <button name="action_draft" position="after">
+                    <field name="status_to_cancel" invisible="1"/>
+                    <button name="to_cancel_payment" class="oe_highlight"  attrs="{'invisible':[('status_to_cancel','=',False)]}" string="Cambiar estado de PAC cancelar" type="object"/>
+                </button>
+            </field>
+        </record>
+
+    </data>
+</odoo>

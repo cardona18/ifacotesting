@@ -187,7 +187,7 @@ class purchase_order_line(models.Model):
             raise ValidationError('No ha capturado la cuenta analitica en las lineas del producto {}.'.format(self.product_id.display_name))
 
     # Permite modifcar ordenes
-    change_purchase = fields.Boolean('Modificar datos de orden de compra', related='order_id.change_purchase')
+    # change_purchase = fields.Boolean('Modificar datos de orden de compra', related='order_id.change_purchase')
 
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):

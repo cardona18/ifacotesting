@@ -56,9 +56,9 @@
                     <strong>Vía de embarque:</strong>
                     <p t-field="o.boarding_ways"/>
                 </div>
-                <div t-if="o.use_cfdi" class="col-xs-3">
-                    <strong>Uso de CFDI:</strong>
-                    <p t-field="o.use_cfdi"/>
+                <div t-if="o.payment_term_id" class="col-xs-3">
+                    <strong>Términos de Pago:</strong>
+                    <p t-field="o.payment_term_id"/>
                 </div>
                 <div t-if="o.payment_method" class="col-xs-3">
                     <strong>Método de pago:</strong>
@@ -68,11 +68,10 @@
                     <strong>Forma de pago:</strong>
                     <p t-field="o.way_to_pay"/>
                 </div>
-                <div t-if="o.payment_term_id" class="col-xs-3">
-                    <strong>Términos de Pago:</strong>
-                    <p t-field="o.payment_term_id"/>
+                <div t-if="o.use_cfdi" class="col-xs-3">
+                    <strong>Uso de CFDI:</strong>
+                    <p t-field="o.use_cfdi"/>
                 </div>
-
             </div>
 
             <table class="table table-condensed">
