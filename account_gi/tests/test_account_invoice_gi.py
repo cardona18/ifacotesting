@@ -53,7 +53,7 @@ class test_account_invoice_gi(common.TransactionCase):
 
 
 
-    def test_cancel_account_invoice(self):
+    def test_average_account_invoice(self):
         """
         Prueba que se calcule el promedio de pago. 
         """

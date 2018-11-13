@@ -27,7 +27,7 @@
                 }
                 .secpage {
                 position: absolute;
-                top: 285px !important;
+                top: 288px !important;
                 width: 95% !important;
                 right: 0px !important;
                 left: 60px !important;
@@ -95,7 +95,7 @@
                             </div>
                         </tr>
                     </div>
-                    <div class="row" style="margin-top: 14px;">
+                    <div class="row" style="margin-top: 16px;">
                         <tr>
                             <div class="col-xs-9">
                                 <td/>
@@ -207,7 +207,7 @@
                             </div>
                         </tr>
                     </div>
-                    <div class="row" style="margin-top: 35px;">
+                    <div class="row" style="margin-top: 37px;">
                         <tr>
                             <div class="col-xs-2">
                                 <td/>

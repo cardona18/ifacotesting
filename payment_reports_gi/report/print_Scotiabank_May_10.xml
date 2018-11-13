@@ -28,7 +28,7 @@
                 }
                 .secpage {
                 position: absolute;
-                top: 284px !important;
+                top: 289px !important;
                 width: 95% !important;
                 right: 0px !important;
                 left: 65px !important;
@@ -36,14 +36,14 @@
                 }
                 .terpage {
                 position: absolute;
-                top: 473px !important;
+                top: 474px !important;
                 width: 97% !important;
                 right: 0px !important;
                 left: 60px !important;
                 }
                 .cheque {
                 position: absolute;
-                top: 1045px !important;
+                top: 1050px !important;
                 right: 0px !important;
                 left: -10px !important;
                 }
@@ -96,7 +96,7 @@
                             </div>
                         </tr>
                     </div>
-                    <div class="row" style="margin-top: 14px;">
+                    <div class="row" style="margin-top: 16px;">
                         <tr>
                             <div class="col-xs-9">
                                 <td/>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-7  col-sm-3 row">
-                            <td style="text-align:left; left: 0px !important;"><span t-field="o.communication"/></td>
+                            <td style="text-align:left; vertical-align: bottom; left: 0px !important;"><span t-field="o.communication"/></td>
                         </div>
                         <div class="col-xs-2">
                             <td/>
@@ -200,7 +200,7 @@
                             </div>
                         </tr>
                     </div>
-                    <div class="row" style="margin-top: 15px;">
+                    <div class="row" style="margin-top: 18px;">
                         <tr>
                             <div class="col-xs-2">
                                 <td/>
