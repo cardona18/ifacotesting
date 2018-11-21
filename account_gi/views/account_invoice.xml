@@ -32,8 +32,6 @@
             </field>
         </record>
 
-
-
         <record id="account.invoice_supplier_form_inherit_gi" model="ir.ui.view">
             <field name="name">account.invoice.supplier.form.inherit</field>
             <field name="model">account.invoice</field>
@@ -51,10 +49,6 @@
             </field>
         </record>
 
-
-
-
-
         <record id="account_invoice_form_gi" model="ir.ui.view">
             <field name="name">account.invoice.inherit</field>
             <field name="model">account.invoice</field>
@@ -70,8 +64,6 @@
             </field>
         </record>
 
-
-
         <record id="view_l10n_mx_edi_invoice_form_inherit_gi" model="ir.ui.view">
             <field name="name">account.invoice.inherit</field>
             <field name="model">account.invoice</field>
@@ -79,21 +71,16 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//button[@name='l10n_mx_edi_update_pac_status']" position="replace">
-                    <button name="l10n_mx_edi_update_sat_status_gi" string="Actualizar" class="oe_link" type="object" groups="account.group_account_invoice" attrs="{'invisible':['|', ('l10n_mx_edi_pac_status', 'in', ['retry', 'to_sign', 'to_cancel', False]), ('state', '=', 'draft')]}"/>
+                    <button name="l10n_mx_edi_update_sat_status_gi" string="Actualizar" class="oe_link" type="object" groups="account.group_account_invoice" attrs="{'invisible':['|', ('l10n_mx_edi_pac_status', 'in', ['retry', 'to_sign', False]), ('state', '=', 'draft')]}"/>
                 </xpath>
-
 
             </field>
         </record>
 
-
-
-
         <menuitem id="certificate_lists"
-          name="Certificados"
-          groups="base.group_system"
-          action="l10n_mx_edi.certificate_list_action"/>
-
+                  name="Certificados"
+                  groups="base.group_system"
+                  action="l10n_mx_edi.certificate_list_action"/>
 
         <record forcecreate="True" id="ir_cron_account_invoice_action" model="ir.cron">
             <field name="name">Actualizar días de vencido</field>
@@ -134,7 +121,6 @@
             <field eval="False" name="doall"/>
         </record>
 
-
         <record forcecreate="True" id="aver_pay_part_gi" model="ir.cron">
             <field name="name">Actualizar promedio de pago</field>
             <field name="model_id" ref="model_account_invoice"/>
@@ -147,7 +133,6 @@
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
         </record>
-
 
     </data>
 </odoo>
