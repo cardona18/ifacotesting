@@ -2,71 +2,72 @@
 <odoo>
     <data>
 
+        <record model="ir.ui.menu" id="account.menu_finance">
+            <field name="groups_id" eval="[(6,0,[ref('consultant_sales')])]"/>
+        </record>
+
+
         <record id="manager_bank" model="res.groups">
-                <field name="name">Tesorero</field>
-                <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-                <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-                <field name="comment">Rol de tesorería para que solo este pueda crear las cuentas bancarias.</field>
-                <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
-                <field name="menu_access" eval="[(4, ref('account.menu_action_currency_form'))]"/>
-                <field name="menu_access" eval="[(4, ref('contacts.menu_config_bank_accounts'))]"/>
-                <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
-                <field name="menu_access" eval="[(4, ref('account.menu_finance_configuration'))]"/>
-                <field name="menu_access" eval="[(4, ref('account.account_account_menu'))]"/>
-                <field name="menu_access" eval="[(4, ref('account.menu_action_currency_form'))]"/>
-                <field name="menu_access" eval="[(4, ref('account.menu_action_account_bank_journal_form'))]"/>
+            <field name="name">Tesorero</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de tesorería para que solo este pueda crear las cuentas bancarias.</field>
+            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_currency_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('contacts.menu_config_bank_accounts'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_configuration'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.account_account_menu'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_currency_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_account_bank_journal_form'))]"/>
 
         </record>
 
         <record id="manager_price" model="res.groups">
-                <field name="name">Modificar listas de precios</field>
-                <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-                <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-                <field name="comment">Rol de capaz de modificar Listas de Precio.</field>
-                <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
+            <field name="name">Modificar listas de precios</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de capaz de modificar Listas de Precio.</field>
+            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
         </record>
 
         <record id="price_to_sale" model="res.groups">
-                <field name="name">Precio de venta</field>
-                <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-                <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-                <field name="comment">Rol precio de venta.</field>
-                <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
+            <field name="name">Precio de venta</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol precio de venta.</field>
+            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
         </record>
 
         <record id="base.res_partner_bank_rule" model="ir.rule">
             <field name="name">Partner bank company rule</field>
             <field name="model_id" ref="base.model_res_partner_bank"/>
             <field name="global" eval="False"/>
-                <field name="domain_force">['|','|',('company_id.child_ids','child_of',[user.company_id.id]),('company_id','child_of',[user.company_id.id]),('company_id','=',False)]</field>
+            <field name="domain_force">['|','|',('company_id.child_ids','child_of',[user.company_id.id]),('company_id','child_of',[user.company_id.id]),('company_id','=',False)]</field>
         </record>
 
-
-
-
         <record id="consultant_sales" model="res.groups">
-                <field name="name">Consultor ventas</field>
-                <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-                <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-                <field name="comment">Rol de consultor de ventas.</field>
-                <field name="menu_access" eval="[(4, ref('account.menu_action_invoice_tree1')),(4, ref('account.menu_finance_receivables_follow_up'))]"/>
+            <field name="name">Consultor ventas</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de consultor de ventas.</field>
         </record>
 
         <record id="consultant_purchase" model="res.groups">
-                <field name="name">Consultor compras</field>
-                <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-                <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-                <field name="comment">Rol de consultor de ventas.</field>
+            <field name="name">Consultor compras</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de consultor de ventas.</field>
         </record>
 
 
 
         <record id="cccount_fiscal" model="res.groups">
-                <field name="name">Fiscal</field>
-                <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-                <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-                <field name="comment">Rol de consultor de fiscal.</field>
-                <field name="menu_access" eval="[(4, ref('account.menu_action_tax_form'))]"/>
+            <field name="name">Fiscal</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de consultor de fiscal.</field>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_tax_form'))]"/>
         </record>
 
     </data>
