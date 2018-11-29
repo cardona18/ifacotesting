@@ -44,11 +44,6 @@ access_consultant_sales_financial_html_report_line_invoice,account.financial.htm
 access_consultant_sales_report_invoice,account.report_manager,account_reports.model_account_report_manager,consultant_sales,1,1,0,0
 access_consultant_sales_report_footnote_invoice,account.report_footnote,account_reports.model_account_report_footnote,consultant_sales,1,0,0,0
 ,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
 access_consultant_purchase_tax,account.tax,account.model_account_tax,consultant_purchase,1,0,0,0
 access_consultant_purchase_bank_statement_group_invoice,account.bank.statement.group.invoice,account.model_account_bank_statement,consultant_purchase,1,0,0,0
 access_consultant_purchase_bank_statement_line_group_invoice,account.bank.statement.line.group.invoice,account.model_account_bank_statement_line,consultant_purchase,1,0,0,0
@@ -71,3 +66,7 @@ access_consultant_purchase_full_reconcile_group_invoice,account.full.reconcile.g
 access_consultant_purchase_payment_method,account.payment.method,account.model_account_payment_method,consultant_purchase,1,0,0,0
 access_consultant_purchase_payment,account.payment,account.model_account_payment,consultant_purchase,1,0,0,0
 access_consultant_purchase_tax_group,account.tax.group,account.model_account_tax_group,consultant_purchase,1,0,0,0
+access_consultant_purchase_order_line_invoicing_payments,purchase.order.line,purchase.model_purchase_order_line,consultant_purchase,1,1,0,0
+access_consultant_purchase_order_invoicing_payments,purchase.order,purchase.model_purchase_order,consultant_purchase,1,1,0,0
+access_consultant_account_asset_category_invoicing_payment,account.asset.category,account_asset.model_account_asset_category,consultant_purchase,1,0,0,0
+access_consultant_purchase_reception_aux,ir_purchase_reception_aux,purchases_gi.model_purchase_reception,consultant_purchase,1,0,0,0
