@@ -22,8 +22,8 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
             <field name="comment">Rol de consultor de compras.</field>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_finance_payables'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
         </record>
         <!--
         Contador
@@ -31,8 +31,13 @@
         <record id="accountant" model="res.groups">
             <field name="name">Contador</field>
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.consultant_sales')),(4, ref('account_gi.consultant_purchase'))]"/>
             <field name="comment">Rol de contador</field>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_master_data'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_payables_master_data'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_board_journal_1'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_entries'))]"/>
         </record>
         <!--
         Tesorero
@@ -76,7 +81,7 @@
         </record>
 
 
-        <record id="acccount_fiscal" model="res.groups">
+        <record id="cccount_fiscal" model="res.groups">
             <field name="name">Fiscal</field>
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>

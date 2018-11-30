@@ -70,3 +70,34 @@ access_consultant_purchase_order_line_invoicing_payments,purchase.order.line,pur
 access_consultant_purchase_order_invoicing_payments,purchase.order,purchase.model_purchase_order,consultant_purchase,1,1,0,0
 access_consultant_account_asset_category_invoicing_payment,account.asset.category,account_asset.model_account_asset_category,consultant_purchase,1,0,0,0
 access_consultant_purchase_reception_aux,ir_purchase_reception_aux,purchases_gi.model_purchase_reception,consultant_purchase,1,0,0,0
+,,,,,,,
+access_accountant_tax,account.tax,account.model_account_tax,accountant,1,1,1,1
+access_accountant_bank_statement_group_invoice,account.bank.statement.group.invoice,account.model_account_bank_statement,accountant,1,1,1,1
+access_accountant_bank_statement_line_group_invoice,account.bank.statement.line.group.invoice,account.model_account_bank_statement_line,accountant,1,1,1,1
+access_accountant_invoice_uinvoice,account.invoice,account.model_account_invoice,accountant,1,1,1,1
+access_accountant_invoice_line_uinvoice,account.invoice.line,account.model_account_invoice_line,accountant,1,1,1,1
+access_accountant_invoice_tax_uinvoice,account.invoice.tax,account.model_account_invoice_tax,accountant,1,1,1,1
+access_accountant_move_uinvoice,account.move,account.model_account_move,accountant,1,1,1,1
+access_accountant_move_line_uinvoice,account.move.line invoice,account.model_account_move_line,accountant,1,1,1,1
+access_accountant_cash_rounding_uinvoice,account.cash.rounding,account.model_account_cash_rounding,accountant,1,1,1,1
+access_accountant_journal_invoice,account.journal invoice,account.model_account_journal,accountant,1,1,1,1
+access_accountant_invoice_group_invoice,account.invoice group invoice,account.model_account_invoice,accountant,1,1,1,1
+access_accountant_invoice_report_billing,account.invoice.report_billing,account.model_account_invoice_report,accountant,1,1,1,1
+access_accountant_analytic_line_invoice,account.analytic.line invoice,account.model_account_analytic_line,accountant,1,1,1,1
+access_accountant_account_invoice,account.account invoice,account.model_account_account,accountant,1,1,1,1
+access_accountant_account_type_invoice,account.account.type invoice,account.model_account_account_type,accountant,1,1,1,1
+access_accountant_financial_report_invoice,account.financial.report invoice,account.model_account_financial_report,accountant,1,1,1,1
+access_accountant_account_tax_user,account.account.tag,account.model_account_account_tag,accountant,1,1,1,1
+access_accountant_partial_reconcile_group_invoice,account.partial.reconcile.group.invoice,account.model_account_partial_reconcile,accountant,1,1,1,1
+access_accountant_full_reconcile_group_invoice,account.full.reconcile.group.invoice,account.model_account_full_reconcile,accountant,1,1,1,1
+access_accountant_payment_method,account.payment.method,account.model_account_payment_method,accountant,1,1,1,1
+access_accountant_payment,account.payment,account.model_account_payment,accountant,1,1,1,1
+access_accountant_tax_group,account.tax.group,account.model_account_tax_group,accountant,1,1,1,1
+access_accountant_financial_html_report_invoice,account.financial.html.report invoice,account_reports.model_account_financial_html_report,accountant,1,1,1,1
+access_accountant_financial_html_report_line_invoice,account.financial.html.report.line invoice,account_reports.model_account_financial_html_report_line,accountant,1,1,1,1
+access_accountant_report_invoice,account.report_manager,account_reports.model_account_report_manager,accountant,1,1,1,1
+access_accountant_report_footnote_invoice,account.report_footnote,account_reports.model_account_report_footnote,accountant,1,1,1,1
+access_accountant_order_line_invoicing_payments,purchase.order.line,purchase.model_purchase_order_line,accountant,1,1,1,1
+access_accountant_order_invoicing_payments,purchase.order,purchase.model_purchase_order,accountant,1,1,1,1
+access_consultant_account_asset_category_invoicing_payment,account.asset.category,account_asset.model_account_asset_category,accountant,1,1,1,1
+access_accountant_reception_aux,ir_purchase_reception_aux,purchases_gi.model_purchase_reception,accountant,1,1,1,1
