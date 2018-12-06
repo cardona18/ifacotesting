@@ -31,13 +31,45 @@
         <record id="accountant" model="res.groups">
             <field name="name">Contador</field>
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.consultant_sales')),(4, ref('account_gi.consultant_purchase'))]"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.consultant_sales')),(4, ref('account_gi.consultant_purchase')),(4, ref('account.group_account_invoice'))]"/>
             <field name="comment">Rol de contador</field>
             <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_master_data'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_finance_payables_master_data'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_board_journal_1'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_finance_entries'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_entries_accounting_entries'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_move_journal_line_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_entries_management'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_asset.menu_action_account_asset_asset_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_budget.menu_act_crossovered_budget_view'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_reports'))]"/>
+            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.menu_action_account_report_diot'))]"/>
+            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.menu_trial_balance'))]"/>
+            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.menu_acountinge_coa'))]"/>
+            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.account_reports_legal_mexican_statements_menu'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.account_reports_legal_statements_menu'))]"/>
+            <field name="menu_access" eval="[(4, ref('l10n_us_reports.check_register_menu'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_partner_ledger'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_general_ledger'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_coa'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_cj'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_asset.menu_action_account_asset_asset_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_configuration'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_tax_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_account_bank_journal_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_action_account_journal_form'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_accountant.account_tag_menu'))]"/>
+            <field name="menu_access" eval="[(4, ref('account_accountant.menu_account_group'))]"/>
+        </record>
+        <!--
+        Fiscal
+        -->
+        <record id="cccount_fiscal" model="res.groups">
+            <field name="name">Fiscal</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.accountant'))]"/>
+            <field name="comment">Rol de consultor de fiscal.</field>
         </record>
         <!--
         Tesorero
@@ -45,16 +77,22 @@
         <record id="manager_bank" model="res.groups">
             <field name="name">Tesorero</field>
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-            <field name="comment">Rol de tesorería para que solo este pueda crear las cuentas bancarias.</field>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.accountant')),(4, ref('account_gi.cccount_fiscal'))]"/>
+            <field name="comment">Rol de tesorería</field>
             <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_action_currency_form'))]"/>
             <field name="menu_access" eval="[(4, ref('contacts.menu_config_bank_accounts'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_configuration'))]"/>
             <field name="menu_access" eval="[(4, ref('account.account_account_menu'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_currency_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_account_bank_journal_form'))]"/>
+        </record>
+        <!--
+        Manager
+         -->
+        <record id="acccount_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.accountant')),(4, ref('account_gi.cccount_fiscal')),(4, ref('account_gi.manager_bank'))]"/>
+            <field name="comment">Rol de manager</field>
+            <field name="menu_access" eval="[(4, ref('account_accountant.menu_action_change_lock_date'))]"/>
         </record>
 
         <record id="manager_price" model="res.groups">
@@ -79,16 +117,6 @@
             <field name="global" eval="False"/>
             <field name="domain_force">['|','|',('company_id.child_ids','child_of',[user.company_id.id]),('company_id','child_of',[user.company_id.id]),('company_id','=',False)]</field>
         </record>
-
-
-        <record id="cccount_fiscal" model="res.groups">
-            <field name="name">Fiscal</field>
-            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
-            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
-            <field name="comment">Rol de consultor de fiscal.</field>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_tax_form'))]"/>
-        </record>
-
 
     </data>
 </odoo>

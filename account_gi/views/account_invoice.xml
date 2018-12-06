@@ -17,7 +17,11 @@
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_open']" position="replace">
-                    <button name="action_invoice_open_gi" type="object" states="draft" string="Validate" class="oe_highlight" groups="account.group_account_manager"/>
+                    <button name="action_invoice_open_gi" type="object" states="draft" string="Validate" class="oe_highlight" groups="account.group_account_manager,account_gi.accountant"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_invoice_cancel']" position="replace">
+                    <button name="action_invoice_cancel_gi" type="object" states="draft,open" string="Cancel Invoice" groups="account.group_account_invoice,account_gi.accountant"/>
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_draft']" position="replace">
@@ -43,7 +47,7 @@
                 </xpath> -->
 
                 <xpath expr="//button[@name='action_invoice_open']" position="replace">
-                    <button name="action_invoice_open" type="object" states="draft" string="Validate" class="oe_highlight o_invoice_validate" groups="account.group_account_manager"/>
+                    <button name="action_invoice_open" type="object" states="draft" string="Validate" class="oe_highlight o_invoice_validate" groups="account.group_account_manager,account_gi.accountant"/>
                 </xpath>
 
             </field>
