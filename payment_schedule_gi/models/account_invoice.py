@@ -11,7 +11,8 @@ class account_invoice_gi(models.Model):
     _inherit = 'account.invoice'
 
     def get_group(self):
-        self.perm_payment = self.env.user.has_group('payment_schedule_gi.group_payment_schedule')
+        for self_id in self:
+            self_id.perm_payment = self.env.user.has_group('payment_schedule_gi.group_payment_schedule')
 
     payment_schedule_date = fields.Date(
         string='Fecha programada de pago',
@@ -21,3 +22,5 @@ class account_invoice_gi(models.Model):
         string='Con permisos de programar pagos',
         compute=get_group,
     )
+
+
