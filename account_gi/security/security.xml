@@ -14,6 +14,7 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
             <field name="comment">Rol de consultor de ventas.</field>
+            <field name="menu_access" eval="[(3, ref('account.menu_finance_payables'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables'))]"/>
             <field name="menu_access" eval="[(4, ref('account_reports.menu_action_followups'))]"/>
             <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_follow_up'))]"/>
