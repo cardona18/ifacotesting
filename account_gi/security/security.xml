@@ -35,9 +35,12 @@
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.consultant_sales')),(4, ref('account_gi.consultant_purchase')),(4, ref('account.group_account_invoice'))]"/>
             <field name="comment">Rol de contador</field>
             <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_master_data')),
-            (4, ref('account.menu_finance_payables_master_data')),(4, ref('account.menu_board_journal_1')),
-            (4, ref('account.menu_finance_entries')),(4, ref('account.menu_finance_entries_accounting_entries')),
-            (4, ref('account.menu_action_move_journal_line_form')),(4, ref('account.menu_finance_entries_management')),
+            (4, ref('account.menu_finance_payables_master_data')),
+            (4, ref('account.menu_board_journal_1')),
+            (4, ref('account.menu_finance_entries')),
+            (4, ref('account.menu_finance_entries_accounting_entries')),
+            (4, ref('account.menu_action_move_journal_line_form')),
+            (4, ref('account.menu_finance_entries_management')),
             (4, ref('account_asset.menu_action_account_asset_asset_form')),
             (4, ref('account_budget.menu_act_crossovered_budget_view')),
             (4, ref('account.menu_finance_reports')),
@@ -60,7 +63,9 @@
             (4, ref('account_accountant.menu_account_group')),
             (4, ref('account.menu_finance')),
             (4, ref('account.menu_finance_receivables_master_data')),
-            (4, ref('account.menu_finance_payables_master_data'))]"/>
+            (4, ref('account.menu_finance_payables_master_data')),
+            (4, ref('account.menu_action_account_moves_all')),
+            (4, ref('account.menu_action_invoice_in_refund'))]"/>
         </record>
         <!--
         Fiscal

@@ -116,7 +116,8 @@ access_accountant_asset_asset_report,asset.asset_report,account_asset.model_asse
 access_accountant_account_group,account_group,account.model_account_group,accountant,1,0,0,0
 access_accountant_account_payment_term,account_account_payment_term,account.model_account_payment_term,accountant,1,1,1,1
 access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
-access_accountant_analytic_account_line,account_analytic_account,analytic.model_account_analytic_account,accountant,1,0,0,0
+access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
+access_accountant_product_lgsa226,product_lgsa226,product_gi.model_product_lgsa226,accountant,1,1,1,0
 ,,,,,,,
 access_fiscal_tax,account.tax,account.model_account_tax,cccount_fiscal,1,1,1,1
 access_fiscal_position,account.fiscal position,account.model_account_fiscal_position,cccount_fiscal,1,1,1,1
