@@ -14,11 +14,7 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
             <field name="comment">Rol de consultor de ventas.</field>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_followups'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_follow_up'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
-            <field name="menu_access" eval="[(3, ref('account.menu_finance_payables'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables')),(4, ref('account_reports.menu_action_followups')),(4, ref('account.menu_finance_receivables_follow_up')),(4, ref('account.menu_finance'))]"/>
         </record>
         <!--
         Consultor de compras
@@ -28,9 +24,7 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
             <field name="comment">Rol de consultor de compras.</field>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_payables'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
-            <field name="menu_access" eval="[(3, ref('account.menu_finance_receivables'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_payables')),(4, ref('account.menu_finance'))]"/>
         </record>
         <!--
         Contador
@@ -40,34 +34,33 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.consultant_sales')),(4, ref('account_gi.consultant_purchase')),(4, ref('account.group_account_invoice'))]"/>
             <field name="comment">Rol de contador</field>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_master_data')),]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_payables_master_data'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_board_journal_1'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_entries'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_entries_accounting_entries'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_move_journal_line_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_entries_management'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_asset.menu_action_account_asset_asset_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_budget.menu_act_crossovered_budget_view'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_reports'))]"/>
-            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.menu_action_account_report_diot'))]"/>
-            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.menu_trial_balance'))]"/>
-            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.menu_acountinge_coa'))]"/>
-            <field name="menu_access" eval="[(4, ref('l10n_mx_reports.account_reports_legal_mexican_statements_menu'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.account_reports_legal_statements_menu'))]"/>
-            <field name="menu_access" eval="[(4, ref('l10n_us_reports.check_register_menu'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_partner_ledger'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_general_ledger'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_coa'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_reports.menu_action_account_report_cj'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_asset.menu_action_account_asset_asset_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_configuration'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_tax_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_account_bank_journal_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_account_journal_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_accountant.account_tag_menu'))]"/>
-            <field name="menu_access" eval="[(4, ref('account_accountant.menu_account_group'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_master_data')),
+            (4, ref('account.menu_finance_payables_master_data')),(4, ref('account.menu_board_journal_1')),
+            (4, ref('account.menu_finance_entries')),(4, ref('account.menu_finance_entries_accounting_entries')),
+            (4, ref('account.menu_action_move_journal_line_form')),(4, ref('account.menu_finance_entries_management')),
+            (4, ref('account_asset.menu_action_account_asset_asset_form')),
+            (4, ref('account_budget.menu_act_crossovered_budget_view')),
+            (4, ref('account.menu_finance_reports')),
+            (4, ref('l10n_mx_reports.menu_action_account_report_diot')),
+            (4, ref('l10n_mx_reports.menu_trial_balance')),
+            (4, ref('l10n_mx_reports.menu_acountinge_coa')),
+            (4, ref('l10n_mx_reports.account_reports_legal_mexican_statements_menu')),
+            (4, ref('account.account_reports_legal_statements_menu')),
+            (4, ref('l10n_us_reports.check_register_menu')),
+            (4, ref('account_reports.menu_action_account_report_partner_ledger')),
+            (4, ref('account_reports.menu_action_account_report_general_ledger')),
+            (4, ref('account_reports.menu_action_account_report_coa')),
+            (4, ref('account_reports.menu_action_account_report_cj')),
+            (4, ref('account_asset.menu_action_account_asset_asset_form')),
+            (4, ref('account.menu_finance_configuration')),
+            (4, ref('account.menu_action_tax_form')),
+            (4, ref('account.menu_action_account_bank_journal_form')),
+            (4, ref('account.menu_action_account_journal_form')),
+            (4, ref('account_accountant.account_tag_menu')),
+            (4, ref('account_accountant.menu_account_group')),
+            (4, ref('account.menu_finance')),
+            (4, ref('account.menu_finance_receivables_master_data')),
+            (4, ref('account.menu_finance_payables_master_data'))]"/>
         </record>
         <!--
         Fiscal
@@ -86,10 +79,10 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.accountant'))]"/>
             <field name="comment">Rol de tesorería</field>
-            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.menu_action_currency_form'))]"/>
-            <field name="menu_access" eval="[(4, ref('contacts.menu_config_bank_accounts'))]"/>
-            <field name="menu_access" eval="[(4, ref('account.account_account_menu'))]"/>
+            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config')),
+            (4, ref('account.menu_action_currency_form')),
+            (4, ref('contacts.menu_config_bank_accounts')),
+            (4, ref('account.account_account_menu'))]"/>
         </record>
         <!--
         Manager
