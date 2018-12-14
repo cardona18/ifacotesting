@@ -17,7 +17,7 @@ access_consultant_sales_bank_statement_group_invoice,account.bank.statement.grou
 access_consultant_sales_bank_statement_line_group_invoice,account.bank.statement.line.group.invoice,account.model_account_bank_statement_line,consultant_sales,1,0,0,0
 access_consultant_sales_invoice_uinvoice,account.invoice,account.model_account_invoice,consultant_sales,1,1,1,0
 access_consultant_sales_invoice_line_uinvoice,account.invoice.line,account.model_account_invoice_line,consultant_sales,1,1,1,0
-access_consultant_sales_invoice_tax_uinvoice,account.invoice.tax,account.model_account_invoice_tax,consultant_sales,1,0,1,0
+access_consultant_sales_invoice_tax_uinvoice,account.invoice.tax,account.model_account_invoice_tax,consultant_sales,1,1,1,0
 access_consultant_sales_move_uinvoice,account.move,account.model_account_move,consultant_sales,1,0,0,0
 access_consultant_sales_move_line_uinvoice,account.move.line invoice,account.model_account_move_line,consultant_sales,1,0,0,0
 access_consultant_sales_cash_rounding_uinvoice,account.cash.rounding,account.model_account_cash_rounding,consultant_sales,1,0,0,0
@@ -36,7 +36,7 @@ access_consultant_sales_payment,account.payment,account.model_account_payment,co
 access_consultant_sales_tax_group,account.tax.group,account.model_account_tax_group,consultant_sales,1,0,0,0
 access_consultant_sales_financial_html_report_invoice,account.financial.html.report invoice,account_reports.model_account_financial_html_report,consultant_sales,1,0,0,0
 access_consultant_sales_financial_html_report_line_invoice,account.financial.html.report.line invoice,account_reports.model_account_financial_html_report_line,consultant_sales,1,0,0,0
-access_consultant_sales_report_invoice,account.report_manager,account_reports.model_account_report_manager,consultant_sales,1,1,0,0
+access_consultant_sales_report_invoice,account.report_manager,account_reports.model_account_report_manager,consultant_sales,1,1,1,0
 access_consultant_sales_report_footnote_invoice,account.report_footnote,account_reports.model_account_report_footnote,consultant_sales,1,0,0,0
 ,,,,,,,
 access_consultant_purchase_tax,account.tax,account.model_account_tax,consultant_purchase,1,0,0,0
@@ -116,7 +116,8 @@ access_accountant_asset_asset_report,asset.asset_report,account_asset.model_asse
 access_accountant_account_group,account_group,account.model_account_group,accountant,1,0,0,0
 access_accountant_account_payment_term,account_account_payment_term,account.model_account_payment_term,accountant,1,1,1,1
 access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
-access_accountant_analytic_account_line,account_analytic_account,analytic.model_account_analytic_account,accountant,1,0,0,0
+access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
+access_accountant_product_lgsa226,product_lgsa226,product_gi.model_product_lgsa226,accountant,1,1,1,0
 ,,,,,,,
 access_fiscal_tax,account.tax,account.model_account_tax,cccount_fiscal,1,1,1,1
 access_fiscal_position,account.fiscal position,account.model_account_fiscal_position,cccount_fiscal,1,1,1,1

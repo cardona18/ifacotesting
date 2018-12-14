@@ -13,7 +13,7 @@
                 </xpath> -->
 
                 <xpath expr="//button[@name='145']" position="replace">
-                    <button name="145" id="account_invoice_payment_btn" type="action" states="open" string="Register Payment" groups="account.group_account_manager" class="oe_highlight"/>
+                    <button name="145" id="account_invoice_payment_btn" type="action" states="open" string="Register Payment" groups="account.group_account_manager,account_gi.accountant" class="oe_highlight"/>
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_open']" position="replace">
