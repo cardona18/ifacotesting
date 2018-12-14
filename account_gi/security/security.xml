@@ -71,7 +71,8 @@
             (4, ref('account_budget.menu_budget_post_form')),
             (4, ref('account_asset.menu_action_account_asset_asset_list_normal_purchase')),
             (4, ref('analytic_tag_dimension.AccountAnalyticDimension_menu')),
-            (4, ref('account.menu_action_invoice_in_refund'))]"/>
+            (4, ref('account.menu_action_invoice_in_refund')),
+            (4, ref('account.account_management_menu'))]"/>
         </record>
         <!--
         Fiscal
