@@ -21,7 +21,6 @@ class account_invoice_gi(models.Model):
                 total_days = date.today() - datetime.strptime(self_id.date_due, '%Y-%m-%d').date()
                 self_id.expiration_days = total_days.days
 
-
     def get_trans_payment(self):
 
         self_account = self.env['account.invoice'].search([('type','=','out_invoice')])
@@ -38,7 +37,7 @@ class account_invoice_gi(models.Model):
                     date_comparation = 0
                     if self_id.payment_ids:
                         for self_dates in self_id.payment_ids:
-                            if self_payment_id.payment_date >= self_dates.payment_date: 
+                            if self_payment_id.payment_date >= self_dates.payment_date:
                                 if self_id.delivery_date:
                                     date_comparation = date_comparation + 1
                                 else:
@@ -64,12 +63,28 @@ class account_invoice_gi(models.Model):
 
         for self_id in self_account:
             partner_ids = self.env['account.invoice'].search([('partner_id', '=', self_id.partner_id.id), ('state', '=', 'paid')])
-            
+
             _logger.warning(self_id.name)
             _logger.warning(len(partner_ids))
             average = self_id.day_trans_payment / len(partner_ids)
             self_id.aver_pay_part = average
 
+    def _get_c_ecchange(self):
+
+        reseption = self.env['purchase.reception'].search([('order_id', '=', self.order_id.id)], limit=1)
+
+        if reseption:
+            self.exchang = reseption.exchangerate
+
+
+
+    def get_exchangerate(self):
+
+        rate = self.env['purchase.reception'].search([('order_id', '=', self.order_id.id)], limit=1)
+
+        if rate:
+            self.c_exchang = rate.c_exchangerate
+            return rate.c_exchangerate
 
     num_request = fields.Char(
         string='Numero de contra recibo',
@@ -83,12 +98,20 @@ class account_invoice_gi(models.Model):
     aver_pay_part = fields.Float(
         string='Promedio de pago',
     )
+    c_exchang = fields.Char(
+        string='Tipo de cambio al dia de la orden de compra',
+        compute='get_exchangerate',
+    )
+    exchang = fields.Float(
+        string='Tipo de cambio',
+        compute='_get_c_ecchange',
+
+    )
 
 
 
     def l10n_mx_edi_update_sat_status_gi(self):
         self.date_invoice = date.today()
-
         _logger.warning(self.date_invoice)
         _logger.warning(self.date_invoice)
         _logger.warning(self.date_invoice)

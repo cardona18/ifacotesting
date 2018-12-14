@@ -36,6 +36,7 @@
         'views/account_register_payments.xml',
         'views/res_partner.xml',
         'views/payment10.xml',
-        'views/account_payment_from_invoices.xml'
+        'views/account_payment_from_invoices.xml',
+        'views/account_move.xml'
     ]
 }

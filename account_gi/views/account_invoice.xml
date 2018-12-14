@@ -36,7 +36,7 @@
             </field>
         </record>
 
-        <record id="account.invoice_supplier_form_inherit_gi" model="ir.ui.view">
+        <record id="invoice_supplier_form_inherit_gi" model="ir.ui.view">
             <field name="name">account.invoice.supplier.form.inherit</field>
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
@@ -45,6 +45,12 @@
                 <!-- <xpath expr="//button[@name='action_invoice_cancel']" position="replace">
                     <button name="account_gi.account_invoice_cancel_action" type="action" states="draft,open" string="Cancelar" groups="account.group_account_manager"/>
                 </xpath> -->
+                <xpath expr="//page[@name='other_info']//field[@name='company_id']" position="after">
+
+                    <field name="c_exchang"/>
+                    <field name="exchang"/>
+
+                </xpath>
 
                 <xpath expr="//button[@name='action_invoice_open']" position="replace">
                     <button name="action_invoice_open" type="object" states="draft" string="Validate" class="oe_highlight o_invoice_validate" groups="account.group_account_manager,account_gi.accountant"/>
@@ -64,6 +70,7 @@
                     <field name="day_trans_payment"/>
                     <field name="aver_pay_part" invisible="1"/>
                 </xpath>
+
 
             </field>
         </record>
