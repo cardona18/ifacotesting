@@ -4,6 +4,7 @@
 import logging
 from datetime import datetime, date, time, timedelta
 from odoo import fields, models, api
+from numpy import *
 
 _logger = logging.getLogger(__name__)
 
@@ -71,20 +72,21 @@ class account_invoice_gi(models.Model):
 
     def _get_c_ecchange(self):
 
-        reseption = self.env['purchase.reception'].search([('order_id', '=', self.order_id.id)], limit=1)
+        reception = self.env['purchase.reception'].search([('order_id', '=', self.order_id.id)], limit=1)
 
-        if reseption:
-            self.exchang = reseption.exchangerate
+        if reception:
+            self.exchang = reception.exchangerate
 
 
 
     def get_exchangerate(self):
 
-        rate = self.env['purchase.reception'].search([('order_id', '=', self.order_id.id)], limit=1)
+        for self_id in self:
+            rate = self.env['purchase.reception'].search([('order_id', '=', self_id.order_id.id)], limit=1)
 
-        if rate:
-            self.c_exchang = rate.c_exchangerate
-            return rate.c_exchangerate
+            if rate:
+                self_id.c_exchang = rate.c_exchangerate
+                return rate.c_exchangerate
 
     num_request = fields.Char(
         string='Numero de contra recibo',
