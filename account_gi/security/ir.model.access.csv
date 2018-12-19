@@ -129,6 +129,7 @@ access_manager_bank_journal_invoice,account.journal invoice,account.model_accoun
 access_manager_bank_account_invoice,account.account invoice,account.model_account_account,manager_bank,1,1,1,1
 access_manager_bank_res_partner_bank,ir_model_res_partner_bank,base.model_res_partner_bank,manager_bank,1,1,1,1
 access_manager_payment_acquirer,account.payment_acquirer,payment.model_payment_acquirer,manager_bank,1,1,1,1
+access_manager_bank_currency_rate,res.currency_rate,base.model_res_currency_rate,manager_bank,1,1,1,1
 ,,,,,,,
 access_manager_crossovered_budget,crossovered_budget,account_budget.model_crossovered_budget,acccount_manager,1,1,1,1
 access_manager_account_tax_user,account.account.tag,account.model_account_account_tag,acccount_manager,1,1,1,1
