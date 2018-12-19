@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','account','account_reports','account_cancel','partner_credit_limit','contacts','product','l10n_mx_edi','currency_rate_live'],
+    'depends': ['base','account','account_reports','account_cancel','partner_credit_limit','contacts','product','l10n_mx_edi','currency_rate_live','stock','purchase','sale','proyectos_ifaco','mrp','hr_recruitment','crm'],
     'application': False,
 
     # always loaded

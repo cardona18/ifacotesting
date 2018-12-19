@@ -104,7 +104,7 @@ access_accountant_stock_warehouse_purchase_user,stock.warehouse,stock.model_stoc
 access_accountant_stock_warehouse_orderpoint_purchase_user,stock.warehouse_orderpoint,stock.model_stock_warehouse_orderpoint,accountant,1,1,0,0
 access_accountant_stock_forecast_user,report.stock.forecast.user,stock.model_report_stock_forecast,accountant,1,1,0,0
 access_accountant_crm_lead_manager,crm.lead.manager,crm.model_crm_lead,accountant,1,1,1,0
-access_accountant_res_partner,res.partner.crm.user,base.model_res_partner,accountant,1,1,1,0
+access_accountant_res_partner,res.partner.crm.user,base.model_res_partner,accountant,1,1,0,0
 access_accountant_product_product,product.product,product.model_product_product,accountant,1,1,0,0
 access_accountant_product_template,product.template,product.model_product_template,accountant,1,1,0,0
 access_accountant_crossovered_budget,crossovered_budget,account_budget.model_crossovered_budget,accountant,1,0,0,0
@@ -118,6 +118,8 @@ access_accountant_account_payment_term,account_account_payment_term,account.mode
 access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
 access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
 access_accountant_product_lgsa226,product_lgsa226,product_gi.model_product_lgsa226,accountant,1,1,1,0
+access_accountant_payment_term,payment_term,account.model_account_payment_term,accountant,1,1,1,1
+access_accountant_product_category,product.category,product.model_product_category,accountant,1,0,0,0
 ,,,,,,,
 access_fiscal_tax,account.tax,account.model_account_tax,cccount_fiscal,1,1,1,1
 access_fiscal_position,account.fiscal position,account.model_account_fiscal_position,cccount_fiscal,1,1,1,1
@@ -135,3 +137,14 @@ access_manager_product_category,product.category,product.model_product_category,
 access_manager_budget_post,budget_post,account_budget.model_account_budget_post,acccount_manager,1,1,1,1
 access_manager_ir_model,ir_model,base.model_ir_model,acccount_manager,1,1,1,1
 access_manager_ir_model_fields,ir_model_fields,base.model_ir_model_fields,acccount_manager,1,1,1,1
+,,,,,,,
+stock.access_product_group_res_partner_stock_manager,res_partner group_stock_manager,base.model_res_partner,stock.group_stock_manager,1,1,0,0
+purchase.access_res_partner_purchase_manager,res.partner.purchase.manager,base.model_res_partner,group_purchase_manager,1,1,0,0
+purchase.access_product_group_res_partner_purchase_manager,res_partner group_purchase_manager,base.model_res_partner,purchase.group_purchase_manager,1,1,0,0
+sale.access_res_partner_sale_manager,res.partner.sale.manager,base.model_res_partner,sales_team.group_sale_manager,1,1,0,0
+sale.access_product_group_res_partner_sale_manager,res_partner group_sale_manager,base.model_res_partner,sales_team.group_sale_manager,1,1,0,0
+proyectos_ifaco.res_partner_group_lt_user,res_partner,base.model_res_partner,group_lt_user,1,1,0,0
+mrp.access_product_group_res_partner_mrp_manager,res_partner group_mrp_manager,base.model_res_partner,mrp.group_mrp_manager,1,1,0,0
+proyectos_ifaco.res_partner_group_lt_manager,res_partner,base.model_res_partner,group_lt_manager,1,1,0,0
+hr_recruitment.access_res_partner_hr_user,res.partner.user,base.model_res_partner,group_hr_recruitment_user,1,1,0,1
+crm.access_res_partner,res.partner.crm.user,base.model_res_partner,sales_team.group_sale_salesman,1,1,0,0
