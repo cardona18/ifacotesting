@@ -46,10 +46,8 @@
                     <button name="account_gi.account_invoice_cancel_action" type="action" states="draft,open" string="Cancelar" groups="account.group_account_manager"/>
                 </xpath> -->
                 <xpath expr="//page[@name='other_info']//field[@name='company_id']" position="after">
-
-                    <field name="c_exchang"/>
-                    <field name="exchang"/>
-
+                    <field name="c_exchang" attrs="{'invisible': [('c_exchang', '=','0.0')]}"/>
+                    <field name="exchang" attrs="{'invisible': [('exchang', '=', '0.0')]}"/>
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_open']" position="replace">

@@ -86,6 +86,7 @@ class account_invoice_gi(models.Model):
 
             if rate:
                 self_id.c_exchang = rate.c_exchangerate
+                _logger.warning(rate.c_exchangerate)
                 return rate.c_exchangerate
 
     num_request = fields.Char(
@@ -104,7 +105,7 @@ class account_invoice_gi(models.Model):
         string='Tipo de cambio al dia de la orden de compra',
         compute='get_exchangerate',
     )
-    exchang = fields.Float(
+    exchang = fields.Char(
         string='Tipo de cambio',
         compute='_get_c_ecchange',
 

@@ -36,7 +36,7 @@ class account_move(models.Model):
         compute='_get_c_ecchange',
 
     )
-    exchang = fields.Float(
+    exchang = fields.Char(
         string='Tipo de cambio',
         compute='_get_ecchange',
 
