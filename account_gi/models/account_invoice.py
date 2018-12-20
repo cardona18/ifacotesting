@@ -4,7 +4,6 @@
 import logging
 from datetime import datetime, date, time, timedelta
 from odoo import fields, models, api
-from numpy import *
 
 _logger = logging.getLogger(__name__)
 

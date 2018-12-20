@@ -8,11 +8,9 @@ from odoo import fields, models, api
 _logger = logging.getLogger(__name__)
 
 
-class account_invoice_refund_gi(models.Model):
-    _inherit = 'account'
+class account_invoice_refund_gi(models.TransientModel):
+    _inherit = 'account.invoice.refund'
 
     comments = fields.Text(
         string='Comentarios',
-
-
     )
