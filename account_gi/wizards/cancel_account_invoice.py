@@ -8,6 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class cancel_account_invoice(models.TransientModel):
     _name = 'cancel.account.invoice'
+    _description = "Motivo de cancelación"
 
     def act_cancel_invoice(self):
         return self.env.context.get('active_id', False)
@@ -15,7 +16,7 @@ class cancel_account_invoice(models.TransientModel):
     account_id = fields.Many2one(
         string='Factura',
         comodel_name='account.invoice',
-        default=act_cancel_invoice
+        default='act_cancel_invoice'
     )
 
     commentary = fields.Html(

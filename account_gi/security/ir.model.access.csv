@@ -138,7 +138,8 @@ access_manager_product_category,product.category,product.model_product_category,
 access_manager_budget_post,budget_post,account_budget.model_account_budget_post,acccount_manager,1,1,1,1
 access_manager_ir_model,ir_model,base.model_ir_model,acccount_manager,1,1,1,1
 access_manager_ir_model_fields,ir_model_fields,base.model_ir_model_fields,acccount_manager,1,1,1,1
-access_account_analytic_accountant,analytic.account manager,analytic.model_account_analytic_account,acccount_manager,1,1,1,1
+access_manager_account_analytic,analytic.account manager,analytic.model_account_analytic_account,acccount_manager,1,1,1,1
+access_manager_account_analytic_tag,access_account_analytic_tag,analytic.model_account_analytic_tag,acccount_manager,1,1,1,1
 ,,,,,,,
 stock.access_product_group_res_partner_stock_manager,res_partner group_stock_manager,base.model_res_partner,stock.group_stock_manager,1,1,0,0
 purchase.access_res_partner_purchase_manager,res.partner.purchase.manager,base.model_res_partner,purchase.group_purchase_manager,1,1,0,0
@@ -187,5 +188,7 @@ hr_expense.access_product_template_hr_expense_user,product.template.hr.expense.u
 analytic.access_account_analytic_account,access_account_analytic_account,analytic.model_account_analytic_account,analytic.group_analytic_accounting,1,0,0,0
 account.access_account_analytic_accountant,account.analytic.account accountant,analytic.model_account_analytic_account,account.group_account_user,1,0,0,0
 sale.access_account_analytic_account_salesman,account_analytic_account salesman,analytic.model_account_analytic_account,sales_team.group_sale_salesman,1,0,0,0
-project.access_account_analytic_account_manager,account.analytic.account,analytic.model_account_analytic_account,project.group_project_manager,1,0,0,0
+project.access_account_analytic_account_manager,account.analytic.account,analytic.model_account_analytic_account,project.group_project_manager,1,1,1,1
 hr_timesheet.access_account_analytic_user,analytic.account.analytic.timesheet.user,analytic.model_account_analytic_account,hr_timesheet.group_hr_timesheet_user,1,0,0,0
+,,,,,,,
+analytic.access_account_analytic_tag,access_account_analytic_tag,analytic.model_account_analytic_tag,analytic.group_analytic_accounting,1,0,0,0
