@@ -27,12 +27,10 @@ class cancel_account_invoice(models.TransientModel):
 
     @api.multi
     def action_invoice_cancel_gi(self):
-        self.account_id.message_post('Se cancelado la factura por el siguiente motivo: '+self.commentary)
-        #self.account_id.action_invoice_cancel()
 
         result = super(account_invoice.account_invoice_gi, self).action_invoice_cancel()
-
-        if self.l10n_mx_edi_pac_status == 'cancelled' and self.siagi_state == 'SY':
+        print('2')
+        if self.l10n_mx_edi_pac_status == "cancelled" and self.siagi_state == "SY":
             self.update_siagi_cancelled()
         else:
             self.siagi_state = 'ER'
