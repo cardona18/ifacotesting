@@ -136,8 +136,6 @@ class account_invoice_gi(models.Model):
     def _get_reason(self):
         for self_id in self:
             rea = self.env['account.res_reasons_types'].search([('id', '=', self_id.reason_type)], limit=1)
-            print(rea.name)
-            print(self_id.reason_type)
             self_id.reason=rea.name
             return rea.name
 

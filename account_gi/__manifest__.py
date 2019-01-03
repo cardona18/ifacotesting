@@ -25,7 +25,7 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'wizards/cancel_account_invoice.xml',
+        'wizards/cancel_account_invoice_view.xml',
         'wizards/account_common_report_view.xml',
         'report/account_report_payment_receipt.xml',
         'views/account_cancel.xml',
