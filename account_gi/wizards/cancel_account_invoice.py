@@ -2,7 +2,9 @@
 # © <2016> <Juan Carlos Vazquez Beas (jcvazquez@grupoifaco.com.mx)>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
-from odoo import fields, models
+from odoo import fields, models, api
+
+from odooIfacoModulos.proyectos_ifaco.invoice_import.models import account_invoice
 
 _logger = logging.getLogger(__name__)
 
@@ -23,12 +25,17 @@ class cancel_account_invoice(models.TransientModel):
         string='Motivo de la cancelación',
     )
 
+    @api.multi
     def action_invoice_cancel_gi(self):
         self.account_id.message_post('Se cancelado la factura por el siguiente motivo: '+self.commentary)
         #self.account_id.action_invoice_cancel()
 
-        result = super(AccountInvoice, self.account_id).action_invoice_cancel()
-        for record in self.filtered(lambda r: r.l10n_mx_edi_is_required()):
-            record._l10n_mx_edi_cancel()
+        result = super(account_invoice.account_invoice_gi, self).action_invoice_cancel()
+
+        if self.l10n_mx_edi_pac_status == 'cancelled' and self.siagi_state == 'SY':
+            self.update_siagi_cancelled()
+        else:
+            self.siagi_state = 'ER'
+
         return result
 
