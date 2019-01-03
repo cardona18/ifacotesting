@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="account.report_invoice" inherit_id="account.report_invoice_document">
+        <xpath expr="//table" position="after">
+            <div class="col-xs-6" t-if="o.l10n_mx_edi_origin">
+                <strong>Tipo de relación: </strong> <span t-esc="o.l10n_mx_edi_origin[:2]"/> <br/>
+                <strong>CFDI Relacionados: </strong> <span t-esc="o.l10n_mx_edi_origin[4:]"/>
+            </div>
+            <br/><br/>
+        </xpath>
+    </template>
+</odoo>

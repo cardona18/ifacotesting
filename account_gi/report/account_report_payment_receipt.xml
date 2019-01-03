@@ -70,6 +70,7 @@
             </t>
         </t>
     </template>
+
     <template id="l10n_mx_edi.report_payment_document_mx" inherit_id="account.report_payment_receipt">
         <xpath expr="//div[1]" position="before">
             <t t-if="not o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_is_required()">
