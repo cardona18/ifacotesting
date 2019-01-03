@@ -2,11 +2,11 @@
 <odoo>
     <template id="account.report_invoice" inherit_id="account.report_invoice_document">
         <xpath expr="//table" position="after">
-            <div class="col-xs-6" t-if="o.l10n_mx_edi_origin">
+            <div t-if="o.l10n_mx_edi_origin">
                 <strong>Tipo de relación: </strong> <span t-esc="o.l10n_mx_edi_origin[:2]"/> <br/>
-                <strong>CFDI Relacionados: </strong> <span t-esc="o.l10n_mx_edi_origin[4:]"/>
+                <strong>CFDI Relacionados: </strong> <span t-esc="o.l10n_mx_edi_origin[3:]"/>
             </div>
-            <br/><br/>
+            <br/>
         </xpath>
     </template>
 </odoo>
