@@ -76,7 +76,7 @@ class account_invoice_gi(models.Model):
             reception = self.env['purchase.reception'].search([('order_id', '=', self_id.order_id.id)], limit=1)
 
             if reception:
-                self.exchang = reception.exchangerate
+                self_id.exchang = reception.exchangerate
                 _logger.warning(reception.exchangerate)
 
 
@@ -120,7 +120,7 @@ class account_invoice_gi(models.Model):
         string='Tipo de cambio',
         compute='_get_c_ecchange',
     )
-    comments = fields.Char(
+    comments = fields.Text(
         string='Comentarios',
     )
     reason_type = fields.Integer(
