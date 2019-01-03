@@ -28,6 +28,7 @@
         'wizards/cancel_account_invoice_view.xml',
         'wizards/account_common_report_view.xml',
         'report/account_report_payment_receipt.xml',
+        'report/account_report_invoice.xml',
         'views/account_cancel.xml',
         'views/account_invoice.xml',
         'views/partner_view.xml',

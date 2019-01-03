@@ -4,8 +4,6 @@
 import logging
 from odoo import fields, models, api
 
-from odooIfacoModulos.proyectos_ifaco.invoice_import.models import account_invoice
-
 _logger = logging.getLogger(__name__)
 
 class cancel_account_invoice(models.TransientModel):
