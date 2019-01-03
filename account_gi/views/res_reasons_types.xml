@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="account_res_reasons_type">
+            <field name="name">account.account_res_reasons_type</field>
+            <field name="model">account.res_reasons_types</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ID"/>
+                    <field name="reason"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

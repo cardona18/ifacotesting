@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="account.view_account_invoice_refund"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='description']" position="after">
-                    <field name="comments"/>
-
+                        <field name="comments"/>
+                        <field name="reason_type"/>
                 </xpath>
             </field>
         </record>
