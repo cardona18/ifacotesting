@@ -67,6 +67,8 @@
                     <field name="expiration_days"/>
                     <field name="day_trans_payment"/>
                     <field name="aver_pay_part" invisible="1"/>
+                    <field name="comments"/>
+                    <field name="reason"/>
                 </xpath>
 
 

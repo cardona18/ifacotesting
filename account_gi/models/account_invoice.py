@@ -3,7 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 from datetime import datetime, date, time, timedelta
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.addons.account.models.account_invoice import TYPE2REFUND
 
 _logger = logging.getLogger(__name__)
 
@@ -71,22 +72,33 @@ class account_invoice_gi(models.Model):
 
     def _get_c_ecchange(self):
 
-        reception = self.env['purchase.reception'].search([('order_id', '=', self.order_id.id)], limit=1)
+        for self_id in self:
+            reception = self.env['purchase.reception'].search([('order_id', '=', self_id.order_id.id)], limit=1)
 
-        if reception:
-            self.exchang = reception.exchangerate
+            if reception:
+                self.exchang = reception.exchangerate
+                _logger.warning(reception.exchangerate)
 
 
 
     def get_exchangerate(self):
 
         for self_id in self:
+            _logger.warning(self_id.order_id.id)
+            _logger.warning(self_id.origin)
             rate = self.env['purchase.reception'].search([('order_id', '=', self_id.order_id.id)], limit=1)
+
 
             if rate:
                 self_id.c_exchang = rate.c_exchangerate
                 _logger.warning(rate.c_exchangerate)
                 return rate.c_exchangerate
+            else:
+                rate = self.env['purchase.reception'].search([('name', '=', self_id.origin)], limit=1)
+                if rate:
+                    self_id.c_exchang = rate.c_exchangerate
+                    _logger.warning(rate.c_exchangerate)
+                    return rate.c_exchangerate
 
     num_request = fields.Char(
         string='Numero de contra recibo',
@@ -107,9 +119,99 @@ class account_invoice_gi(models.Model):
     exchang = fields.Char(
         string='Tipo de cambio',
         compute='_get_c_ecchange',
-
+    )
+    comments = fields.Char(
+        string='Comentarios',
+    )
+    reason_type = fields.Integer(
+        string='Tipo de razon',
+    )
+    reason = fields.Char(
+        string='Tipo de razon',
+        compute='_get_reason'
     )
 
+
+
+    def _get_reason(self):
+        for self_id in self:
+            rea = self.env['account.res_reasons_types'].search([('id', '=', self_id.reason_type)], limit=1)
+            print(rea.name)
+            print(self_id.reason_type)
+            self_id.reason=rea.name
+            return rea.name
+
+
+
+
+    @api.multi
+    @api.returns('self')
+    def refund(self, date_invoice=None, date=None, description=None, journal_id=None, comment=None, reason=None):
+        new_invoices = self.browse()
+        for invoice in self:
+            # create the new invoice
+            values = self._prepare_refund(invoice, date_invoice=date_invoice, date=date,
+                                    description=description, journal_id=journal_id, comment=comment, reason=reason)
+            refund_invoice = self.create(values)
+            invoice_type = {'out_invoice': ('customer invoices credit note'),
+                'in_invoice': ('vendor bill credit note')}
+            message = _("This %s has been created from: <a href=# data-oe-model=account.invoice data-oe-id=%d>%s</a>") % (invoice_type[invoice.type], invoice.id, invoice.number)
+            refund_invoice.message_post(body=message)
+            new_invoices += refund_invoice
+        return new_invoices
+
+    @api.model
+    def _prepare_refund(self, invoice, date_invoice=None, date=None, description=None, journal_id=None, comment=None, reason=None):
+        """ Prepare the dict of values to create the new credit note from the invoice.
+            This method may be overridden to implement custom
+            credit note generation (making sure to call super() to establish
+            a clean extension chain).
+
+            :param record invoice: invoice as credit note
+            :param string date_invoice: credit note creation date from the wizard
+            :param integer date: force date from the wizard
+            :param string description: description of the credit note from the wizard
+            :param integer journal_id: account.journal from the wizard
+            :return: dict of value to create() the credit note
+        """
+        values = {}
+        for field in self._get_refund_copy_fields():
+            if invoice._fields[field].type == 'many2one':
+                values[field] = invoice[field].id
+            else:
+                values[field] = invoice[field] or False
+
+        values['invoice_line_ids'] = self._refund_cleanup_lines(invoice.invoice_line_ids)
+
+        tax_lines = invoice.tax_line_ids
+        values['tax_line_ids'] = self._refund_cleanup_lines(tax_lines)
+
+        if journal_id:
+            journal = self.env['account.journal'].browse(journal_id)
+        elif invoice['type'] == 'in_invoice':
+            journal = self.env['account.journal'].search([('type', '=', 'purchase')], limit=1)
+        else:
+            journal = self.env['account.journal'].search([('type', '=', 'sale')], limit=1)
+        values['journal_id'] = journal.id
+
+        values['type'] = TYPE2REFUND[invoice['type']]
+        values['date_invoice'] = date_invoice or fields.Date.context_today(invoice)
+        values['state'] = 'draft'
+        values['number'] = False
+        values['origin'] = invoice.number
+        values['payment_term_id'] = False
+        values['refund_invoice_id'] = invoice.id
+
+        if date:
+            values['date'] = date
+        if description:
+            values['name'] = description
+        if comment:
+            values['comments'] = comment
+        if reason:
+            values['reason_type'] = reason
+
+        return values
 
 
     def l10n_mx_edi_update_sat_status_gi(self):

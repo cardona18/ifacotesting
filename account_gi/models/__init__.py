@@ -5,3 +5,4 @@ from . import report_account_report_trialbalance
 from . import res_partner
 from . import account_payment
 from . import account_move
+from . import res_reasons_types
