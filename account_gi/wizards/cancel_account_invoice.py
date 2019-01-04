@@ -4,6 +4,8 @@
 import logging
 from odoo import fields, models, api
 
+from odooIfacoModulos.proyectos_ifaco.account_gi.models.account_invoice import account_invoice_gi
+
 _logger = logging.getLogger(__name__)
 
 class cancel_account_invoice(models.TransientModel):
@@ -16,22 +18,18 @@ class cancel_account_invoice(models.TransientModel):
     account_id = fields.Many2one(
         string='Factura',
         comodel_name='account.invoice',
-        default='act_cancel_invoice'
+        default=act_cancel_invoice
     )
 
     commentary = fields.Html(
         string='Motivo de la cancelación',
     )
 
-    @api.multi
     def action_invoice_cancel_gi(self):
+        self.account_id.message_post('Se cancelado la factura por el siguiente motivo: ' + self.commentary)
+        # self.account_id.action_invoice_cancel()
 
-        result = super(account_invoice.account_invoice_gi, self).action_invoice_cancel()
-        print('2')
-        if self.l10n_mx_edi_pac_status == "cancelled" and self.siagi_state == "SY":
-            self.update_siagi_cancelled()
-        else:
-            self.siagi_state = 'ER'
-
+        result = super(account_invoice_gi, self).action_invoice_cancel()
+        for record in self.filtered(lambda r: r.l10n_mx_edi_is_required()):
+            record._l10n_mx_edi_cancel()
         return result
-
