@@ -2,9 +2,7 @@
 # © <2016> <Juan Carlos Vazquez Beas (jcvazquez@grupoifaco.com.mx)>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
-from odoo import fields, models, api
-
-from odooIfacoModulos.proyectos_ifaco.account_gi.models.account_invoice import account_invoice_gi
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
