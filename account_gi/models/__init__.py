@@ -6,3 +6,4 @@ from . import res_partner
 from . import account_payment
 from . import account_move
 from . import res_reasons_types
+from . import res_cancel_types

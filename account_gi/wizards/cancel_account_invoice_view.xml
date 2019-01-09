@@ -9,7 +9,9 @@
             <field name="arch" type="xml">
                 <form string="Cancelar factura">
                     <group>
-                        <field name="commentary" required="1"/>
+                        <field name="cancel_commentary" required="1"/>
+                        <field name="cancel_type"/>
+                        <field name="cause" required="1"/>
                     </group>
                     <footer>
                         <button name="action_invoice_cancel_gi" type="object" string="Cancelar Factura" groups="account.group_account_invoice,account_gi.accountant"/>
