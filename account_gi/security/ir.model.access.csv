@@ -38,6 +38,8 @@ access_consultant_sales_financial_html_report_invoice,account.financial.html.rep
 access_consultant_sales_financial_html_report_line_invoice,account.financial.html.report.line invoice,account_reports.model_account_financial_html_report_line,consultant_sales,1,0,0,0
 access_consultant_sales_report_invoice,account.report_manager,account_reports.model_account_report_manager,consultant_sales,1,1,1,0
 access_consultant_sales_report_footnote_invoice,account.report_footnote,account_reports.model_account_report_footnote,consultant_sales,1,0,0,0
+access_consultant_sales_reasons_types,res_reasons_types,account_gi.model_account_res_reasons_types,consultant_sales,1,1,1,1
+access_consultant_sales_cancel_types,res_cancel_types,account_gi.model_account_res_cancel_types,consultant_sales,1,1,1,1
 ,,,,,,,
 access_consultant_purchase_tax,account.tax,account.model_account_tax,consultant_purchase,1,0,0,0
 access_consultant_purchase_bank_statement_group_invoice,account.bank.statement.group.invoice,account.model_account_bank_statement,consultant_purchase,1,0,0,0
@@ -63,8 +65,10 @@ access_consultant_purchase_payment,account.payment,account.model_account_payment
 access_consultant_purchase_tax_group,account.tax.group,account.model_account_tax_group,consultant_purchase,1,0,0,0
 access_consultant_purchase_order_line_invoicing_payments,purchase.order.line,purchase.model_purchase_order_line,consultant_purchase,1,1,0,0
 access_consultant_purchase_order_invoicing_payments,purchase.order,purchase.model_purchase_order,consultant_purchase,1,1,0,0
-access_consultant_account_asset_category_invoicing_payment,account.asset.category,account_asset.model_account_asset_category,consultant_purchase,1,0,0,0
+access_consultant_purchase_account_asset_category_invoicing_payment,account.asset.category,account_asset.model_account_asset_category,consultant_purchase,1,0,0,0
 access_consultant_purchase_reception_aux,ir_purchase_reception_aux,purchases_gi.model_purchase_reception,consultant_purchase,1,0,0,0
+access_consultant_purchase_reasons_types,res_reasons_types,account_gi.model_account_res_reasons_types,consultant_purchase,1,1,1,1
+access_consultant_purchase_cancel_types,res_cancel_types,account_gi.model_account_res_cancel_types,consultant_purchase,1,1,1,1
 ,,,,,,,
 access_accountant_tax,account.tax,account.model_account_tax,accountant,1,0,0,0
 access_accountant_bank_statement_group_invoice,account.bank.statement.group.invoice,account.model_account_bank_statement,accountant,1,1,1,1
@@ -120,6 +124,8 @@ access_accountant_account_payment_term_line,account_account_payment_term_line,ac
 access_accountant_product_lgsa226,product_lgsa226,product_gi.model_product_lgsa226,accountant,1,1,1,0
 access_accountant_payment_term,payment_term,account.model_account_payment_term,accountant,1,1,1,1
 access_accountant_product_category,product.category,product.model_product_category,accountant,1,0,0,0
+,,,,,,,
+,,,,,,,
 ,,,,,,,
 access_fiscal_tax,account.tax,account.model_account_tax,cccount_fiscal,1,1,1,1
 access_fiscal_position,account.fiscal position,account.model_account_fiscal_position,cccount_fiscal,1,1,1,1
