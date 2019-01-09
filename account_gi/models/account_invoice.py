@@ -132,7 +132,7 @@ class account_invoice_gi(models.Model):
         compute='_get_reason'
     )
 
-    comentario_cancel = fields.Char(
+    comentario_cancel = fields.Text(
         string='Comentarios de cancelación',
         readonly=True,
     )
@@ -142,13 +142,13 @@ class account_invoice_gi(models.Model):
         readonly=True,
     )
 
-    cancel_reason = fields.Char(
+    cancel_reason = fields.Text(
         string='Tipo de cancelación',
         compute='_get_cancel_reason',
         readonly=True,
     )
 
-    motivo_cancel = fields.Char(
+    motivo_cancel = fields.Text(
         string='Motivo de cancelación',
         readonly=True,
     )
