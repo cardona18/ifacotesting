@@ -40,5 +40,6 @@
         'views/account_payment_from_invoices.xml',
         'views/account_move.xml',
         'wizards/account_invoice_refund.xml',
+        'views/res_reasons_types.xml',
     ]
 }

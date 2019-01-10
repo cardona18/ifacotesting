@@ -11,3 +11,5 @@ class account_res_reasons_types(models.Model):
     _name = 'account.res_reasons_types'
 
     name = fields.Char("Reason")
+
+

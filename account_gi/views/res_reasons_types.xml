@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
+        <act_window id="action_reason" name="Tipos de Razón" res_model="account.res_reasons_types" view_mode="tree,form"/>
+
         <record model="ir.ui.view" id="account_res_reasons_type">
             <field name="name">account.account_res_reasons_type</field>
             <field name="model">account.res_reasons_types</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="ID"/>
-                    <field name="reason"/>
+                    <field name="name"/>
                 </tree>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="account_res_reasons_type_form">
+            <field name="name">account.account_res_reasons_type_form</field>
+            <field name="model">account.res_reasons_types</field>
+            <field name="arch" type="xml">
+                <form String="Tipos de Razón">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Tipos de Razón" id="account.menu_ res_reasons_types" parent="account.account_management_menu" action="action_reason" sequence="3312"/>
+
+
+
     </data>
 </odoo>
