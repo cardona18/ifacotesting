@@ -124,23 +124,46 @@ class account_invoice_gi(models.Model):
         string='Comentarios',
     )
     reason_type = fields.Integer(
-        string='Tipo de razon',
+        string='ID Tipo de razon',
     )
+
     reason = fields.Char(
         string='Tipo de razon',
         compute='_get_reason'
     )
 
+    comentario_cancel = fields.Text(
+        string='Comentarios de cancelación',
+        readonly=True,
+    )
 
+    tipo_cancel = fields.Integer(
+        string='ID Tipo de cancelación',
+        readonly=True,
+    )
+
+    cancel_reason = fields.Text(
+        string='Tipo de cancelación',
+        compute='_get_cancel_reason',
+        readonly=True,
+    )
+
+    motivo_cancel = fields.Text(
+        string='Motivo de cancelación',
+        readonly=True,
+    )
+
+    def _get_cancel_reason(self):
+        for self_id in self:
+            can_rea = self.env['account_res_cancel_types'].search([('id', '=', self_id.tipo_cancel)], limit=1)
+            self_id.cancel_reason=can_rea.name
+            return can_rea.name
 
     def _get_reason(self):
         for self_id in self:
             rea = self.env['account.res_reasons_types'].search([('id', '=', self_id.reason_type)], limit=1)
             self_id.reason=rea.name
             return rea.name
-
-
-
 
     @api.multi
     @api.returns('self')
@@ -211,7 +234,6 @@ class account_invoice_gi(models.Model):
 
         return values
 
-
     def l10n_mx_edi_update_sat_status_gi(self):
         self.date_invoice = date.today()
         _logger.warning(self.date_invoice)
@@ -220,7 +242,6 @@ class account_invoice_gi(models.Model):
         _logger.warning(self.date_invoice)
         _logger.warning(self.date_invoice)
         self.l10n_mx_edi_update_pac_status()
-
 
     def action_invoice_open_gi(self):
         self.date_invoice = datetime.now()

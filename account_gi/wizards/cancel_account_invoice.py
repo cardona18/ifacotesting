@@ -2,7 +2,8 @@
 # © <2016> <Juan Carlos Vazquez Beas (jcvazquez@grupoifaco.com.mx)>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
-from odoo import fields, models, api
+
+from odoo import api, fields, models, _
 
 _logger = logging.getLogger(__name__)
 
@@ -16,22 +17,29 @@ class cancel_account_invoice(models.TransientModel):
     account_id = fields.Many2one(
         string='Factura',
         comodel_name='account.invoice',
-        default='act_cancel_invoice'
+        default=act_cancel_invoice
     )
 
-    commentary = fields.Html(
-        string='Motivo de la cancelación',
+    cancel_commentary = fields.Char(
+        string='Comentario de cancelación',
+        store='True',
     )
 
-    @api.multi
+    cancel_type = fields.Many2one(
+        string='Tipo de cancelación',
+        comodel_name='account_res_cancel_types',
+        required='True',
+        store='True',
+    )
+
+    cause = fields.Char(
+        string='Motivo',
+        store='True',
+    )
+
     def action_invoice_cancel_gi(self):
-
-        result = super(account_invoice.account_invoice_gi, self).action_invoice_cancel()
-        print('2')
-        if self.l10n_mx_edi_pac_status == "cancelled" and self.siagi_state == "SY":
-            self.update_siagi_cancelled()
-        else:
-            self.siagi_state = 'ER'
-
-        return result
-
+        self.account_id.message_post('Se cancelado la factura por el siguiente motivo: ' + self.cause)
+        self.account_id.comentario_cancel = self.cancel_commentary
+        self.account_id.tipo_cancel = self.cancel_type
+        self.account_id.motivo_cancel = self.cause
+        self.account_id.action_invoice_cancel_gi()
