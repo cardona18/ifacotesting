@@ -23,8 +23,6 @@
 
     # always loaded
     'data': [
-        'security/security.xml',
-        'security/ir.model.access.csv',
         'wizards/cancel_account_invoice_view.xml',
         'wizards/account_common_report_view.xml',
         'report/account_report_payment_receipt.xml',
@@ -42,5 +40,7 @@
         'views/res_cancel_types.xml',
         'wizards/account_invoice_refund.xml',
         'views/res_reasons_types.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv',
     ]
 }
