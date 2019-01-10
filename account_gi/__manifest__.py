@@ -39,6 +39,7 @@
         'views/payment10.xml',
         'views/account_payment_from_invoices.xml',
         'views/account_move.xml',
+        'views/res_cancel_types.xml',
         'wizards/account_invoice_refund.xml',
         'views/res_reasons_types.xml',
     ]

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <act_window id="action_account_res_cancel_types" name="Tipos de cancelación" res_model="account_res_cancel_types" view_mode="tree,form"/>
+
+        <record model="ir.ui.view" id="account_res_cancel_types_tree_view">
+            <field name="name">account_res_cancel_types_tree</field>
+            <field name="model">account_res_cancel_types</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_res_cancel_types_form_view">
+            <field name="name">account_res_cancel_types_form</field>
+            <field name="model">account_res_cancel_types</field>
+            <field name="arch" type="xml">
+                <form String="Tipos de Razón">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Tipos de cancelación" id="menu_account_res_cancel_types" parent="account.account_management_menu" action="action_account_res_cancel_types" sequence="3313"/>
+
+    </data>
+</odoo>

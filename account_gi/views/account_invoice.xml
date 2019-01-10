@@ -21,7 +21,7 @@
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_cancel']" position="replace">
-                    <button name="account_gi.account_invoice_cancel_action" type="action" states="draft,open" string="Cancelar" groups="account.group_account_manager"/>
+                    <button name="account_gi.account_invoice_cancel_action" type="action" states="draft,open" string="Cancelar" groups="account.group_account_invoice,account_gi.accountant"/>
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_draft']" position="replace">
