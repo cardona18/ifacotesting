@@ -124,7 +124,7 @@ class account_invoice_gi(models.Model):
         string='Comentarios',
     )
     reason_type = fields.Integer(
-        string='ID Tipo de razon',
+        string='Numero de Razón',
     )
 
     reason = fields.Char(
@@ -152,6 +152,7 @@ class account_invoice_gi(models.Model):
         string='Motivo de cancelación',
         readonly=True,
     )
+
 
     def _get_cancel_reason(self):
         for self_id in self:

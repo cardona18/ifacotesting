@@ -69,6 +69,7 @@
                     <field name="aver_pay_part" invisible="1"/>
                     <field name="comments"/>
                     <field name="reason"/>
+                    <field name="reason_type"/>
                     <field name="cancel_reason"/>
                 </xpath>
 
