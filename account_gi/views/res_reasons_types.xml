@@ -25,9 +25,7 @@
             </field>
         </record>
 
-        <menuitem name="Tipos de Razón" id="account.menu_ res_reasons_types" parent="account.account_management_menu" action="action_reason" sequence="3312"/>
-
-
+        <menuitem name="Tipos de Razón" id="menu_account_res_reasons_types" parent="account.account_management_menu" action="action_reason" sequence="3312"/>
 
     </data>
 </odoo>

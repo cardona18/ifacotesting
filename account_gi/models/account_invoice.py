@@ -173,10 +173,10 @@ class account_invoice_gi(models.Model):
         for invoice in self:
             # create the new invoice
             values = self._prepare_refund(invoice, date_invoice=date_invoice, date=date,
-                                    description=description, journal_id=journal_id, comment=comment, reason=reason)
+                                          description=description, journal_id=journal_id, comment=comment, reason=reason)
             refund_invoice = self.create(values)
             invoice_type = {'out_invoice': ('customer invoices credit note'),
-                'in_invoice': ('vendor bill credit note')}
+                            'in_invoice': ('vendor bill credit note')}
             message = _("This %s has been created from: <a href=# data-oe-model=account.invoice data-oe-id=%d>%s</a>") % (invoice_type[invoice.type], invoice.id, invoice.number)
             refund_invoice.message_post(body=message)
             new_invoices += refund_invoice
@@ -236,11 +236,10 @@ class account_invoice_gi(models.Model):
         return values
 
     def l10n_mx_edi_update_sat_status_gi(self):
-        self.date_invoice = date.today()
-        _logger.warning(self.date_invoice)
-        _logger.warning(self.date_invoice)
-        _logger.warning(self.date_invoice)
-        _logger.warning(self.date_invoice)
+        if (self.l10n_mx_edi_pac_status != 'to_cancel'):
+
+            self.date_invoice = date.today()
+
         _logger.warning(self.date_invoice)
         self.l10n_mx_edi_update_pac_status()
 

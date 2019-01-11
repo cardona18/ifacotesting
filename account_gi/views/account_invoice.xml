@@ -21,7 +21,7 @@
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_cancel']" position="replace">
-                    <button name="account_gi.account_invoice_cancel_action" type="action" states="draft,open" string="Cancelar" groups="account.group_account_manager"/>
+                    <button name="account_gi.account_invoice_cancel_action" type="action" states="draft,open" string="Cancelar" groups="account.group_account_invoice,account_gi.accountant"/>
                 </xpath>
 
                 <xpath expr="//button[@name='action_invoice_draft']" position="replace">
@@ -87,7 +87,7 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//button[@name='l10n_mx_edi_update_pac_status']" position="replace">
-                    <button name="l10n_mx_edi_update_sat_status_gi" string="Actualizar" class="oe_link" type="object" groups="account.group_account_invoice" attrs="{'invisible':['|', ('l10n_mx_edi_pac_status', 'in', ['retry', 'to_sign', False]), ('state', '=', 'draft')]}"/>
+                    <button name="l10n_mx_edi_update_sat_status_gi" string="Actualizar" class="oe_link" type="object" groups="account.group_account_invoice" attrs="{'invisible':['|', ('l10n_mx_edi_pac_status', 'in', ['signed', 'cancelled', False]), ('state', '=', 'draft')]}"/>
                 </xpath>
 
             </field>
