@@ -31,6 +31,21 @@ class stock_picking(models.Model):
         string='Descripción',
     )
 
+    unit_price = fields.Integer(
+        string='Precio Unitario',
+        compute='_get_unit_price',
+    )
+
+
+    @api.multi
+    def _get_unit_price(self):
+        for self_id in self:
+            unit = self.env['stock.move'].search([('product_id', '=', self_id.product_id)], limit=1)
+            _logger.warning("la vaca gorda")
+            _logger.warning(unit)
+            if unit:
+                self_id.unit_price = unit.unit_price
+                return unit.unit_price
 
     @api.multi
     def action_draft(self):
