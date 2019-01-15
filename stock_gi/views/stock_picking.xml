@@ -57,17 +57,6 @@
 
 
 
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[2]/field[@name='move_lines']/tree[1]/field[@name='product_id']" position="after">
-                    <field name="price_unit"/>
-                </xpath>
-
-                <xpath expr="//field[@name='document_id']" position="attributes">
-                    <attribute name="attrs">{}</attribute>
-                </xpath>
-
-                <xpath expr="//field[@name='price_unit']" position="after">
-                    <field name="purchase_line_id"/>
-                </xpath>
 
                 <xpath expr="//button[@name='button_scrap']" position="after">
                     <button name="action_draft" string="Botón volver" type="object" class="oe_stat_button" icon="fa-undo-alt" states="confirmed"/>
