@@ -124,11 +124,11 @@ class account_invoice_gi(models.Model):
         string='Comentarios',
     )
     reason_type = fields.Integer(
-        string='Numero de Razón',
+        string='Número de razón',
     )
 
     reason = fields.Char(
-        string='Tipo de razon',
+        string='Tipo de razón',
         compute='_get_reason'
     )
 
