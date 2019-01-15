@@ -31,7 +31,6 @@ class stock_picking(models.Model):
         string='Descripción',
     )
 
-
     @api.multi
     def action_draft(self):
         self.state = 'draft'

@@ -125,9 +125,18 @@
                     <group>
                         <field name="picking_type_id" options="{'no_create':True, 'create_edit': false}" domain="[('code','=','incoming'), ('name', 'not ilike', 'Devol')]"/>
                         <!-- <field name="picking_type_id_sl"/> -->
+                        <field name="employee_destiny" required="1"/>
+                        <field name="department_destiny" required="1"/>
                     </group>
                 </xpath>
 
+                <xpath expr="//field[@name='employee_destiny']" position="attributes">
+                    <attribute name="string">Persona que recibe:</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='department_destiny']" position="attributes">
+                    <attribute name="string">Departamento de entrega:</attribute>
+                </xpath>
 
                 <xpath expr="//field[@name='picking_type_id']" position="attributes">
                     <attribute name="string">Entregar en</attribute>

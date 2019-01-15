@@ -308,6 +308,8 @@ class purchase_requisition_gi(models.Model):
         default=get_current_date
     )
 
+
+
     state = fields.Selection(
         [('draft','Borrador'),
         ('send', 'Enviada'),
@@ -405,6 +407,14 @@ class purchase_requisition_gi(models.Model):
     urgent_mensa = fields.Text(
         string='Motivo',
         track_visibility="onchenge"
+    )
+
+    employee_destiny = fields.Many2one(
+        'hr.employee',
+    )
+
+    department_destiny = fields.Many2one(
+        'hr.department',
     )
 
     @api.onchange('schedule_date')

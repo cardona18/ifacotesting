@@ -1,14 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-
-access_res_bank,ir_model_access_res_bank,base.model_res_bank,manager_bank,1,1,1,1
-access_res_partner_bank,ir_model_res_partner_bank,base.model_res_partner_bank,manager_bank,1,1,1,1
-access_res_account_bank,ir_model_account,account.model_account_journal,manager_bank,1,1,1,1
-access_res_account_bank,ir_model_account_invoice,account.model_account_invoice,manager_bank,1,0,0,0
-access_account_invoice_tax_bank,ir_model_account_invoice_tax,account.model_account_invoice_tax,manager_bank,1,0,0,0
-
-
-
-
+,,,,,,,
 base.access_res_partner_bank_group_partner_manager,ir_model_res_partner_bank,base.model_res_partner_bank,base.group_partner_manager,1,0,0,0
 base.access_res_bank_group_partner_manager,ir_model_res_partner_bank,base.model_res_partner_bank,base.group_partner_manager,1,0,0,0
 base.access_res_bank_group_partner_manager,ir_model_res_bank,base.model_res_bank,base.group_partner_manager,1,0,0,0
@@ -20,11 +11,190 @@ sale.access_product_pricelist_sale_manager,product.pricelist salemanager,product
 mrp.access_product_pricelist_mrp_manager,product.pricelist mrp_manager,product.model_product_pricelist,mrp.group_mrp_manager,1,0,0,0
 access_product_pricelist_manager,product.pricelist pricelist_manage,product.model_product_pricelist,manager_price,1,1,1,1
 access_product_pricelist_item_manager,product.pricelist pricelist_manage,product.model_product_pricelist_item,manager_price,1,1,1,1
-
-
-access_consultant_account_invoice,access_consultant_account_invoice,sale.model_account_invoice,consultant_sales,1,0,1,0
-access_consultant_account_payment,access_consultant_account_payment,account.model_account_payment,consultant_sales,1,0,1,0
-access_consultant_purch,access_consultant_purc_consul_purchase,purchase.model_purchase_order,consultant_purchase,1,1,1,0
-
-access_consult_pur_account_invoice,access_consult_pur_account_invoice,sale.model_account_invoice,account_gi.consultant_purchase,1,1,1,0
-access_consult_pur_account_payment,access_consult_pur_account_payment,account.model_account_payment,account_gi.consultant_purchase,1,1,1,0
+,,,,,,,
+access_consultant_sales_tax,account.tax,account.model_account_tax,consultant_sales,1,0,0,0
+access_consultant_sales_bank_statement_group_invoice,account.bank.statement.group.invoice,account.model_account_bank_statement,consultant_sales,1,0,0,0
+access_consultant_sales_bank_statement_line_group_invoice,account.bank.statement.line.group.invoice,account.model_account_bank_statement_line,consultant_sales,1,0,0,0
+access_consultant_sales_invoice_uinvoice,account.invoice,account.model_account_invoice,consultant_sales,1,1,1,0
+access_consultant_sales_invoice_line_uinvoice,account.invoice.line,account.model_account_invoice_line,consultant_sales,1,1,1,0
+access_consultant_sales_invoice_tax_uinvoice,account.invoice.tax,account.model_account_invoice_tax,consultant_sales,1,1,1,0
+access_consultant_sales_move_uinvoice,account.move,account.model_account_move,consultant_sales,1,0,0,0
+access_consultant_sales_move_line_uinvoice,account.move.line invoice,account.model_account_move_line,consultant_sales,1,0,0,0
+access_consultant_sales_cash_rounding_uinvoice,account.cash.rounding,account.model_account_cash_rounding,consultant_sales,1,0,0,0
+access_consultant_sales_journal_invoice,account.journal invoice,account.model_account_journal,consultant_sales,1,0,0,0
+access_consultant_sales_invoice_group_invoice,account.invoice group invoice,account.model_account_invoice,consultant_sales,1,0,0,0
+access_consultant_sales_invoice_report_billing,account.invoice.report_billing,account.model_account_invoice_report,consultant_sales,1,0,0,0
+access_consultant_sales_analytic_line_invoice,account.analytic.line invoice,account.model_account_analytic_line,consultant_sales,1,0,0,0
+access_consultant_sales_account_invoice,account.account invoice,account.model_account_account,consultant_sales,1,0,0,0
+access_consultant_sales_account_type_invoice,account.account.type invoice,account.model_account_account_type,consultant_sales,1,0,0,0
+access_consultant_sales_financial_report_invoice,account.financial.report invoice,account.model_account_financial_report,consultant_sales,1,0,0,0
+access_consultant_sales_account_tax_user,account.account.tag,account.model_account_account_tag,consultant_sales,1,0,0,0
+access_consultant_sales_partial_reconcile_group_invoice,account.partial.reconcile.group.invoice,account.model_account_partial_reconcile,consultant_sales,1,0,0,0
+access_consultant_sales_full_reconcile_group_invoice,account.full.reconcile.group.invoice,account.model_account_full_reconcile,consultant_sales,1,0,0,0
+access_consultant_sales_payment_method,account.payment.method,account.model_account_payment_method,consultant_sales,1,0,0,0
+access_consultant_sales_payment,account.payment,account.model_account_payment,consultant_sales,1,0,0,0
+access_consultant_sales_tax_group,account.tax.group,account.model_account_tax_group,consultant_sales,1,0,0,0
+access_consultant_sales_financial_html_report_invoice,account.financial.html.report invoice,account_reports.model_account_financial_html_report,consultant_sales,1,0,0,0
+access_consultant_sales_financial_html_report_line_invoice,account.financial.html.report.line invoice,account_reports.model_account_financial_html_report_line,consultant_sales,1,0,0,0
+access_consultant_sales_report_invoice,account.report_manager,account_reports.model_account_report_manager,consultant_sales,1,1,1,0
+access_consultant_sales_report_footnote_invoice,account.report_footnote,account_reports.model_account_report_footnote,consultant_sales,1,0,0,0
+access_consultant_sales_reasons_types,res_reasons_types,account_gi.model_account_res_reasons_types,consultant_sales,1,0,0,0
+access_consultant_sales_cancel_types,res_cancel_types,account_gi.model_account_res_cancel_types,consultant_sales,1,0,0,0
+,,,,,,,
+access_consultant_purchase_tax,account.tax,account.model_account_tax,consultant_purchase,1,0,0,0
+access_consultant_purchase_bank_statement_group_invoice,account.bank.statement.group.invoice,account.model_account_bank_statement,consultant_purchase,1,0,0,0
+access_consultant_purchase_bank_statement_line_group_invoice,account.bank.statement.line.group.invoice,account.model_account_bank_statement_line,consultant_purchase,1,0,0,0
+access_consultant_purchase_invoice_uinvoice,account.invoice,account.model_account_invoice,consultant_purchase,1,1,1,0
+access_consultant_purchase_invoice_line_uinvoice,account.invoice.line,account.model_account_invoice_line,consultant_purchase,1,1,1,0
+access_consultant_purchase_invoice_tax_uinvoice,account.invoice.tax,account.model_account_invoice_tax,consultant_purchase,1,0,1,0
+access_consultant_purchase_move_uinvoice,account.move,account.model_account_move,consultant_purchase,1,0,0,0
+access_consultant_purchase_move_line_uinvoice,account.move.line invoice,account.model_account_move_line,consultant_purchase,1,0,0,0
+access_consultant_purchase_cash_rounding_uinvoice,account.cash.rounding,account.model_account_cash_rounding,consultant_purchase,1,0,0,0
+access_consultant_purchase_journal_invoice,account.journal invoice,account.model_account_journal,consultant_purchase,1,0,0,0
+access_consultant_purchase_invoice_group_invoice,account.invoice group invoice,account.model_account_invoice,consultant_purchase,1,0,0,0
+access_consultant_purchase_invoice_report_billing,account.invoice.report_billing,account.model_account_invoice_report,consultant_purchase,1,0,0,0
+access_consultant_purchase_analytic_line_invoice,account.analytic.line invoice,account.model_account_analytic_line,consultant_purchase,1,0,0,0
+access_consultant_purchase_account_invoice,account.account invoice,account.model_account_account,consultant_purchase,1,0,0,0
+access_consultant_purchase_account_type_invoice,account.account.type invoice,account.model_account_account_type,consultant_purchase,1,0,0,0
+access_consultant_purchase_financial_report_invoice,account.financial.report invoice,account.model_account_financial_report,consultant_purchase,1,0,0,0
+access_consultant_purchase_account_tax_user,account.account.tag,account.model_account_account_tag,consultant_purchase,1,0,0,0
+access_consultant_purchase_partial_reconcile_group_invoice,account.partial.reconcile.group.invoice,account.model_account_partial_reconcile,consultant_purchase,1,0,0,0
+access_consultant_purchase_full_reconcile_group_invoice,account.full.reconcile.group.invoice,account.model_account_full_reconcile,consultant_purchase,1,0,0,0
+access_consultant_purchase_payment_method,account.payment.method,account.model_account_payment_method,consultant_purchase,1,0,0,0
+access_consultant_purchase_payment,account.payment,account.model_account_payment,consultant_purchase,1,0,0,0
+access_consultant_purchase_tax_group,account.tax.group,account.model_account_tax_group,consultant_purchase,1,0,0,0
+access_consultant_purchase_order_line_invoicing_payments,purchase.order.line,purchase.model_purchase_order_line,consultant_purchase,1,1,0,0
+access_consultant_purchase_order_invoicing_payments,purchase.order,purchase.model_purchase_order,consultant_purchase,1,1,0,0
+access_consultant_purchase_account_asset_category_invoicing_payment,account.asset.category,account_asset.model_account_asset_category,consultant_purchase,1,0,0,0
+access_consultant_purchase_reception_aux,ir_purchase_reception_aux,purchases_gi.model_purchase_reception,consultant_purchase,1,0,0,0
+access_consultant_purchase_reasons_types,res_reasons_types,account_gi.model_account_res_reasons_types,consultant_purchase,1,0,0,0
+access_consultant_purchase_cancel_types,res_cancel_types,account_gi.model_account_res_cancel_types,consultant_purchase,1,0,0,0
+,,,,,,,
+access_accountant_tax,account.tax,account.model_account_tax,accountant,1,0,0,0
+access_accountant_bank_statement_group_invoice,account.bank.statement.group.invoice,account.model_account_bank_statement,accountant,1,1,1,1
+access_accountant_bank_statement_line_group_invoice,account.bank.statement.line.group.invoice,account.model_account_bank_statement_line,accountant,1,1,1,1
+access_accountant_invoice_uinvoice,account.invoice,account.model_account_invoice,accountant,1,1,1,1
+access_accountant_invoice_line_uinvoice,account.invoice.line,account.model_account_invoice_line,accountant,1,1,1,1
+access_accountant_invoice_tax_uinvoice,account.invoice.tax,account.model_account_invoice_tax,accountant,1,1,1,1
+access_accountant_move_uinvoice,account.move,account.model_account_move,accountant,1,1,1,1
+access_accountant_move_line_uinvoice,account.move.line invoice,account.model_account_move_line,accountant,1,1,1,1
+access_accountant_cash_rounding_uinvoice,account.cash.rounding,account.model_account_cash_rounding,accountant,1,1,1,1
+access_accountant_journal_invoice,account.journal invoice,account.model_account_journal,accountant,1,0,0,0
+access_accountant_invoice_group_invoice,account.invoice group invoice,account.model_account_invoice,accountant,1,1,1,1
+access_accountant_invoice_report_billing,account.invoice.report_billing,account.model_account_invoice_report,accountant,1,1,1,1
+access_accountant_analytic_line_invoice,account.analytic.line invoice,account.model_account_analytic_line,accountant,1,1,1,1
+access_accountant_account_invoice,account.account invoice,account.model_account_account,accountant,1,0,0,0
+access_accountant_account_type_invoice,account.account.type invoice,account.model_account_account_type,accountant,1,0,0,0
+access_accountant_financial_report_invoice,account.financial.report invoice,account.model_account_financial_report,accountant,1,1,1,1
+access_accountant_account_tax_user,account.account.tag,account.model_account_account_tag,accountant,1,0,0,0
+access_accountant_partial_reconcile_group_invoice,account.partial.reconcile.group.invoice,account.model_account_partial_reconcile,accountant,1,1,1,1
+access_accountant_full_reconcile_group_invoice,account.full.reconcile.group.invoice,account.model_account_full_reconcile,accountant,1,1,1,1
+access_accountant_payment_method,account.payment.method,account.model_account_payment_method,accountant,1,1,1,1
+access_accountant_payment,account.payment,account.model_account_payment,accountant,1,1,1,1
+access_accountant_tax_group,account.tax.group,account.model_account_tax_group,accountant,1,1,1,1
+access_accountant_financial_html_report_invoice,account.financial.html.report invoice,account_reports.model_account_financial_html_report,accountant,1,1,1,1
+access_accountant_financial_html_report_line_invoice,account.financial.html.report.line invoice,account_reports.model_account_financial_html_report_line,accountant,1,1,1,1
+access_accountant_report_invoice,account.report_manager,account_reports.model_account_report_manager,accountant,1,1,1,1
+access_accountant_report_footnote_invoice,account.report_footnote,account_reports.model_account_report_footnote,accountant,1,1,1,1
+access_accountant_order_line_invoicing_payments,purchase.order.line,purchase.model_purchase_order_line,accountant,1,1,1,1
+access_accountant_order_invoicing_payments,purchase.order,purchase.model_purchase_order,accountant,1,1,1,1
+access_accountant_asset_category_invoicing_payment,account.asset.category,account_asset.model_account_asset_category,accountant,1,1,1,1
+access_accountant_reception_aux,ir_purchase_reception_aux,purchases_gi.model_purchase_reception,accountant,1,1,1,1
+access_accountant_asset_depreciation_line_invoicing_payment,account.asset.depreciation.line,account_asset.model_account_asset_depreciation_line,accountant,1,1,1,1
+access_accountant_sale_order_invoicing_payments,sale.order,sale.model_sale_order,accountant,1,1,1,1
+access_accountant_sale_order_line_invoicing_payments,sale.order.line,sale.model_sale_order_line,accountant,1,1,1,1
+access_accountant_stock_move_invoicing_payment,stock.move,stock_account.model_stock_move,accountant,1,1,0,0
+access_accountant_stock_warehouse_purchase_user,stock.warehouse,stock.model_stock_warehouse,accountant,1,1,0,0
+access_accountant_stock_warehouse_orderpoint_purchase_user,stock.warehouse_orderpoint,stock.model_stock_warehouse_orderpoint,accountant,1,1,0,0
+access_accountant_stock_forecast_user,report.stock.forecast.user,stock.model_report_stock_forecast,accountant,1,1,0,0
+access_accountant_crm_lead_manager,crm.lead.manager,crm.model_crm_lead,accountant,1,1,1,0
+access_accountant_res_partner,res.partner.crm.user,base.model_res_partner,accountant,1,1,0,0
+access_accountant_product_product,product.product,product.model_product_product,accountant,1,1,0,0
+access_accountant_product_template,product.template,product.model_product_template,accountant,1,1,0,0
+access_accountant_crossovered_budget,crossovered_budget,account_budget.model_crossovered_budget,accountant,1,0,0,0
+access_accountant_crossovered_budget_lines,crossovered_budget_lines,account_budget.model_crossovered_budget_lines,accountant,1,0,0,0
+access_accountant_budget_post,budget_post,account_budget.model_account_budget_post,accountant,1,0,0,0
+access_accountant_asset_asset,account.asset.asset,account_asset.model_account_asset_asset,accountant,1,1,1,1
+access_accountant_reconcile_model,account.reconcile_model,account.model_account_reconcile_model,accountant,1,1,1,1
+access_accountant_asset_asset_report,asset.asset_report,account_asset.model_asset_asset_report,accountant,1,1,1,1
+access_accountant_account_group,account_group,account.model_account_group,accountant,1,0,0,0
+access_accountant_account_payment_term,account_account_payment_term,account.model_account_payment_term,accountant,1,1,1,1
+access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
+access_accountant_account_payment_term_line,account_account_payment_term_line,account.model_account_payment_term_line,accountant,1,1,1,1
+access_accountant_product_lgsa226,product_lgsa226,product_gi.model_product_lgsa226,accountant,1,1,1,0
+access_accountant_payment_term,payment_term,account.model_account_payment_term,accountant,1,1,1,1
+access_accountant_product_category,product.category,product.model_product_category,accountant,1,0,0,0
+,,,,,,,
+access_fiscal_tax,account.tax,account.model_account_tax,cccount_fiscal,1,1,1,1
+access_fiscal_position,account.fiscal position,account.model_account_fiscal_position,cccount_fiscal,1,1,1,1
+access_fiscal_reasons_types,res_reasons_types,account_gi.model_account_res_reasons_types,cccount_fiscal,1,1,1,1
+access_fiscal_cancel_types,res_cancel_types,account_gi.model_account_res_cancel_types,cccount_fiscal,1,1,1,1
+,,,,,,,
+access_manager_bank_currency,res.currency,base.model_res_currency,manager_bank,1,1,1,1
+access_manager_bank_journal_invoice,account.journal invoice,account.model_account_journal,manager_bank,1,1,1,1
+access_manager_bank_account_invoice,account.account invoice,account.model_account_account,manager_bank,1,1,1,1
+access_manager_bank_res_partner_bank,ir_model_res_partner_bank,base.model_res_partner_bank,manager_bank,1,1,1,1
+access_manager_payment_acquirer,account.payment_acquirer,payment.model_payment_acquirer,manager_bank,1,1,1,1
+access_manager_bank_currency_rate,res.currency_rate,base.model_res_currency_rate,manager_bank,1,1,1,1
+,,,,,,,
+access_manager_crossovered_budget,crossovered_budget,account_budget.model_crossovered_budget,acccount_manager,1,1,1,1
+access_manager_account_tax_user,account.account.tag,account.model_account_account_tag,acccount_manager,1,1,1,1
+access_manager_account_group,account_group,account.model_account_group,acccount_manager,1,1,1,1
+access_manager_product_category,product.category,product.model_product_category,acccount_manager,1,1,1,1
+access_manager_budget_post,budget_post,account_budget.model_account_budget_post,acccount_manager,1,1,1,1
+access_manager_ir_model,ir_model,base.model_ir_model,acccount_manager,1,1,1,1
+access_manager_ir_model_fields,ir_model_fields,base.model_ir_model_fields,acccount_manager,1,1,1,1
+access_manager_account_analytic,analytic.account manager,analytic.model_account_analytic_account,acccount_manager,1,1,1,1
+access_manager_account_analytic_tag,access_account_analytic_tag,analytic.model_account_analytic_tag,acccount_manager,1,1,1,1
+,,,,,,,
+stock.access_product_group_res_partner_stock_manager,res_partner group_stock_manager,base.model_res_partner,stock.group_stock_manager,1,1,0,0
+purchase.access_res_partner_purchase_manager,res.partner.purchase.manager,base.model_res_partner,purchase.group_purchase_manager,1,1,0,0
+purchase.access_product_group_res_partner_purchase_manager,res_partner group_purchase_manager,base.model_res_partner,purchase.group_purchase_manager,1,1,0,0
+sale.access_res_partner_sale_manager,res.partner.sale.manager,base.model_res_partner,sales_team.group_sale_manager,1,1,0,0
+sale.access_product_group_res_partner_sale_manager,res_partner group_sale_manager,base.model_res_partner,sales_team.group_sale_manager,1,1,0,0
+mrp.access_product_group_res_partner_mrp_manager,res_partner group_mrp_manager,base.model_res_partner,mrp.group_mrp_manager,1,1,0,0
+legal_technical.res_partner_group_lt_user,res_partner,base.model_res_partner,legal_technical.group_lt_user,1,1,0,0
+legal_technical.res_partner_group_lt_manager,res_partner,base.model_res_partner,legal_technical.group_lt_manager,1,1,0,0
+hr_recruitment.access_res_partner_hr_user,res.partner.user,base.model_res_partner,hr_recruitment.group_hr_recruitment_user,1,1,0,1
+crm.access_res_partner,res.partner.crm.user,base.model_res_partner,sales_team.group_sale_salesman,1,1,0,0
+,,,,,,,
+stock.access_product_uom_categ_stock_manager,product.uom.categ stock_manager,product.model_product_uom_categ,stock.group_stock_manager,1,1,0,0
+purchase.access_product_uom_categ_purchase_manager,product.uom.categ purchase_manager,product.model_product_uom_categ,purchase.group_purchase_manager,1,1,0,0
+sale.access_product_uom_categ_sale_manager,product.uom.categ salemanager,product.model_product_uom_categ,sales_team.group_sale_manager,1,1,0,0
+mrp.access_product_uom_categ_mrp_manager,product.uom.categ mrp_manager,product.model_product_uom_categ,mrp.group_mrp_manager,1,1,0,0
+,,,,,,,
+hr_expense.access_product_uom_hr_expense_user,product.uom.hr.expense.user,product.model_product_uom,hr_expense.group_hr_expense_user,1,0,0,0
+mrp.access_product_uom_mrp_manager,product.uom mrp_manager,product.model_product_uom,mrp.group_mrp_manager,1,0,0,0
+sale.access_product_uom_sale_manager,product.uom salemanager,product.model_product_uom,sales_team.group_sale_manager,1,0,0,0
+purchase.access_product_uom_purchase_manager,product.uom purchase_manager,product.model_product_uom,purchase.group_purchase_manager,1,0,0,0
+stock.access_product_uom_stock_manager,product.uom stock_manager,product.model_product_uom,stock.group_stock_manager,1,0,0,0
+,,,,,,,
+stock.access_product_category_stock_manager,product.category stock_manager,product.model_product_category,stock.group_stock_manager,1,0,0,0
+purchase.access_product_category_purchase_manager,product.category purchase_manager,product.model_product_category,purchase.group_purchase_manager,1,0,0,0
+sale.access_product_category_sale_manager,product.category salemanager,product.model_product_category,sales_team.group_sale_manager,1,0,0,0
+mrp.access_product_category_mrp_manager,product.category mrp_manager,product.model_product_category,mrp.group_mrp_manager,1,1,0,0
+,,,,,,,
+account.access_product_product_account_manager,product.product.account.manager,product.model_product_product,account.group_account_manager,1,1,0,0
+stock.access_product_product_stock_manager,product.product stock_manager,product.model_product_product,stock.group_stock_manager,1,1,0,0
+purchase.access_product_product_purchase_manager,product.product purchase_manager,product.model_product_product,purchase.group_purchase_manager,1,1,0,0
+sale.access_product_product_sale_manager,product.product salemanager,product.model_product_product,sales_team.group_sale_manager,1,1,0,0
+mrp.access_product_product_mrp_manager,product.product mrp_manager,product.model_product_product,mrp.group_mrp_manager,1,1,0,0
+hr_timesheet.access_product_product_user,product.product.timesheet.user,product.model_product_product,hr_timesheet.group_hr_timesheet_user,1,0,0,0
+hr_expense.access_product_product_hr_expense_user,product.product.hr.expense.user,product.model_product_product,hr_expense.group_hr_expense_user,1,1,0,0
+,,,,,,,
+account.access_product_template_account_manager,product.template.account.manager,product.model_product_template,account.group_account_manager,1,1,0,0
+stock.access_product_template_stock_manager,product.template stock_manager,product.model_product_template,stock.group_stock_manager,1,1,0,0
+purchase.access_product_template_purchase_manager,product.template purchase_manager,product.model_product_template,purchase.group_purchase_manager,1,1,0,0
+sale.access_product_template_sale_manager,product.template salemanager,product.model_product_template,sales_team.group_sale_manager,1,1,0,0
+mrp.access_product_template_mrp_manager,product.template mrp_manager,product.model_product_template,mrp.group_mrp_manager,1,1,0,0
+mrp_plm.access_product_template_plm_manager,product.template plm_manager,product.model_product_template,mrp_plm.group_plm_manager,1,1,0,0
+hr_timesheet.access_product_template_timesheet_user,product.template.timesheet.user,product.model_product_template,hr_timesheet.group_hr_timesheet_user,1,0,0,0
+hr_expense.access_product_template_hr_expense_user,product.template.hr.expense.user,product.model_product_template,hr_expense.group_hr_expense_user,1,1,0,0
+,,,,,,,
+analytic.access_account_analytic_account,access_account_analytic_account,analytic.model_account_analytic_account,analytic.group_analytic_accounting,1,0,0,0
+account.access_account_analytic_accountant,account.analytic.account accountant,analytic.model_account_analytic_account,account.group_account_user,1,0,0,0
+sale.access_account_analytic_account_salesman,account_analytic_account salesman,analytic.model_account_analytic_account,sales_team.group_sale_salesman,1,0,0,0
+project.access_account_analytic_account_manager,account.analytic.account,analytic.model_account_analytic_account,project.group_project_manager,1,1,1,1
+hr_timesheet.access_account_analytic_user,analytic.account.analytic.timesheet.user,analytic.model_account_analytic_account,hr_timesheet.group_hr_timesheet_user,1,0,0,0
+,,,,,,,
+analytic.access_account_analytic_tag,access_account_analytic_tag,analytic.model_account_analytic_tag,analytic.group_analytic_accounting,1,0,0,0

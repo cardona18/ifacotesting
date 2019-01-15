@@ -365,6 +365,11 @@
                     <field name="date_planned" widget="date"/>
                 </xpath>
 
+                <field name="payment_term_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+
+
             </field>
         </record>
 

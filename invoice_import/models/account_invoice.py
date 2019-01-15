@@ -110,7 +110,7 @@ class account_invoice_gi(models.Model):
     def action_invoice_cancel_gi(self):
 
         result = super(account_invoice_gi, self).action_invoice_cancel()
-
+        print('2')
         if self.l10n_mx_edi_pac_status == 'cancelled' and self.siagi_state == 'SY':
             self.update_siagi_cancelled()
         else:
