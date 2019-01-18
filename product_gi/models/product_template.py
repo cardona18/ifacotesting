@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields, models, api
+from odoo.exceptions import RedirectWarning
 
 class product_template_gi(models.Model):
     _inherit = 'product.template'
@@ -38,6 +39,24 @@ class product_template_gi(models.Model):
         comodel_name='product.sanitary.registration'
     )
 
+    def _get_default_category_id(self):
+        if self._context.get('categ_id') or self._context.get('default_categ_id'):
+            return self._context.get('categ_id') or self._context.get('default_categ_id')
+        category = self.env.ref('product.product_category_all', raise_if_not_found=False)
+        if not category:
+            category = self.env['product.category'].search([], limit=1)
+        if category:
+            return category.id
+        else:
+            err_msg = _('You must define at least one product category in order to be able to create products.')
+            redir_msg = _('Go to Internal Categories')
+            raise RedirectWarning(err_msg, self.env.ref('product.product_category_action_form').id, redir_msg)
+
+    categ_id = fields.Many2one(
+        'product.category', 'Internal Category',
+        change_default=True, default=_get_default_category_id,
+        track_visibility="onchange", required=True, help="Select category for the current product")
+
     @api.onchange('cbss')
     def check_change_cbss(self):
 
@@ -45,7 +64,6 @@ class product_template_gi(models.Model):
             self.short_cbss = str(self.cbss[5:9])
         except Exception as e:
             self.short_cbss = False
-
 
 class product_product_gi(models.Model):
     _inherit = 'product.product'
