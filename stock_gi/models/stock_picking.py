@@ -31,22 +31,6 @@ class stock_picking(models.Model):
         string='Descripción',
     )
 
-    unit_price = fields.Integer(
-        string='Precio Unitario',
-        compute='_get_unit_price',
-    )
-
-
-    @api.multi
-    def _get_unit_price(self):
-        for self_id in self:
-            unit = self.env['stock.move'].search([('product_id', '=', self_id.product_id)], limit=1)
-            _logger.warning("la vaca gorda")
-            _logger.warning(unit)
-            if unit:
-                self_id.unit_price = unit.unit_price
-                return unit.unit_price
-
     @api.multi
     def action_draft(self):
         self.state = 'draft'
@@ -57,7 +41,7 @@ class stock_picking(models.Model):
         _logger.warning("Hola")
         self.action_assign()
 
-    
+
     @api.multi
     def on_hold_gi(self):
         self.show_check_availability = True
@@ -86,25 +70,29 @@ class stock_picking(models.Model):
 
             purchases_order = self.env['purchase.order'].sudo().search([('name', '=', self.origin)], limit=1)
 
-            if purchases_order:
-                for move_line in self.move_lines:
+            stock_picking_op = self.env['stock.picking.type'].sudo().browse(self.picking_type_id.code)
 
-                    if move_line.product_id.type == 'consu' or move_line.product_id.type == 'product':
+            if stock_picking_op == 'incomming':
 
+                if purchases_order:
+                    for move_line in self.move_lines:
 
-                        for line_id in move_line.move_line_ids:
-
-                            if line_id.qty_done > 0.0:
-                                reception_id = self.env['purchase.reception'].create({'product_id': line_id.product_id.id, 'order_id': purchases_order.id, 'qty': line_id.qty_done, 'get_qty': line_id.qty_done, 'state': 'received','date_request': fields.Date.today(), 'move_line': line_id.id, 'company_id' : self.company_id.id, 'picking_id':self.id, 'purchase_line_id': move_line.purchase_line_id.id})
-
-                                folio_sequence = self.env['ir.sequence'].sudo().search([('name', '=', 'reception'),('company_id','=', self.company_id.id)], limit=1)
-
-                                if not folio_sequence:
-                                    raise ValidationError('No está configurada una secuencia "Orden de compra" para la compañía.')
-                                reception_id.name = folio_sequence._next()
+                        if move_line.product_id.type == 'consu' or move_line.product_id.type == 'product':
 
 
-                            line_id.lot_name = reception_id.name
+                            for line_id in move_line.move_line_ids:
+
+                                if line_id.qty_done > 0.0:
+                                    reception_id = self.env['purchase.reception'].create({'product_id': line_id.product_id.id, 'order_id': purchases_order.id, 'qty': line_id.qty_done, 'get_qty': line_id.qty_done, 'state': 'received','date_request': fields.Date.today(), 'move_line': line_id.id, 'company_id' : self.company_id.id, 'picking_id':self.id, 'purchase_line_id': move_line.purchase_line_id.id})
+
+                                    folio_sequence = self.env['ir.sequence'].sudo().search([('name', '=', 'reception'),('company_id','=', self.company_id.id)], limit=1)
+
+                                    if not folio_sequence:
+                                        raise ValidationError('No está configurada una secuencia "Orden de compra" para la compañía.')
+                                    reception_id.name = folio_sequence._next()
+
+
+                                line_id.lot_name = reception_id.name
 
 
             if self.location_dest_id.get_lot:
@@ -153,7 +141,7 @@ class stock_picking(models.Model):
             else:
                 for move_line in self.move_lines:
                     if move_line.quantity_done != move_line.reserved_availability:
-                       move_line.lot_name = "Borrador"
+                        move_line.lot_name = "Borrador"
 
                 if not self.origin:
 
@@ -168,6 +156,6 @@ class stock_picking(models.Model):
 
             for move_line in self.move_lines:
                 for move_line_id in move_line.move_line_ids:
-                   move_line_id.lot_name = "Borrador"
+                    move_line_id.lot_name = "Borrador"
 
             return self.button_validate()
