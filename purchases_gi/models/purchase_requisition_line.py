@@ -81,6 +81,11 @@ class purchase_requisition_line_gi(models.Model):
         default='draft',
     )
 
+    stock_location = fields.Many2one(
+        'stock.location',
+        string='Almacen',
+    )
+
     @api.multi
     def write(self,vals):
         """

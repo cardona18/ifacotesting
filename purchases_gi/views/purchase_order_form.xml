@@ -162,7 +162,7 @@
 
                 <xpath expr="//field[@name='notes']" position="replace">
                     <group>
-                        <field name="notes" string="Notas"/>
+                        <field name="notes" string="Términos y Condiciones"/>
                     </group>
                 </xpath>
 

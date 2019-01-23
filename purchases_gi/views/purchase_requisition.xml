@@ -2,7 +2,7 @@
 <openerp>
     <data>
 
-         <record id="view_purchase_requisition_filter_gi" model="ir.ui.view">
+        <record id="view_purchase_requisition_filter_gi" model="ir.ui.view">
             <field name="name">purchase.requisition.list.select</field>
             <field name="model">purchase.requisition</field>
             <field name="arch" type="xml">
@@ -46,7 +46,7 @@
             <field name="domain">[]</field>
             <field name="context">{"search_default_user_id":uid}</field>
             <field name="search_view_id" ref="purchases_gi.view_purchase_requisition_filter_gi"/>
-             <!-- <field name="context">{'department_id': my_department_id}</field> -->
+            <!-- <field name="context">{'department_id': my_department_id}</field> -->
         </record>
 
 
@@ -73,16 +73,16 @@
                 </xpath>
 
                 <xpath expr="//field[@name='state']" position="replace">
-<!--                     <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,send,approve,authorizes,assigned,in_progress,done,cancel"/>
- -->                    <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,send,approve,in_progress,done,partially_authorized,authorizes,cancel"/>
-                </xpath> 
+                    <!--                     <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,send,approve,authorizes,assigned,in_progress,done,cancel"/>
+                     -->                    <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,send,approve,in_progress,done,partially_authorized,authorizes,cancel"/>
+                </xpath>
 
                 <xpath expr="//button[1]" position="after">
                     <button name="send_request_purchanse" type="object" string="Enviar solicitud" class="oe_highlight" icon="kanban-apply" states="draft" />
                     <button name="request_purchanse_approve" type="object" string="Aprobar" class="oe_highlight" icon="kanban-apply" states="send"  attrs="{'invisible':['|', ('with_perm_app', '=', False), '|']}" />
                     <button name="request_purchanse_authorization" type="object" string="Autorizar" class="oe_highlight" icon="kanban-apply" states="in_progress,partially_authorized" attrs="{'invisible':['|', ('with_perm_autho', '=', False), '|']}" />
-<!--                     <button name="%(cancel_purchase_requisition_action)d" string="Cancelar solicitud de compra" type="action" states="draft,send,approve,authorizes,in_progress" class="oe_highlight" icon="kanban-apply"/>
- -->
+                    <!--                     <button name="%(cancel_purchase_requisition_action)d" string="Cancelar solicitud de compra" type="action" states="draft,send,approve,authorizes,in_progress" class="oe_highlight" icon="kanban-apply"/>
+                     -->
 
                     <button name="assign_auxiliary" type="object" string="Asignar solicitud de compras" class="oe_highlight" icon="gtk-leave-fullscreen" states="assigned" groups="purchase.group_purchase_manager"/>
 
@@ -113,11 +113,11 @@
 
 
                 <!-- <button name="sent_suppliers" states="draft" string="Confirm Call" class="oe_highlight"/> -->
- 
 
-               <!--  <xpath expr="//field[@name='name']" position="replace">
-                        <field name='name'/>
-                </xpath> -->
+
+                <!--  <xpath expr="//field[@name='name']" position="replace">
+                         <field name='name'/>
+                 </xpath> -->
 
                 <xpath expr="//field[@name='picking_type_id']" position="replace"></xpath>
 
@@ -149,7 +149,7 @@
                 </xpath>
 
                 <xpath expr="//field[@name='line_ids']" position="after">
-                        <field name='message_app' readonly="1" style="line-height: 18px; min-width: 150px; font-weight: bold !important;"/>
+                    <field name='message_app' readonly="1" style="line-height: 18px; min-width: 150px; font-weight: bold !important;"/>
                 </xpath>
 
                 <xpath expr="//label[@for='name']" position="replace">
@@ -190,17 +190,17 @@
 
 
                 <xpath expr="//div[@class='oe_button_box']" position="attributes">
-<!--                     <attribute name="states">assigned,in_progress,open,authorizes,done,cancel</attribute>
- -->                    <attribute name="states">approve,in_progress,open,partially_authorized,authorizes,done,cancel</attribute>
+                    <!--                     <attribute name="states">assigned,in_progress,open,authorizes,done,cancel</attribute>
+                     -->                    <attribute name="states">approve,in_progress,open,partially_authorized,authorizes,done,cancel</attribute>
 
                 </xpath>
 
-<!--                 <button name="sent_suppliers" states="draft" string="Confirm Call" class="oe_highlight"/>
-                <button name="open_bid" states="in_progress" string="Close Call for Bids" class="oe_highlight"/>
-                <button name="tender_reset" states="cancel" string="Reset to Draft" type="object"/>
-                <button name="open_product_line" states="open" string="Choose product lines" type="object" class="oe_highlight" groups="purchase.group_advance_bidding"/>
-                <button name="generate_po" states="open" string="Done" type="object" class="oe_highlight"/>
-                <button name="cancel_requisition" states="draft,in_progress" string="Cancel Call"/> -->
+                <!--                 <button name="sent_suppliers" states="draft" string="Confirm Call" class="oe_highlight"/>
+                                <button name="open_bid" states="in_progress" string="Close Call for Bids" class="oe_highlight"/>
+                                <button name="tender_reset" states="cancel" string="Reset to Draft" type="object"/>
+                                <button name="open_product_line" states="open" string="Choose product lines" type="object" class="oe_highlight" groups="purchase.group_advance_bidding"/>
+                                <button name="generate_po" states="open" string="Done" type="object" class="oe_highlight"/>
+                                <button name="cancel_requisition" states="draft,in_progress" string="Cancel Call"/> -->
 
 
                 <xpath expr="//field[@name='user_id']" position="after">
@@ -238,7 +238,7 @@
                     <attribute name="attrs">{'readonly': ['|', ('with_perm_edit','=',False), '|']}</attribute>
                     <attribute name="required">1</attribute>
                 </xpath>
-                
+
                 <xpath expr="//field[@name='line_ids']" position="before">
                     <group>
                         <field name='employee_assigned'  options="{'no_create':True, 'create_edit': false}"/>
@@ -300,7 +300,7 @@
                                 <field name="schedule_date" invisible="1"/>
                                 <field name="account_analytic_id" groups="" invisible="0"/>
                                 <field name="order_ids"/>
-                          </group>
+                            </group>
                         </form>
                     </field>
                 </xpath>
@@ -316,10 +316,14 @@
                 </xpath>
 
 
-            <xpath expr="//button[@name='analyze_quotes']" position="after">
-                <button name="action_cancel" type="object" string="Cancelar lineas solicitud de compra" class="oe_highlight" icon="STOCK_STOP" states="in_progress,partially_authorized" groups="purchase.group_purchase_manager,purchases_gi.group_assistant"/>
-                <button name="%(cancel_purchase_requisition_action)d" type="action" string="Cancelar solicitud de compra" class="oe_highlight"  icon="STOCK_STOP" confirm="Estas seguro que deseas cancelar la solicitud de compra?" attrs="{'invisible':[('with_perm_cancel_requisition', '=', False)]}"/>
-            </xpath>
+                <xpath expr="//button[@name='analyze_quotes']" position="after">
+                    <button name="action_cancel" type="object" string="Cancelar lineas solicitud de compra" class="oe_highlight" icon="STOCK_STOP" states="in_progress,partially_authorized" groups="purchase.group_purchase_manager,purchases_gi.group_assistant"/>
+                    <button name="%(cancel_purchase_requisition_action)d" type="action" string="Cancelar solicitud de compra" class="oe_highlight"  icon="STOCK_STOP" confirm="Estas seguro que deseas cancelar la solicitud de compra?" attrs="{'invisible':[('with_perm_cancel_requisition', '=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='line_ids']/tree[1]/field[@name='account_analytic_id']" position="after">
+                    <field name="stock_location"/>
+                </xpath>
 
             </field>
         </record>
@@ -333,9 +337,9 @@
 
                 <xpath expr="//tree" position="attributes">
                     <attribute name="colors">
-                        #CCCCCC:state=='draft'; 
-                        #339933:state=='send'; 
-                        #46B000:state=='approve'; 
+                        #CCCCCC:state=='draft';
+                        #339933:state=='send';
+                        #46B000:state=='approve';
                         #006600:state=='authorizes';
                         #0000FF:state=='in_progress';
                         #d23737:state=='cancel'
