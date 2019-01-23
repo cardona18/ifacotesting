@@ -159,6 +159,8 @@ class purchase_reception(models.Model):
     c_exchangerate = fields.Float(string='Tipo de cambio al dia de la orden de compra', compute=_get_exchangerate)
     exchangerate = fields.Float(string='Tipo de cambio')
 
+    destination = fields.Many2one('stock.location', String='Almacen de destino')
+
 
 
     def force_unlink(self):

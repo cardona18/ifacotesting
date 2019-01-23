@@ -40,6 +40,7 @@
                             <field name="date_request" readonly="0"/>
                             <field name="doc" attrs="{'readonly':[('state', '!=', 'create')]}"/>
                             <field name="coments" attrs="{'readonly':[('state', '!=', 'create')]}"/>
+                            <field name="destination" string="Almacen de destino"/>
                             <field name="move_line" invisible="1"/>
                         </group>
 
