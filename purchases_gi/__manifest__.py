@@ -25,8 +25,6 @@
     # always loaded
     'data': [
         'data/purchases_data.xml',
-        'security/security.xml',
-        'security/ir.model.access.csv',
         'wizards/cancel_purchase_requisition.xml',
         'wizards/input_free_wizard.xml',
         'wizards/purchase_immediate_transfer.xml',
@@ -50,5 +48,7 @@
         'views/template/purchase_order_templates.xml',
         'views/template/purchase_quotation_templates.xml',
         'views/template/purchase_order_templates_english.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv',
     ]
 }
