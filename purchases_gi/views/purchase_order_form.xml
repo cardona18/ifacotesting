@@ -411,6 +411,7 @@
                     <tree colors="#00BCD4:state=='related';#FF0000:state=='cancel';#2766af:state=='merged_order';#00981b:state=='approved'">
                         <field name="current_sequence" string="Referencia"/>
                         <field name="partner_id"/>
+                        <field name="requisition_id"/>
                         <field name="employee_assig"/>
                         <field name="state"/>
                         <field name="order_related" invisible="1"/>
