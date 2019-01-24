@@ -205,6 +205,7 @@
 
                 <xpath expr="//field[@name='user_id']" position="after">
                     <field name="employee_purchase_reque" readonly="1"/>
+                    <field name="name_pr" required="1"/>
                     <field name='user_id_employee_assigned' invisible="1"/>
                     <field name='current_em' invisible="1"/>
                     <field name='with_perm_app' readonly="0" invisible="1"/>
@@ -247,6 +248,10 @@
 
                 <xpath expr="//field[@name='schedule_date']" position="attributes">
                     <attribute name="string">Fecha de entrega deseada</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='name_pr']" position="attributes">
+                    <attribute name="string">Nombre de la Solicitud:</attribute>
                 </xpath>
 
                 <xpath expr="//field[@name='user_id']" position="attributes">
@@ -364,6 +369,7 @@
                 </xpath>
                 <xpath expr="//field[@name='company_id']" position="after">
                     <field name="create_date" string="Fecha de creación"/>
+                    <field name="name_pr" string="Nombre de la solicitud"/>
                     <field name="product_id"/>
                     <field name="vendor_quotation_id"/>
                 </xpath>

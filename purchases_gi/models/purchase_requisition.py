@@ -417,6 +417,11 @@ class purchase_requisition_gi(models.Model):
         'hr.department',
     )
 
+    name_pr = fields.Char(
+        String="Nombre de Solicitud de Compra",
+        track_visibility="onchenge"
+    )
+
     @api.onchange('schedule_date')
     def _onchange_schedule_date(self):
         """
