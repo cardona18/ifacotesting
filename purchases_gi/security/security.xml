@@ -53,6 +53,7 @@
         (4, ref('purchase.menu_purchase_form_action')),
         (4, ref('purchase.menu_product_in_config_purchase')),
         (4, ref('account.menu_action_invoice_tree2')),
+        (4, ref('purchase_reception_menu')),
         (4, ref('purchase.menu_procurement_partner_contact_form'))]"/>
         <!-- <field name="menu_access" eval="[(4, ref('purchase.menu_purchase_rfq')), (4, ref('purchase.menu_purchase_form_action')), (4, ref('purchase.menu_procurement_management_invoice')), (4, ref('purchase.menu_procurement_management_product')), (4, ref('stock.menu_product_by_category_stock_form')), (4, ref('purchase.menu_product_by_category_purchase_form')), (4, ref('purchase.menu_procurement_partner_contact_form')),(4, ref('base.menu_purchase_root')),(4,ref('purchase.menu_product_in_config_purchase')),(4,ref('purchase.menu_purchase_partner_cat'))]"/> -->
     </record>
@@ -107,8 +108,9 @@ purchase.menu_purchase_partner_cat
         <field name="name">Recepción de consum - servicios</field>
         <field name="category_id" ref="base.module_category_purchase_management"/>
         <field name="menu_access" eval="[(4, ref('purchase.menu_purchase_form_action')),
-        (4, ref('account.menu_action_invoice_tree2'))]"/>
-    </record> 
+        (4, ref('account.menu_action_invoice_tree2')),
+        (4, ref('purchase_reception_menu'))]"/>
+    </record>
 
 
 <!--     <record model="ir.model" id="purchase.model_purchase_order">
@@ -209,6 +211,7 @@ purchase.menu_purchase_partner_cat
         <field name="menu_access" eval="[(4, ref('purchase.menu_purchase_form_action')),
         (4, ref('purchase.menu_purchase_rfq')),
         (4, ref('account.menu_action_invoice_tree2')),
+        (4, ref('purchase_reception_menu')),
         (4, ref('purchase.menu_procurement_partner_contact_form'))]"/>
 <!--         <field name="menu_access" eval="[(4, ref('base.menu_procurement_management_supplier_name'))]"/>
         <field name="menu_access" eval="[(4, ref('purchase.menu_purchase_rfq'))]"/>
@@ -244,7 +247,8 @@ purchase.menu_purchase_partner_cat
     <record id="res_groups_105" model="res.groups">
         <field name="name">Solo consulta</field>
         <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
-        <field name="menu_access" eval="[(4, ref('account.menu_action_invoice_tree2'))]"/>
+        <field name="menu_access" eval="[(4, ref('account.menu_action_invoice_tree2')),
+        (4, ref('purchase_reception_menu'))]"/>
     </record>
 
     <record id="rule_group_director" model="ir.rule">
