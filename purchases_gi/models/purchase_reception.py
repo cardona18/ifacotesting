@@ -147,19 +147,51 @@ class purchase_reception(models.Model):
         string='Compañía',
         track_visibility='onchenge')
 
-    picking_id = fields.Many2one('stock.picking', string='Picking')
+    picking_id = fields.Many2one(
+        'stock.picking',
+        string='Picking'
+    )
 
-    purchase_line_id = fields.Many2one('purchase.order.line', string='Descripción',
-                                       domain="[('order_id', '=', order_id), ('product_id', '=', product_id)]")
+    purchase_line_id = fields.Many2one(
+        'purchase.order.line',
+        string='Descripción',
+        domain="[('order_id', '=', order_id), ('product_id', '=', product_id)]"
+    )
 
-    account_analytic_id = fields.Many2one('account.analytic.account',
-                                          string='Cuenta analitica', compute=_get_data_order)
-    subtotal = fields.Float(string='Subtotal', compute = _get_data_order)
-    tax = fields.Float(string='Total impuestos', compute=_get_data_order)
-    c_exchangerate = fields.Float(string='Tipo de cambio al dia de la orden de compra', compute=_get_exchangerate)
-    exchangerate = fields.Float(string='Tipo de cambio')
+    account_analytic_id = fields.Many2one(
+        'account.analytic.account',
+        string='Cuenta analitica',
+        compute=_get_data_order
+    )
 
-    destination = fields.Many2one('stock.location', String='Almacen de destino')
+    subtotal = fields.Float(
+        string='Subtotal',
+        compute = _get_data_order
+    )
+
+    tax = fields.Float(
+        string='Total impuestos',
+        compute=_get_data_order
+    )
+
+    c_exchangerate = fields.Float(
+        string='Tipo de cambio al dia de la orden de compra',
+        compute=_get_exchangerate
+    )
+
+    exchangerate = fields.Float(
+        string='Tipo de cambio'
+    )
+
+    destination = fields.Many2one(
+        'stock.location',
+        String='Almacen de destino'
+    )
+
+    rep_employee = fields.Many2one(
+        'hr.employee',
+        String="Empleado que recibe"
+    )
 
 
 
