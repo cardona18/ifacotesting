@@ -44,7 +44,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//search" position="inside">
                     <separator/>
-                    <filter name="invoice_import_siagi" string="SIAGI" domain="[('origin', 'like', 'SIAGI/')]"/>
+                    <filter string="SIAGI" name="invoice_import_siagi" domain="[('origin', 'like', 'SIAGI/')]"/>
                 </xpath>
             </field>
         </record>
@@ -58,15 +58,15 @@
             <field name="state">code</field>
             <field name="code">
                 action = {
-                    'name': 'Facturas de cliente',
-                    'view_type': 'form',
-                    'view_mode': 'tree,form',
-                    'res_model': 'account.invoice',
-                    'views':  [(env.ref('account.invoice_tree').id, 'tree'), (env.ref('account.invoice_form').id, 'form')],
-                    'context': {'type':'out_invoice', 'journal_type': 'sale'},
-                    'domain': [('type', '=', 'out_invoice'), ('origin', 'like', 'SIAGI/')],
-                    'type': 'ir.actions.act_window',
-                    'target': 'current',
+                'name': 'Facturas de cliente',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'account.invoice',
+                'views':  [(env.ref('account.invoice_tree').id, 'tree'), (env.ref('account.invoice_form').id, 'form')],
+                'context': {'type':'out_invoice', 'journal_type': 'sale'},
+                'domain': [('type', '=', 'out_invoice'), ('origin', 'like', 'SIAGI/')],
+                'type': 'ir.actions.act_window',
+                'target': 'current',
                 }
             </field>
         </record>
@@ -82,15 +82,15 @@
             <field name="state">code</field>
             <field name="code">
                 action = {
-                    'name': 'Notas de crédito',
-                    'view_type': 'form',
-                    'view_mode': 'tree,form',
-                    'res_model': 'account.invoice',
-                    'views':  [(env.ref('account.invoice_tree').id, 'tree'), (env.ref('account.invoice_form').id, 'form')],
-                    'context': {'default_type': 'out_refund', 'type':'out_refund', 'journal_type': 'sale'},
-                    'domain': [('type', '=', 'out_refund'), ('origin', 'like', 'SIAGI')],
-                    'type': 'ir.actions.act_window',
-                    'target': 'current',
+                'name': 'Notas de crédito',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'account.invoice',
+                'views':  [(env.ref('account.invoice_tree').id, 'tree'), (env.ref('account.invoice_form').id, 'form')],
+                'context': {'default_type': 'out_refund', 'type':'out_refund', 'journal_type': 'sale'},
+                'domain': [('type', '=', 'out_refund'), ('origin', 'like', 'SIAGI')],
+                'type': 'ir.actions.act_window',
+                'target': 'current',
                 }
             </field>
         </record>

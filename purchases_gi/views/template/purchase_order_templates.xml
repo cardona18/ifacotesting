@@ -9,15 +9,10 @@
                     <div class="oe_structure"/>
                     <div class="row">
                         <div class="col-xs-6">
-                            <strong>Dirección de la empresa:</strong>
-                            <div t-if="o.dest_address_id">
-                                <div t-field="o.dest_address_id"
-                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                            </div>
-                            <div t-if="not o.dest_address_id and o.picking_type_id and o.picking_type_id.warehouse_id">
-                                <span t-field="o.picking_type_id.warehouse_id.name"/>
-                                <div t-field="o.picking_type_id.warehouse_id.partner_id"
-                                     t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'/>
+                            <strong>Dirección de entrega:</strong>
+                            <div t-if="o.delivery_addresses">
+                                <div t-field="o.delivery_addresses"/>
+                                <div t-field="o.r_addresses"/>
                             </div>
                         </div>
                         <div class="col-xs-5 col-xs-offset-1">
@@ -85,6 +80,10 @@
                         <div t-if="o.use_cfdi" class="col-xs-3">
                             <strong>Uso de CFDI:</strong>
                             <p t-field="o.use_cfdi"/>
+                        </div>
+                        <div t-if="o.requisition_id" class="col-xs-3">
+                            <strong>Solicitud de compras:</strong>
+                            <p t-field="o.requisition_id"/>
                         </div>
                     </div>
 

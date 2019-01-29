@@ -45,6 +45,30 @@ class account_invoice_gi(models.Model):
         size=60
     )
 
+    employee_assig_inv = fields.Char(
+        string='Personal de compras asignado en la OC',
+        compute='_get_employee_assig'
+    )
+
+    def _get_employee_assig(self):
+        for self_id in self:
+            name_oc = self.env['purchase.order'].search([('name', '=', self_id.origin)], limit=1)
+            nameint = int(name_oc.employee_assig)
+            name_oc_id = self.env['hr.employee'].search([('id', '=', nameint)], limit=1)
+            print(name_oc)
+            print(name_oc.employee_assig)
+            print(nameint)
+            print(name_oc_id)
+            print(name_oc_id.work_email)
+            name_f = name_oc_id.work_email
+            self.employee_assig_inv = name_f
+            return name_f
+
+    current_user = fields.Many2one(
+        'res.users',
+        'Current User',
+        default=lambda self: self.env.user)
+
     def execute(self, _command):
         try:
             return subprocess.check_output(_command, shell=True, stderr=subprocess.STDOUT)
@@ -110,7 +134,6 @@ class account_invoice_gi(models.Model):
     def action_invoice_cancel_gi(self):
 
         result = super(account_invoice_gi, self).action_invoice_cancel()
-        print('2')
         if self.l10n_mx_edi_pac_status == 'cancelled' and self.siagi_state == 'SY':
             self.update_siagi_cancelled()
         else:

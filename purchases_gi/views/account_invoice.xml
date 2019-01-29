@@ -16,7 +16,11 @@
                     </page>
                 </xpath>
                 <xpath expr="//field[@name='purchase_id']" position="attributes">
-                 <attribute name="domain">[('partner_id','=',partner_id)]</attribute>
+                    <attribute name="domain">[('partner_id','=',partner_id)]</attribute>
+                </xpath>
+                <xpath expr="//page[@name='other_info']//field[@name='name']" position="after">
+                    <field name="order_id"/>
+                    <field name="employee_assig_inv"/>
                 </xpath>
             </field>
         </record>
@@ -27,11 +31,14 @@
             <field name="inherit_id" ref="account.invoice_supplier_tree"/>
             <field name="arch" type="xml">
 
+                <xpath expr="//field[@name='number']" position="after">
+                    <field name="name"/>
+                </xpath>
                 <xpath expr="//field[@name='state']" position="after">
                     <field name="with_receptions"/>
                 </xpath>
-                <xpath expr="//field[@name='number']" position="after">
-                    <field name="name"/>
+                <xpath expr="//field[@name='with_receptions']" position="after">
+                    <field name="current_user"/>
                 </xpath>
 
             </field>
@@ -44,14 +51,14 @@
             <field name="arch" type="xml">
 
                 <xpath expr="filter[@name='activities_my']"
-                    position="after">
-                     <filter string="Con entradas relacionadas "
+                       position="after">
+                    <filter string="Con entradas relacionadas "
                             domain="[('with_receptions', '=', 'Con entradas')]" />
                 </xpath>
                 <xpath expr="filter[@name='activities_my']"
-                    position="after">
-                     <field name="name" />
-                     <filter string="Entradas de hoy"
+                       position="after">
+                    <field name="name" />
+                    <filter string="Entradas de hoy"
                             domain="[('reception_id.date_request', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('reception_id.date_request', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]" />
                     <filter string="Entradas de ayer"
                             domain="[('reception_id.date_request', '&gt;=', (datetime.datetime.now()- datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')),('reception_id.date_request', '&lt;=',(datetime.datetime.now()- datetime.timedelta(days=1)).strftime('%Y-%m-%d 23:23:59'))]" />
@@ -61,6 +68,6 @@
 
             </field>
         </record>
-    -
+        -
     </data>
 </openerp>
