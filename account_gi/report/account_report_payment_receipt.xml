@@ -88,7 +88,7 @@
         <xpath expr="//table" position="after">
             <div class="col-xs-6" t-if="o.l10n_mx_edi_origin">
                 <strong>Tipo de relación: </strong> <span t-esc="o.l10n_mx_edi_origin[:2]"/> <br/>
-                <strong>CFDI Relacionados: </strong> <span t-esc="o.l10n_mx_edi_origin[4:]"/>
+                <strong>CFDI Relacionados: </strong> <span t-esc="o.l10n_mx_edi_origin[3:]"/>
             </div><br/><br/>
             <t t-if="o.l10n_mx_edi_cfdi_uuid">
                 <div class="row" id='complement'>
