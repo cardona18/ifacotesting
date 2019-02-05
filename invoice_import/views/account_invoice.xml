@@ -45,6 +45,7 @@
                 <xpath expr="//search" position="inside">
                     <separator/>
                     <filter string="SIAGI" name="invoice_import_siagi" domain="[('origin', 'like', 'SIAGI/')]"/>
+                    <filter string="Mis facturas de mis OC" domain="[]" context="{}" name="oc_invoices"/>
                 </xpath>
             </field>
         </record>
