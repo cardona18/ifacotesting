@@ -212,6 +212,8 @@ purchase.menu_purchase_partner_cat
         (4, ref('purchase.menu_purchase_rfq')),
         (4, ref('account.menu_action_invoice_tree2')),
         (4, ref('purchase_reception_menu')),
+        (4, ref('purchases_gi.menu_purchase_order_line')),
+        (4, ref('purchases_gi.menu_purchase_requisition_line')),
         (4, ref('purchase.menu_procurement_partner_contact_form'))]"/>
 <!--         <field name="menu_access" eval="[(4, ref('base.menu_procurement_management_supplier_name'))]"/>
         <field name="menu_access" eval="[(4, ref('purchase.menu_purchase_rfq'))]"/>

@@ -38,6 +38,7 @@
         'views/purchase_requisition.xml',
         'views/template/purchase_requisition_template.xml',   
         'views/purchase_order_line.xml',
+        'views/purchase_requisition_line.xml',
         'views/boarding_ways.xml',
         'views/purchase_consignee.xml',
         'views/delivery_addresses.xml',

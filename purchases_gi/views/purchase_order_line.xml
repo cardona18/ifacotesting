@@ -4,18 +4,71 @@
 
         <!-- PURCHASE ORDER LINE VIEWS -->
 
-<!-- 
-       <field name="name">purchase_order_form_gi</field>
-            <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <!--
+               <field name="name">purchase_order_form_gi</field>
+                    <field name="model">purchase.order</field>
+                    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+                    <field name="arch" type="xml">
+                        <form name="PURCHASE ORDER LINE">
+                            <group>
+                                <field name="price_unit"/>
+                            </group>
+                        </form>
+                    </field>
+                </record>
+         -->
+
+        <act_window id="action_purchase_order_line" name="Línea de orden de compra" res_model="purchase.order.line" view_mode="tree,form"/>
+
+        <record model="ir.ui.view" id="purchase_order_line_tree_view">
+            <field name="name">purchase_order_line_tree_view</field>
+            <field name="model">purchase.order.line</field>
             <field name="arch" type="xml">
-                <form name="PURCHASE ORDER LINE">
-                    <group>
+                <form String="Línea de orden de compra">
+                    <tree>
+                        <field name="product_id"/>
+                        <field name="name"/>
+                        <field name="date_planned"/>
+                        <field name="product_qty"/>
+                        <field name="qty_received"/>
+                        <field name="qty_invoiced"/>
+                        <field name="product_uom"/>
                         <field name="price_unit"/>
-                    </group>
-                </form>           
+                        <field name="priceless"/>
+                        <field name="additional_costs"/>
+                        <field name="discount"/>
+                        <field name="taxes_id"/>
+                        <field name="price_subtotal"/>
+                    </tree>
+                </form>
             </field>
         </record>
- -->
+
+        <record model="ir.ui.view" id="purchase_order_line_form_view">
+            <field name="name">purchase_order_line_form_view</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <form String="Línea de orden de compra">
+                    <group>
+                        <field name="product_id"/>
+                        <field name="name"/>
+                        <field name="date_planned"/>
+                        <field name="product_qty"/>
+                        <field name="qty_received"/>
+                        <field name="qty_invoiced"/>
+                        <field name="product_uom"/>
+                        <field name="price_unit"/>
+                        <field name="priceless"/>
+                        <field name="additional_costs"/>
+                        <field name="discount"/>
+                        <field name="taxes_id"/>
+                        <field name="price_subtotal"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Línea de orden de compra" id="menu_purchase_order_line" parent="purchase.menu_purchase_control" action="action_purchase_order_line" sequence="624"/>
+
     </data>
 </openerp>

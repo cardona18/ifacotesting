@@ -4,9 +4,9 @@
 
 from datetime import datetime
 import sys, logging, math
-from openerp.osv import osv
-from odoo import fields, models, tools, api
-from openerp.exceptions import ValidationError
+from odoo.osv import osv
+from odoo import fields, models, tools, api, _
+from odoo.exceptions import ValidationError, UserError
 
 from .num2words import Numero_a_Texto
 
@@ -64,7 +64,20 @@ class purchase_order(models.Model):
         """
         for self_id in self:
             self_id.partner_ref = self_id.partner_id.name[0:15]
+    """
+    cod_prod_prov = fields.Char(
+        string='Código de producto por proveedor',
+        compute='_get_cod_prod_prov'
+    )
 
+    def _get_cod_prod_prov(self):
+        for self_id in self:
+            prod_code = self.env['product.product'].sudo().search([('partner_id', '=', self.product_id.seller_ids.name)])
+            self_id.cod_prod_prov = prod_code
+            print(self_id.cod_prod_prov)
+            print(self_id.cod_prod_prov)
+            self.cod_prod_prov = self_id.cod_prod_prov
+            return self_id.prod_code """
 
     reception_count = fields.Integer(
         string='Entradas',

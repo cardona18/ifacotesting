@@ -87,7 +87,7 @@
                     <button name="assign_auxiliary" type="object" string="Asignar solicitud de compras" class="oe_highlight" icon="gtk-leave-fullscreen" states="assigned" groups="purchase.group_purchase_manager"/>
 
                     <button name="analyze_quotes" type="object" string="Enviar a autorizar" class="oe_highlight" icon="gtk-index" states="approve" groups="purchases_gi.group_assistant"/>
-                    <button name="%(action_purchase_requisition_to_so)d" type="action" string="Crear cotización" class="btn-primary" attrs="{'invisible': [('state', 'not in', ['approve', 'partially_authorized'])]}" groups="purchase.group_purchase_manager,purchases_gi.group_assistant"/>
+                    <button name="%(action_purchase_requisition_to_so)d" type="action" string="Crear cotización" class="btn-primary" attrs="{'invisible': [('state', 'not in', ['send', 'partially_authorized'])]}" groups="purchase.group_purchase_manager,purchases_gi.group_assistant"/>
                 </xpath>
 
                 <!--
