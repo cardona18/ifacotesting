@@ -1,9 +1,86 @@
 # Proyectos_ifaco
 En este repositorio se encuentran los proyectos soportados en la versión de Odoo 11.0+e-20180925
 
-Versión 11.01.02.0--GAMMA
+Versión 11.01.02.84--BETA
+======================
+Publicada: 25/01/2019
+
+Cambios:
+
+* Agregar columna a ordenes de compra
+* Al momento de recibir producto que se indique en odoo quien recibió, que se muestre y especifique en la entrada
+* Es necesario que el usuario especifique el almacen/ubicación donde entrará el producto
+* Campos obligatorios: - entregar en: - persona que recibe
+* Nombre para las solicitudes de compra
+* Es necesario saber a que almacén / ubicación va a entrar el producto en la entrada
+* Mostrar campos precio de compra y linea de compra, en el menú recibir
+* Campos obligatorios plazo de pago
+* Fac064 - mostrar el campo folio fiscal solo en menú de pagos de clientes
+* Af013 - poliza y plantilla de amortización de seguros
+* Roles de usuario contabilidad
+* Cxc016 - incluir en el pdf de todos los cfdi's el nodo cfdi relación cuando exista en el xml.
+* Tipo de cambio en poliza
+
+Correcciones:
+
+* Sistema crea entradas en pickings encadenados a oc
+* Que al cancelar pago, no cambie el folio o no lo sustituya por uno nuevo
+* Quitar permisos de creación de contactos
+* Restringir menú de entradas
+* Leyenda "términos y condiciones en sc y oc
+* El domicilio registrado al dar de alta al proveedor no aparece completo en la oc
+* Restringir menú facturas de proveedor en compras
+* Que solo jefes y gerentes de compras y contador y responsable planeación puedan actualizar la info del producto en el campo categoría interna
+* Que solo contabilidad pueda crear y actualizar las categorías internas de productos
+* Permiso de creación de contactos
+* Quitar permiso crear cuentas y etiquetas analíticas
+* Revisar permiso de creación de productos
+* Fac063 - mostrar el botón de reintentar cuando una factura se quede en "para cancelar"
+
+Modulos agregados:
+
+* Res_currency_reverse
+
+
+Versión 11.01.02.84--BETA
+======================
+Publicada: 15/01/2019
+
+Cambios:
+
+* Campo moneda al registrar factura
+* Roles de Usuario Contablidad
+* Impresión de cheques
+* Mejoras en el monitor
+* Al timbrar una factura, que force a que la fecha de la factura sea la del día actual.
+* Dias de vencimiento trascurridos en reporte de partidas vivas
+* Se agrega la vista de folio fiscal en el menú de pagos
+* Se agregaron los Campos de Poliza y Factura
+* Organizar Roles Ventas
+*   
+
+
+Correcciones:
+
+* Campo Fecha de pago en PDF de CFDI de pagos aparece vacio
+* Se modifica el reporte del xml de Pago10 a pago10
+
+
+Versión 11.01.01.0--ALPHA
+===========================
+Publicada: 8/11/18
+
+Versión en producción
+
+Cambios:
+
+* Se actualiza el repositorio de Github con la versión actual de producción de Odoo
+
+
+[PLANTILLA]
+Versión [Versión Odoo].[Versión producción].[Versión pruebas].[Commits]--[Nombre de la versión]
 ===================
-Publicada: --/--/2019
+Publicada: [Día]/[Mes]/[Año]
 
 Cambios:
 
@@ -15,58 +92,12 @@ Correcciones:
 * Corrección 1
 * Corrección 2
 
-Modulos agregados:
+Módulos agregados:
 
-* Modulo 1
-* Modulo 2
-
-Versión 11.01.02.84--BETA
-======================
-Publicada: 25/01/2019
-
-Cambios:
-* AGREGAR COLUMNA A ORDENES DE COMPRA
-* AL MOMENTO DE RECIBIR PRODUCTO QUE SE INDIQUE EN Odoo QUIEN RECIBIÓ, QUE SE MUESTRE Y ESPECIFIQUE EN LA ENTRADA
-* ES NECESARIO QUE EL USUARIO ESPECIFIQUE EL ALMACEN/UBICACIÓN DONDE ENTRARÁ EL PRODUCTO
-* CAMPOS OBLIGATORIOS: - ENTREGAR EN: - PERSONA QUE RECIBE
-* NOMBRE PARA LAS SOLICITUDES DE COMPRA
-* ES NECESARIO SABER A QUE ALMACÉN / UBICACIÓN VA A ENTRAR EL PRODUCTO EN LA ENTRADA
-* MOSTRAR CAMPOS PRECIO DE COMPRA Y LINEA DE COMPRA, EN EL MENÚ RECIBIR
-* CAMPOS OBLIGATORIOS PLAZO DE PAGO
-* FAC064 - MOSTRAR EL CAMPO FOLIO FISCAL SOLO EN MENÚ DE PAGOS DE CLIENTES
-* AF013 - POLIZA Y PLANTILLA DE AMORTIZACIÓN DE SEGUROS
-* ROLES DE USUARIO CONTABILIDAD
-* CXC016 - INCLUIR EN EL PDF DE TODOS LOS CFDI'S EL NODO CFDI RELACIÓN CUANDO EXISTA EN EL XML.
-* TIPO DE CAMBIO EN POLIZA
-
-
-Correcciones:
-
-* SISTEMA CREA ENTRADAS EN PICKINGS ENCADENADOS A OC
-* QUE AL CANCELAR PAGO, NO CAMBIE EL FOLIO O NO LO SUSTITUYA POR UNO NUEVO
-* QUITAR PERMISOS DE CREACIÓN DE CONTACTOS
-* RESTRINGIR MENÚ DE ENTRADAS
-* LEYENDA "TÉRMINOS Y CONDICIONES EN SC Y OC
-* EL DOMICILIO REGISTRADO AL DAR DE ALTA AL PROVEEDOR NO APARECE COMPLETO EN LA OC
-* RESTRINGIR MENÚ FACTURAS DE PROVEEDOR EN COMPRAS
-* QUE SOLO JEFES Y GERENTES DE COMPRAS Y CONTADOR Y RESPONSABLE PLANEACIÓN PUEDAN ACTUALIZAR LA INFO DEL PRODUCTO EN EL CAMPO CATEGORÍA INTERNA
-* QUE SOLO CONTABILIDAD PUEDA CREAR Y ACTUALIZAR LAS CATEGORÍAS INTERNAS DE PRODUCTOS
-* PERMISO DE CREACIÓN DE CONTACTOS
-* QUITAR PERMISO CREAR CUENTAS Y ETIQUETAS ANALÍTICAS
-* REVISAR PERMISO DE CREACIÓN DE PRODUCTOS
-* FAC063 - MOSTRAR EL BOTÓN DE REINTENTAR CUANDO UNA FACTURA SE QUEDE EN "PARA CANCELAR"
-* RE - ORGANIZAR ROLES VENTAS
-
-Modulos agregados:
-
-* Res_currency_reverse
-
-Versión de odoo: v11
+* Módulo 1
+* Módulo 2
 
 
 
-Versión 11.01.01.0--ALPHA
-===========================
-Publicada: 01/10/18
 
-Versión en producción
+
