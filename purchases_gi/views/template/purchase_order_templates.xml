@@ -114,17 +114,21 @@
                         </thead>
                         <tbody>
                             <tr t-foreach="o.order_line" t-as="line">
-                                <t t-foreach="o.order_line.product_id" t-as="p">
+                                <t t-foreach="line.product_id" t-as="p">
                                     <td>
-                                        <div>
-                                            <span t-field="line.product_id.display_name"/>
-                                        </div>
-                                        <div>
-                                            <t t-if="p.seller_ids.product_code">
-                                                <strong>Código proveedor: </strong>
-                                                <span t-field="p.seller_ids.product_code"/>
+                                        <t t-foreach="p.seller_ids" t-as="s">
+                                            <t t-if="o.partner_id == s.name">
+                                                <div>
+                                                    <span t-field="p.display_name"/>
+                                                </div>
+                                                <div>
+                                                    <t t-if="s.product_code">
+                                                        <strong>Código proveedor: </strong>
+                                                        <span t-field="s.product_code"/>
+                                                    </t>
+                                                </div>
                                             </t>
-                                        </div>
+                                        </t>
                                     </td>
                                 </t>
                                 <td>
