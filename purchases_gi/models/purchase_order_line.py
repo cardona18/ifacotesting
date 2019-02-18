@@ -62,6 +62,7 @@ class purchase_order_line(models.Model):
         default=0.0,
         digits=(16, 2),
         store=1,
+        track_visibility='onchange',
     )
     date_planned = fields.Date(
         string='Fecha planificada',
@@ -83,7 +84,8 @@ class purchase_order_line(models.Model):
         default=get_current_company_id
     )
     priceless = fields.Boolean(
-        string='Sin precio',
+        string='Muestra / Regalo',
+        track_visibility='onchange',
     )
     additional_costs = fields.Boolean(
         string='Costo adicional ',
