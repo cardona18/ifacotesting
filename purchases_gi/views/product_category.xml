@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PRODUCT CATEGORY VIEWS -->
+
+
+        <record model="ir.ui.view" id="product_category_form">
+            <field name="name">product_category_form</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <!-- <field name='operating_cost' attrs="{'invisible':[('type','=','view')]}"/>
+                    <field name='apportionment' attrs="{'invisible':[('type','=','view')]}"/>
+                    <field name='manufacturing' attrs="{'invisible':[('type','=','view')]}"/>
+                    <field name='sales' attrs="{'invisible':[('type','=','view')]}"/>
+                    <field name='admin' attrs="{'invisible':[('type','=','view')]}"/>
+                    <field name='investigation' attrs="{'invisible':[('type','=','view')]}"/> -->
+                    <field name='operating_cost' invisible="1"/>
+                    <field name='apportionment' invisible="1"/>
+                    <field name='manufacturing' invisible="1"/>
+                    <field name='sales' invisible="1"/>
+                    <field name='admin' invisible="1"/>
+                    <field name='investigation' invisible="1"/>
+                    <field name='user_requirements'/>
+                    
+                </xpath>  
+                <xpath expr="//field[@name='name']" position="after">
+                    <group>
+                        <field name='description_cat' attrs="{'invisible':[('type','=','view')]}"/>
+                    </group>
+                </xpath>        
+            </field>
+        </record>
+
+
+
+    </data>
+</openerp>

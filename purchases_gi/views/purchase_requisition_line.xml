@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <act_window id="action_purchase_requisition_line" name="Línea solicitud de compra" res_model="purchase.requisition.line" view_mode="tree,form"/>
+
+        <record model="ir.ui.view" id="purchase_requisition_line_tree_view">
+            <field name="name">purchase_requisition_line_tree_view</field>
+            <field name="model">purchase.requisition.line</field>
+            <field name="arch" type="xml">
+                <form String="Línea solicitud de compra">
+                    <tree>
+                        <field name="product_id"/>
+                        <field name="description_product"/>
+                        <field name="product_qty"/>
+                        <field name="product_qty_quoted"/>
+                        <field name="product_uom_id"/>
+                        <field name="account_analytic_id"/>
+                        <field name="stock_location"/>
+                        <field name="order_ids"/>
+                        <field name="state"/>
+                    </tree>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_requisition_line_form_view">
+            <field name="name">purchase_requisition_line_form_view</field>
+            <field name="model">purchase.requisition.line</field>
+            <field name="arch" type="xml">
+                <form String="Línea solicitud de compra">
+                    <group>
+                        <field name="product_id"/>
+                        <field name="description_product"/>
+                        <field name="product_qty"/>
+                        <field name="product_qty_quoted"/>
+                        <field name="product_uom_id"/>
+                        <field name="account_analytic_id"/>
+                        <field name="stock_location"/>
+                        <field name="order_ids"/>
+                        <field name="state"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Línea solicitud de compra" id="menu_purchase_requisition_line" parent="purchase.menu_purchase_control" action="action_purchase_requisition_line" sequence="625"/>
+
+    </data>
+</openerp>

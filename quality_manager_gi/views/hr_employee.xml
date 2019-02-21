@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="hr_employee_qualitys_gi_form" model="ir.ui.view">
+            <field name="name">hr_employee_purchases_gi_form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[last()]//group[1]" position="inside">
+                    <group string="Control de calidad">
+                        <field name="is_analysis"/>
+                    </group>
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+</odoo>

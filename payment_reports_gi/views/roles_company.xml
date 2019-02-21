@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_roles_company_gi">
+            <field name="name">roles_company_gi_form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <field name="report_header" position="after">
+                    <field name="employee_autorizo"/>
+                    <field name="employee_aprobo"/>
+                    <field name="employee_elaboro"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

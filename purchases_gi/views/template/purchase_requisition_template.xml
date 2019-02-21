@@ -1,0 +1,419 @@
+<openerp>
+    <data>
+
+        <!--Enviar SC-->
+        <record id="purchase_requisition_email" model="mail.template">
+            <field name="name">purchase requisition send</field>
+            <field name="subject">Nueva solicitud de compra</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.employee_approve.work_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+            <field name="body_html" type="xml">
+                <div style="margin:auto;width:100%;">
+                Tienes una solicitud de compra pendiente de aprobar creada por ${object.employee_purchase_reque.name or ''}.<br /><br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+                <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+
+                <br />
+                <br />
+                Área solicitante: '${object.empl_department_id.name or ''}'<br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                <!--Requerimientos minimos de compra: '${object.description or ''}'<br />-->
+                <h3><a href="__URL__">Click aquí para ir al ERP para aprobar solicitud de compra</a></h3>
+                Favor de no responde a este correo, es generado automáticamente
+                </div>
+
+            </field>
+        </record>
+
+        <!--Fin enviar SC-->
+
+        <!--Emails botón aprobada-->
+
+        <!--Empleado que solicitó-->
+        <record id="purchase_requisition_email_approve" model="mail.template">
+            <field name="name">purchase requisition approve</field>
+            <field name="subject">Se ha aprobado la solicitud de compra</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.employee_purchase_reque.work_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+             <field name="body_html"><![CDATA[
+                Se ha aprobado la solicitud de compra por ${object.employee_approve.name or ''}.<br /><br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+                <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+                <br />
+                <br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                Requerimientos minimos de compra: '${object.description or ''}'<br />
+                <h3><a href="__URL__">Click aquí para ir al ERP para ver tu estado de tu solicitud de compra</a></h3>
+                Favor de no responde a este correo, es generado automáticamente
+                ]]>
+
+            </field>
+        </record>
+
+
+        <!--Empleado que autorizará-->
+        <record id="purchase_requisition_email_for_authorizes" model="mail.template">
+            <field name="name">purchase requisition for authorizes</field>
+            <field name="subject">Tienes por autorizar una nueva solicitud de compra</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.employee_authorize.work_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+             <field name="body_html"><![CDATA[
+                Tienes por autorizar una nueva solicitud de compra aprobada por ${object.employee_approve.name or ''}.<br /><br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+                <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+                <br />
+                <br />
+                Área solicitante: '${object.empl_department_id.name or ''}'<br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                Requerimientos minimos de compra: '${object.description or ''}'<br />
+                <h3><a href="__URL__">Click aquí para ir al ERP para autorizar solicitud de compra</a></h3>
+                Favor de no responde a este correo, es generado automáticamente
+                ]]>
+
+            </field>
+        </record>
+
+
+        <!--Fin emails botón aprobada-->
+
+
+
+        <!--Emails botón autorizar-->
+
+        <!--Notificación al empleado que solicitó que se ha autorizado su SC-->
+        <record id="purchase_requisition_email_applicant_purchase_already_authorized" model="mail.template">
+            <field name="name">applicant of purchase already authorized</field>
+            <field name="subject">Se ha autotizado la solicitud de compra</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.employee_purchase_reque.work_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+            <field name="body_html"><![CDATA[
+                Se ha autotizado la solicitud de compra por ${object.employee_authorize.name or ''}<br /><br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+                <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+                <br />
+                <br />
+                Área solicitante: '${object.empl_department_id.name or ''}'<br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                Requerimientos minimos de compra: '${object.description or ''}'<br />
+               <h3><a href="__URL__">Click aquí para ir al ERP para ver tu estado de tu solicitud de compra</a></h3>
+               Favor de no responde a este correo, es generado automáticamente
+                ]]>
+
+            </field>
+        </record>
+
+        <!--Notificación al empleado que aprobo que se autorizó la SC-->
+        <record id="purchase_requisition_email_purchase_requisit_approve_authorizes" model="mail.template">
+            <field name="name">purchase requisition to approve authorizes</field>
+            <field name="subject">Se ha autotizado la solicitud de compra</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">pruebas@gi.com</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+            <field name="body_html"><![CDATA[
+                Se ha autotizado la solicitud de compra por ${object.employee_authorize.name or ''}<br /><br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+                <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+                <br />
+                <br />
+                Área solicitante: '${object.empl_department_id.name or ''}'<br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                Requerimientos minimos de compra: '${object.description or ''}'<br />
+               <h3><a href="__URL__">Click aquí para ir al ERP para ver tu estado de tu solicitud de compra</a></h3>
+               Favor de no responde a este correo, es generado automáticamente
+                ]]>
+
+            </field>
+        </record>
+
+        <!--Notificación al jefe de compras que se autorizó la SC-->
+        <record id="purchase_requisition_email_boss_purchase_requisition_authorizes" model="mail.template">
+            <field name="name">boss purchase requisition authorizes</field>
+            <field name="subject">Se ha autotizado una solicitud de compra</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">pruebas@gi.com</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+            <field name="body_html"><![CDATA[
+                Se ha aprobado una solicitud de compra por ${object.employee_authorize.name or ''} para iniciar el proceso de compra
+                <br /><br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+               <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+                <br />
+                <br />
+                Área solicitante: '${object.empl_department_id.name or ''}'<br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                Requerimientos minimos de compra: '${object.description or ''}'<br />
+               <h3><a href="__URL__">Click aquí para ir al ERP para segir el proceso de compra</a></h3>
+               Favor de no responde a este correo, es generado automáticamente
+                ]]>
+
+            </field>
+        </record>
+
+
+        <!--Fin botón autorizar-->
+
+
+        <!---Botón asiganr a auxiliar-->
+        <record id="purchase_requisition_assigned" model="mail.template">
+            <field name="name">assigned purchase requisition</field>
+            <field name="subject">Has sido asignado a la solicitud de compras ${object.name or ''}</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.employee_assigned.work_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+            <field name="body_html"><![CDATA[
+                Has sido asignado a la solicitud de compra ${object.name or ''} por ${object.current_em.name or ''}.<br /><br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+                <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+                <br />
+                <br />
+                Área solicitante: '${object.empl_department_id.name or ''}'<br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                Requerimientos minimos de compra: '${object.description or ''}'<br />
+                <h3><a href="__URL__">Click aquí para ir al ERP para segir el proceso de compra</a></h3>
+                Favor de no responde a este correo, es generado automáticamente
+                ]]>
+            </field>
+        </record>
+        <!--Fin botón asiganr a auxiliar-->
+
+
+        <!---Botón enviar a analizar cotizaciones-->
+        <record id="purchase_requisition_analyze" model="mail.template">
+            <field name="name">analyze purchase requisition</field>
+            <field name="subject">El proceso de compra esta pendiente de autorizar</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.employee_authorize.work_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_purchase_requisition"/>
+            <field name="body_html"><![CDATA[
+                El proceso de compra esta pendiente de autorizar<br />
+                El empleado ${object.employee_assigned.name or ''} a enviado las solicitudes de cotización.<br /><br />
+                Cantidad de solicitudes de cotización: '${object.quantity_of_quotes or ''}'<br />
+                <h4>Referencia de la solicitud de compra: '${object.name or ''}'</h4>
+                <table>
+
+                <tbody>
+
+                    <tr>
+
+                    <th style="width:135px">Producto</th>
+
+                    <th style="width: 85px;">Cantidad</th>
+
+                    </tr>
+
+                    % for row in object.line_ids:
+
+                    <tr>
+
+                    <td> ${row.product_id.name or ''}</td>
+
+                    <td style="text-align: center;">${row.product_qty or ''}</td>
+
+                    </tr>
+
+                    %endfor
+                </tbody>
+                </table>
+                <br />
+                <br />
+                Área solicitante: '${object.empl_department_id.name or ''}'<br />
+                Empleado solicitante: '${object.employee_purchase_reque.name or ''}'<br />
+                Fecha de entrega deseada: '${object.schedule_date or ''}'<br />
+                Requerimientos minimos de compra: '${object.description or ''}'<br />
+                <h3><a href="__URL__">Click aquí para ir al ERP para segir el proceso de compra</a></h3>
+                Favor de no responde a este correo, es generado automáticamente
+                ]]>
+            </field>
+        </record>
+        <!--Fin botón enviar a analizar cotizaciones-->
+
+
+    </data>
+</openerp>

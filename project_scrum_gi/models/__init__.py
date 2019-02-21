@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import project_scrum_sprint
-import project_scrum_us
-import project_task
-import project_issue
-import project_scrum_monitor_wizard
+from . import project_scrum_sprint
+from . import project_scrum_us
+from . import project_task
+from . import project_scrum_monitor_wizard

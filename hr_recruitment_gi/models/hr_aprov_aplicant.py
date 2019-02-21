@@ -6,9 +6,6 @@ import sys
 from openerp.osv import osv
 from openerp import fields, models, api
 
-reload(sys)  
-sys.setdefaultencoding('utf8')
-
 _logger = logging.getLogger(__name__)
 
 class hr_aprov_aplicant(models.Model):

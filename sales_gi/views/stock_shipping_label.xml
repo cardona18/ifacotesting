@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- STOCK SHIPPING LABEL VIEWS -->
+
+        <record id="stock_shipping_label_action" model="ir.actions.act_window">
+            <field name="name">Etiquetas</field>
+            <field name="res_model">stock.shipping.label</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_shipping_label_form">
+            <field name="name">stock_shipping_label_form</field>
+            <field name="model">stock.shipping.label</field>
+            <field name="arch" type="xml">
+                <form name="Etiquetas">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="lot_num"/>
+                        <field name="rs_name"/>
+                        <field name="expiration"/>
+                        <field name="customer"/>
+                        <field name="address"/>
+                        <field name="description"/>
+                        <field name="content"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_shipping_label_tree">
+            <field name="name">stock_shipping_label_tree</field>
+            <field name="model">stock.shipping.label</field>
+            <field name="arch" type="xml">
+                <tree name="Etiquetas" create="false" edit="false">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="lot_num"/>
+                    <field name="rs_name"/>
+                    <field name="expiration"/>
+                    <field name="content"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="shipping_label_picking_request" model="ir.actions.act_window">
+            <field name="name">Etiquetas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.shipping.label</field>
+            <field name="src_model">stock.picking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_picking_id': active_id}</field>
+            <field name="domain">[('picking_id', '=', active_id)]</field>
+            <field name="view_id" eval="stock_shipping_label_tree"/>
+        </record>
+
+    </data>
+</odoo>

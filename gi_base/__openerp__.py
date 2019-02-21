@@ -2,8 +2,7 @@
 {
     'name': "GI BASE",
 
-    'summary': """
-        Modificaciones globales al sistema""",
+    'summary': """Modificaciones globales al sistema""",
 
     'description': """
 

@@ -16,8 +16,6 @@ from openerp.osv import osv
 from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
-reload(sys)
-sys.setdefaultencoding('utf8')
 _logger = logging.getLogger(__name__)
 
 class hr_job_gi(models.Model):

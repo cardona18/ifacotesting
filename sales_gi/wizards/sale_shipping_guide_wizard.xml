@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- SALE SHIPPING GUIDE WIZARD -->
+
+        <act_window id="sale_shipping_guide_wizard_action" name="Guía de embarque" res_model="sale.shipping.guide.wizard" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="sale_shipping_guide_wizard_form_view">
+            <field name="name">sale_shipping_guide_wizard_form</field>
+            <field name="model">sale.shipping.guide.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Guía de embarque">
+
+                  <group>
+                    <field name="guide_id" required="1"/>
+                  </group>
+
+                  <footer>
+                      <button name="relate_shipping_guide" type="object" string="Asignar" class="oe_highlight"/>
+                      or
+                      <button special="cancel" string="Cancel"/>
+                  </footer>
+
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

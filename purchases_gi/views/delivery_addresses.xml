@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- Direcciones / domicilios de entrega VIEWS -->
+
+        <record id="delivery_addresses_action" model="ir.actions.act_window">
+            <field name="name">direcciones_domicilios de entrega</field>
+            <field name="res_model">delivery.addresses</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="delivery_addresses_form">
+            <field name="name">delivery_addresses_form</field>
+            <field name="model">delivery.addresses</field>
+            <field name="arch" type="xml">
+                <form name="Direcciones / domicilios de entrega">
+                    <group>
+                        <field name="name"/>
+                        <field name="addresses"/>
+                    </group>
+                </form>           
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="delivery_addresses_tree">
+            <field name="name">"delivery_addresses_tree"</field>
+            <field name="model">delivery.addresses</field>
+            <field name="arch" type="xml">
+                <tree name="Direcciones / domicilios de entrega">
+                    <field name='name'/>
+                    <field name="addresses"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="delivery_addresses_menu" parent="purchase.menu_product_in_config_purchase" name="Direcciones / domicilios de entrega" action="delivery_addresses_action" sequence="10"/>
+
+    </data>
+</openerp>

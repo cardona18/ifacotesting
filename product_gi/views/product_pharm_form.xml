@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PRODUCT PHARM FORM VIEWS -->
+
+        <record id="product_pharm_form_action" model="ir.actions.act_window">
+            <field name="name">Forma farmacéutica</field>
+            <field name="res_model">product.pharm.form</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="product_pharm_form_form">
+            <field name="name">product_pharm_form_form</field>
+            <field name="model">product.pharm.form</field>
+            <field name="arch" type="xml">
+                <form name="Forma farmacéutica">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_pharm_form_tree">
+            <field name="name">"product_pharm_form_tree"</field>
+            <field name="model">product.pharm.form</field>
+            <field name="arch" type="xml">
+                <tree name="Forma farmacéutica">
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

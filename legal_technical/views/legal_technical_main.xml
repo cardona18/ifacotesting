@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- LEGAL TECHNICAL MENU ITEMS -->
+
+        <menuitem name="Técnico Legal" id="legal_technical_root_menu" web_icon="legal_technical,static/description/icon.png" groups="group_lt_user"/>
+
+        <menuitem id="legal_technical_product_product_menu" name="Productos" action="account.product_product_action_sellable" parent="legal_technical_root_menu" sequence="10"/>
+
+        <menuitem id="legal_technical_customers_menu" name="Clientes" action="base.action_partner_customer_form" parent="legal_technical_root_menu" sequence="20"/>
+
+        <menuitem id="legal_technical_sanitary_registration_menu" name="Registro sanitario" action="product_gi.product_sanitary_registration_action" parent="legal_technical_root_menu" sequence="30"/>
+
+        <menuitem name="Configuración" id="legal_technical_config_menu" parent="legal_technical_root_menu" sequence="100"/>
+
+        <menuitem id="legal_technical_product_lgsa226_menu" name="Grupo LGS A226" action="product_gi.product_lgsa226_action" parent="legal_technical_config_menu" sequence="10"/>
+
+        <menuitem id="legal_technical_product_lgsa229_menu" name="Grupo LGS A229" action="product_gi.product_lgsa229_action" parent="legal_technical_config_menu" sequence="20"/>
+
+        <menuitem id="legal_technical_pharm_form_menu" name="Forma farmacéutica" action="product_gi.product_pharm_form_action" parent="legal_technical_config_menu" sequence="30"/>
+
+    </data>
+</odoo>

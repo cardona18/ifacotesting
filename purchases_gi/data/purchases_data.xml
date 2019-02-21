@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record model="ir.sequence" id="order_purchase_gi_sequence">
+            <field name="name">Orden de compra</field>
+            <field name="code">purchase.order</field>
+            <field name="implementation">no_gap</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">OC</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record model="ir.sequence" id="order_quotation_gi_sequence">
+            <field name="name">request for quotation</field>
+            <field name="code">purchase.order</field>
+            <field name="implementation">no_gap</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">SC</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="new_supplier_sequence" model="ir.sequence">
+            <field name="name">new supplier</field>
+            <field name="active">1</field>
+            <field name="implementation">standard</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="reception_sequence" model="ir.sequence">
+            <field name="name">reception</field>
+            <field name="active">1</field>
+            <field name="implementation">standard</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="purchase_requisition_sequence" model="ir.sequence">
+            <field name="name">purchase_requisition</field>
+            <field name="active">1</field>
+            <field name="implementation">standard</field>
+            <field name="padding">4</field>
+        </record>
+
+    </data>
+</openerp>

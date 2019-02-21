@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.menu" id="invoice_import.siagi_invoice_main_menu">
+            <field name="groups_id" eval="[(4, ref('account.group_account_user'))]"/>
+        </record>
+
+
+        <!--
+        Consultor de ventas
+        -->
+        <record id="consultant_sales" model="res.groups">
+            <field name="name">Consultor ventas</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de consultor de ventas.</field>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables')),(4, ref('account_reports.menu_action_followups')),(4, ref('account.menu_finance_receivables_follow_up')),(4, ref('account.menu_finance'))]"/>
+        </record>
+        <!--
+        Consultor de compras
+         -->
+        <record id="consultant_purchase" model="res.groups">
+            <field name="name">Consultor compras</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de consultor de compras.</field>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_payables')),(4, ref('account.menu_finance'))]"/>
+        </record>
+        <!--
+        Contador
+         -->
+        <record id="accountant" model="res.groups">
+            <field name="name">Contador</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.consultant_sales')),(4, ref('account_gi.consultant_purchase')),(4, ref('account.group_account_invoice'))]"/>
+            <field name="comment">Rol de contador</field>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_master_data')),
+            (4, ref('account.menu_finance_payables_master_data')),
+            (4, ref('account.menu_board_journal_1')),
+            (4, ref('account.menu_finance_entries')),
+            (4, ref('account.menu_finance_entries_accounting_entries')),
+            (4, ref('account.menu_action_move_journal_line_form')),
+            (4, ref('account.menu_finance_entries_management')),
+            (4, ref('account_asset.menu_action_account_asset_asset_form')),
+            (4, ref('account_budget.menu_act_crossovered_budget_view')),
+            (4, ref('account.menu_finance_reports')),
+            (4, ref('l10n_mx_reports.menu_action_account_report_diot')),
+            (4, ref('l10n_mx_reports.menu_trial_balance')),
+            (4, ref('l10n_mx_reports.menu_acountinge_coa')),
+            (4, ref('l10n_mx_reports.account_reports_legal_mexican_statements_menu')),
+            (4, ref('account.account_reports_legal_statements_menu')),
+            (4, ref('l10n_us_reports.check_register_menu')),
+            (4, ref('account_reports.menu_action_account_report_partner_ledger')),
+            (4, ref('account_reports.menu_action_account_report_general_ledger')),
+            (4, ref('account_reports.menu_action_account_report_coa')),
+            (4, ref('account_reports.menu_action_account_report_cj')),
+            (4, ref('account_asset.menu_action_account_asset_asset_form')),
+            (4, ref('account.menu_finance_configuration')),
+            (4, ref('account.menu_action_tax_form')),
+            (4, ref('account.menu_action_account_bank_journal_form')),
+            (4, ref('account.menu_action_account_journal_form')),
+            (4, ref('account_accountant.account_tag_menu')),
+            (4, ref('account_accountant.menu_account_group')),
+            (4, ref('account.menu_finance')),
+            (4, ref('account.menu_finance_receivables_master_data')),
+            (4, ref('account.menu_finance_payables_master_data')),
+            (4, ref('account.menu_action_account_moves_all')),
+            (4, ref('account.menu_action_account_form')),
+            (4, ref('account.menu_action_payment_term_form')),
+            (4, ref('account_accountant.menu_product_product_categories')),
+            (4, ref('account_budget.menu_budget_post_form')),
+            (4, ref('account_asset.menu_action_account_asset_asset_list_normal_purchase')),
+            (4, ref('analytic_tag_dimension.AccountAnalyticDimension_menu')),
+            (4, ref('account.menu_action_invoice_in_refund')),
+            (4, ref('account_gi.menu_account_res_reasons_types')),
+            (4, ref('account_gi.menu_account_res_cancel_types')),
+            (4, ref('account.account_management_menu'))]"/>
+        </record>
+        <!--
+        Fiscal
+        -->
+        <record id="cccount_fiscal" model="res.groups">
+            <field name="name">Fiscal</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.accountant'))]"/>
+            <field name="comment">Rol de consultor de fiscal.</field>
+        </record>
+        <!--
+        Tesorero
+         -->
+        <record id="manager_bank" model="res.groups">
+            <field name="name">Tesorero</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.accountant'))]"/>
+            <field name="comment">Rol de tesorería</field>
+            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config')),
+            (4, ref('account.menu_action_currency_form')),
+            (4, ref('contacts.menu_config_bank_accounts')),
+            (4, ref('account.account_account_menu'))]"/>
+        </record>
+        <!--
+        Manager
+         -->
+        <record id="acccount_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.accountant')),(4, ref('account_gi.cccount_fiscal')),(4, ref('account_gi.manager_bank'))]"/>
+            <field name="comment">Rol de manager</field>
+            <field name="menu_access" eval="[(4, ref('account_accountant.menu_action_change_lock_date'))]"/>
+        </record>
+
+        <record id="manager_price" model="res.groups">
+            <field name="name">Modificar listas de precios</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol de capaz de modificar Listas de Precio.</field>
+            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
+        </record>
+
+        <record id="price_to_sale" model="res.groups">
+            <field name="name">Precio de venta</field>
+            <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+            <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
+            <field name="comment">Rol precio de venta.</field>
+            <field name="menu_access" eval="[(4, ref('contacts.res_partner_menu_config'))]"/>
+        </record>
+
+        <record id="base.res_partner_bank_rule" model="ir.rule">
+            <field name="name">Partner bank company rule</field>
+            <field name="model_id" ref="base.model_res_partner_bank"/>
+            <field name="global" eval="False"/>
+            <field name="domain_force">['|','|',('company_id.child_ids','child_of',[user.company_id.id]),('company_id','child_of',[user.company_id.id]),('company_id','=',False)]</field>
+        </record>
+
+    </data>
+</odoo>

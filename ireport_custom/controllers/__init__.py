@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-import report_contents
+from . import report_contents

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        
+        <record id="view_account_payment_form_inherit_gi" model="ir.ui.view">
+            <field name="name">account.payment.form.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[1]" position="after">
+                    <button name="change_dates" type="object" string="Cambiar fechas" class="oe_highlight" icon="kanban-apply" groups="base.group_system" confirm="Esto actualizara la fecha 'payment_date' por la de 'real_copper'"/>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_date']" position="replace">
+                    <field name="payment_date" string="Fecha de pago"/>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_date']" position="after">
+                    <field name="real_copper" groups="base.group_system"/>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

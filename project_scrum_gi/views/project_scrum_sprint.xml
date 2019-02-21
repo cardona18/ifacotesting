@@ -23,11 +23,12 @@
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
-                        <div class="oe_right oe_button_box" name="button_box" style="margin-bottom: 20px">
-                            <button name="project_scrum_gi.sprint_project_task_request" type="action" class="oe_stat_button" icon="fa-tasks">
+
+                        <div class="oe_button_box" name="button_box">
+                            <button name="project_scrum_gi.sprint_project_task_request" type="action" class="oe_stat_button" icon="fa-tasks" context="{'default_project_id': project_id }">
                                 <field string="Backlog" name="task_count" widget="statinfo"/>
                             </button>
-                            <button name="project_scrum_gi.project_scrum_us_request" type="action" class="oe_stat_button" icon="fa-list">
+                            <button name="project_scrum_gi.project_scrum_us_request" type="action" class="oe_stat_button" icon="fa-list" context="{'default_project_id': project_id }">
                                 <field string="Historias" name="stories_count" widget="statinfo"/>
                             </button>
                         </div>

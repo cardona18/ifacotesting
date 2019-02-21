@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record id="view_purchase_requisition_filter_gi" model="ir.ui.view">
+            <field name="name">purchase.requisition.list.select</field>
+            <field name="model">purchase.requisition</field>
+            <field name="arch" type="xml">
+                <search string="Search Purchase Agreements">
+                    <field name="name" string="Purchase Agreements" filter_domain="['|', ('name','ilike',self), ('origin','ilike',self)]"/>
+                    <field name="type_id"/>
+                    <field name="user_id_employee_assigned"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]" help="New Agreements"/>
+                    <filter string="Confirmed" domain="[('state','in',('in_progress','open'))]" help="In negotiation"/>
+                    <filter string="Done" domain="[('state','=','done')]"/>
+                    <separator/>
+                    <filter string="Unassigned"  domain="[('user_id','=', False)]" help="Unassigned  Requisition"/>
+                    <field name="user_id" />
+
+                    <group expand="0" string="Group By">
+                        <filter string="Responsible" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter string="Source" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Ordering Date" domain="[]" context="{'group_by':'ordering_date'}"/>
+                        <filter string="End Month" domain="[]" context="{'group_by':'date_end'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_purchase_requisition_to_so">
+            <field name="name">Request for Quotation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">[('requisition_id','=',active_id)]</field>
+            <field name="context">{"default_requisition_id":active_id}</field>
+        </record>
+
+        <record id="action_purchase_requisition_gi" model="ir.actions.act_window" >
+            <field name="name">Solicitud de compras</field>
+            <field name="res_model">purchase.requisition</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="context">{"search_default_user_id":uid}</field>
+            <field name="search_view_id" ref="purchases_gi.view_purchase_requisition_filter_gi"/>
+            <!-- <field name="context">{'department_id': my_department_id}</field> -->
+        </record>
+
+
+
+        <!-- PURCHASE REQUISITION SEQUENCE -->
+
+
+
+
+        <!-- <delete id="purchase_requisition.action_report_purchase_requisitions" model="ir.actions.report.xml"/> -->
+
+        <!-- PURCHASE REQUISITION VIEWS -->
+
+        <record model="ir.ui.view" id="view_purchase_requisition_gi">
+            <field name="name">purchase_requisition_gi_form</field>
+            <field name="model">purchase.requisition</field>
+            <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(purchase_requisition.action_purchase_requisition_to_so)d'][1]" position="attributes">
+                    <attribute name="groups">purchase.group_purchase_manager,purchases_gi.group_assistant</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(purchase_requisition.action_purchase_requisition_to_so)d'][2]" position="attributes">
+                    <attribute name="groups">purchase.group_purchase_manager,purchases_gi.group_assistant</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='state']" position="replace">
+                    <!--                     <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,send,approve,authorizes,assigned,in_progress,done,cancel"/>
+                     -->                    <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,send,approve,in_progress,done,partially_authorized,authorizes,cancel"/>
+                </xpath>
+
+                <xpath expr="//button[1]" position="after">
+                    <button name="send_request_purchanse" type="object" string="Enviar solicitud" class="oe_highlight" icon="kanban-apply" states="draft" />
+                    <button name="request_purchanse_approve" type="object" string="Aprobar" class="oe_highlight" icon="kanban-apply" states="send"  attrs="{'invisible':['|', ('with_perm_app', '=', False), '|']}" />
+                    <button name="request_purchanse_authorization" type="object" string="Autorizar" class="oe_highlight" icon="kanban-apply" states="in_progress,partially_authorized" attrs="{'invisible':['|', ('with_perm_autho', '=', False), '|']}" />
+                    <!--                     <button name="%(cancel_purchase_requisition_action)d" string="Cancelar solicitud de compra" type="action" states="draft,send,approve,authorizes,in_progress" class="oe_highlight" icon="kanban-apply"/>
+                     -->
+
+                    <button name="assign_auxiliary" type="object" string="Asignar solicitud de compras" class="oe_highlight" icon="gtk-leave-fullscreen" states="assigned" groups="purchase.group_purchase_manager"/>
+
+                    <button name="analyze_quotes" type="object" string="Enviar a autorizar" class="oe_highlight" icon="gtk-index" states="approve" groups="purchases_gi.group_assistant"/>
+                    <button name="%(action_purchase_requisition_to_so)d" type="action" string="Crear cotización" class="btn-primary" attrs="{'invisible': [('state', 'not in', ['send', 'partially_authorized'])]}" groups="purchase.group_purchase_manager,purchases_gi.group_assistant"/>
+                </xpath>
+
+                <!--
+                <xpath expr="//button[@name='analyze_quotes']" position="after">
+                    <button name="action_cancel" type="object" string="Cancelar solicitud de compra" class="oe_highlight"  icon="STOCK_STOP" states="send"  attrs="{'invisible':['|', ('with_perm_app', '=', False), '|']}"/>
+                </xpath>
+
+                <xpath expr="//button[@name='analyze_quotes']" position="after">
+                    <button name="action_cancel" type="object" string="Cancelar solicitud de compra" class="oe_highlight" icon="STOCK_STOP" states="in_progress" attrs="{'invisible':['|', ('with_perm_autho', '=', False), '|']}"/>
+                </xpath>
+                -->
+
+                <xpath expr="//button[@name='action_in_progress']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_open']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+
+                <!-- <button name="sent_suppliers" states="draft" string="Confirm Call" class="oe_highlight"/> -->
+
+
+                <!--  <xpath expr="//field[@name='name']" position="replace">
+                         <field name='name'/>
+                 </xpath> -->
+
+                <xpath expr="//field[@name='picking_type_id']" position="replace"></xpath>
+
+                <xpath expr="//field[@name='line_ids']" position="before">
+                    <group>
+                        <field name="picking_type_id" options="{'no_create':True, 'create_edit': false}" domain="[('code','=','incoming'), ('name', 'not ilike', 'Devol')]"/>
+                        <!-- <field name="picking_type_id_sl"/> -->
+                        <field name="employee_destiny" required="1"/>
+                        <field name="department_destiny" required="1"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='employee_destiny']" position="attributes">
+                    <attribute name="string">Persona que recibe:</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='department_destiny']" position="attributes">
+                    <attribute name="string">Departamento de entrega:</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                    <attribute name="string">Entregar en</attribute>
+                    <attribute name="required">0</attribute>
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='type_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='line_ids']" position="after">
+                    <field name='message_app' readonly="1" style="line-height: 18px; min-width: 150px; font-weight: bold !important;"/>
+                </xpath>
+
+                <xpath expr="//label[@for='name']" position="replace">
+                    <h1>
+                        <label for="name" string="Referencia de solicitud de compra" class="oe_inline"/>
+                    </h1>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_end']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='ordering_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_end']" position="attributes">
+                    <attribute name="string">Plazo límite de envío de la solicitud de compra</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='description']" position="attributes">
+                    <attribute name="string">Observaciones</attribute>
+                    <attribute name="track_visibility">onchenge</attribute>
+                    <!-- <attribute name="attrs">{'readonly': [('with_perm_edit','=',False)]}</attribute> -->
+                    <attribute name="attrs">{'readonly': [('state','in',('authorizes','done','cancel'))]}</attribute>
+                    <!-- <attribute name="required">1</attribute> -->
+                </xpath>
+
+                <xpath expr="//field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                    <attribute name="string">Destino de compra</attribute>
+                    <attribute name="options">{'no_create':True, 'create_edit': false}</attribute>
+                </xpath>
+
+
+                <xpath expr="//div[@class='oe_button_box']" position="attributes">
+                    <!--                     <attribute name="states">assigned,in_progress,open,authorizes,done,cancel</attribute>
+                     -->                    <attribute name="states">approve,in_progress,open,partially_authorized,authorizes,done,cancel</attribute>
+
+                </xpath>
+
+                <!--                 <button name="sent_suppliers" states="draft" string="Confirm Call" class="oe_highlight"/>
+                                <button name="open_bid" states="in_progress" string="Close Call for Bids" class="oe_highlight"/>
+                                <button name="tender_reset" states="cancel" string="Reset to Draft" type="object"/>
+                                <button name="open_product_line" states="open" string="Choose product lines" type="object" class="oe_highlight" groups="purchase.group_advance_bidding"/>
+                                <button name="generate_po" states="open" string="Done" type="object" class="oe_highlight"/>
+                                <button name="cancel_requisition" states="draft,in_progress" string="Cancel Call"/> -->
+
+
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="employee_purchase_reque" readonly="1"/>
+                    <field name="name_pr" required="1"/>
+                    <field name='user_id_employee_assigned' invisible="1"/>
+                    <field name='current_em' invisible="1"/>
+                    <field name='with_perm_app' readonly="0" invisible="1"/>
+                    <field name='with_perm_autho' readonly="0" invisible="1"/>
+                    <field name='with_perm_edit' readonly="0" invisible="1"/>
+                    <field name='with_perm_purchasemanager' readonly="0" invisible="1" />
+                    <field name='with_perm_cancel_requisition' readonly="0" invisible="1" />
+                    <field name="empl_department_id" readonly="1"/>
+                    <field name="to_choose_empl_apr_aut" class="oe_field_name" placeholder="Al activar esta opción se podrá modificar el empleado que aprueba y autoriza" groups="purchase.group_purchase_manager"/>
+                    <field name='employee_approve' required="1" attrs="{'readonly':[('to_choose_empl_apr_aut','=',False)]}" options="{'no_create':True, 'create_edit': false}"/>
+                    <field name='employee_authorize' required="1" attrs="{'readonly':['|',('to_choose_empl_apr_aut','=',False)]}" options="{'no_create':True, 'create_edit': false}"/>
+                    <!-- <field name="comp_empl_id" invisible="1"/> -->
+                </xpath>
+
+                <!-- <xpath expr="//notebook" position="before">
+                    <group>
+                        <field name="department_id" attrs="{'invisible':[('type_of_operat','!=','unit_department_or_area')],'required':[('type_of_operat', '=', 'unit_department_or_area')]}" options="{'no_create': True}"/>
+                        <field name='employee_id' attrs="{'invisible':[('type_of_operat','!=','manager_or_director')],'required':[('type_of_operat', '=', 'manager_or_director')] }" options="{'no_create': True}"/>
+                    </group>
+                </xpath> -->
+
+                <xpath expr="//field[@name='schedule_date']" position="replace">
+                    <field name="schedule_date"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_draft']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='schedule_date']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('with_perm_edit','=',False), '|']}</attribute>
+                    <attribute name="required">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='line_ids']" position="before">
+                    <group>
+                        <field name='employee_assigned'  options="{'no_create':True, 'create_edit': false}"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='schedule_date']" position="attributes">
+                    <attribute name="string">Fecha de entrega deseada</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='name_pr']" position="attributes">
+                    <attribute name="string">Nombre de la Solicitud:</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="string">Nombre del solicitante</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='company_id']" position="replace">
+                    <field name="company_id" options="{'no_create':True, 'create_edit': false}" attrs="{'readonly': ['|',('with_perm_edit','=',False)]}" domain="[('vat','!=',False)]"/>
+                    <field name="urgent_buy"/>
+                    <field name="urgent_mensa" attrs="{'invisible': [('urgent_buy','=',False)], 'required': [('urgent_buy','=',True)]}"/>
+                    <field name='inputs_for_manufacturing' attrs="{'readonly': ['|',('with_perm_edit','=',False)], 'readonly': ['|',('with_perm_edit','=',False)]}" groups="purchases_gi.group_purchase_user_manufacturing,purchase.group_purchase_manager,purchases_gi.group_assistant"/>
+                </xpath>
+
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="string">Compañía destino de compra</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='schedule_date']" position="replace">
+                    <field name="schedule_date" />
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='line_ids']" position="replace">
+                    <field name="line_ids">
+                        <tree string="Products" editable="bottom" create="1" delete="1">
+                            <field name="product_id" options="{'no_create':True, 'create_edit': false}" readonly="0"/>
+                            <field name="description_product"/>
+                            <field name="product_qty"/>
+                            <field name="product_qty_quoted" readonly="1" digits="[42, 3]"/>
+                            <field name="product_uom_id" readonly="0" required="1"/>
+                            <field name="schedule_date" invisible="1"/>
+                            <field name="account_analytic_id" options="{'no_create':True, 'create_edit': false}" invisible="0" required="1"/>
+                            <field name="order_ids" domain="[('id', 'in', purchase_ids),('state', '!=', 'cancel')]" options="{'no_create':True, 'create_edit': false}" readonly="0" widget="many2many_tags"/>
+                            <field name="purchase_ids" invisible="1"/>
+                            <field name="state" readonly="1"/>
+                        </tree>
+                        <form string="Products">
+                            <header>
+                                <field name="state" widget="statusbar" statusbar_visible="draft,done,cancel"/>
+                            </header>
+                            <group>
+
+                                <field name="product_id" readonly="0"/>
+                                <field name="description_product"/>
+                                <field name="product_qty"/>
+                                <field name="product_qty_quoted" digits="[42, 3]"/>
+                                <field name="product_uom_id"/>
+                                <field name="schedule_date" invisible="1"/>
+                                <field name="account_analytic_id" groups="" invisible="0"/>
+                                <field name="order_ids"/>
+                            </group>
+                        </form>
+                    </field>
+                </xpath>
+
+                <xpath expr="//field[@name='description']" position="after">
+                    <separator string="Motivo de cancelación" attrs="{'invisible': [('state','!=','cancel')]}"/>
+                    <field name="comment_cancel" class="oe_field_name" readonly="1" attrs="{'invisible': [('state','!=','cancel')]}" states="cancel"/>
+                </xpath>
+
+                <xpath expr="//field[@name='vendor_id']" position="attributes">
+                    <attribute name="string">Proveedor sugerido</attribute>
+                    <attribute name="groups">purchase.group_purchase_manager,purchases_gi.group_assistant</attribute>
+                </xpath>
+
+
+                <xpath expr="//button[@name='analyze_quotes']" position="after">
+                    <button name="action_cancel" type="object" string="Cancelar lineas solicitud de compra" class="oe_highlight" icon="STOCK_STOP" states="in_progress,partially_authorized" groups="purchase.group_purchase_manager,purchases_gi.group_assistant"/>
+                    <button name="%(cancel_purchase_requisition_action)d" type="action" string="Cancelar solicitud de compra" class="oe_highlight"  icon="STOCK_STOP" confirm="Estas seguro que deseas cancelar la solicitud de compra?" attrs="{'invisible':[('with_perm_cancel_requisition', '=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='line_ids']/tree[1]/field[@name='account_analytic_id']" position="after">
+                    <field name="stock_location"/>
+                </xpath>
+
+                 <xpath expr="//separator" position="attributes">
+                    <attribute name="string">Observaciones</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="purchase_requisition_gi_tree" model="ir.ui.view">
+            <field name="name">purchase.requisition.gi.tree</field>
+            <field name="model">purchase.requisition</field>
+            <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="colors">
+                        #CCCCCC:state=='draft';
+                        #339933:state=='send';
+                        #46B000:state=='approve';
+                        #006600:state=='authorizes';
+                        #0000FF:state=='in_progress';
+                        #d23737:state=='cancel'
+                    </attribute>
+
+                </xpath>
+
+                <xpath expr="//field[@name='ordering_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_end']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="create_date" string="Fecha de creación"/>
+                    <field name="name_pr" string="Nombre de la solicitud"/>
+                    <field name="product_id"/>
+                    <field name="vendor_quotation_id"/>
+                    <field name="employee_destiny" string="Nombre del solicitante"/>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="purchase_requisition.menu_purchase_requisition_pro_mgt" model="ir.ui.menu">
+            <field name="name">Solicitud de compra</field>
+        </record>
+
+
+        <menuitem id="purchase_requisition.menu_purchase_requisition_pro_mgt" parent="purchase.menu_procurement_management"  name="Solicitud de compra" action="purchases_gi.action_purchase_requisition_gi" sequence="-1" />
+
+
+
+    </data>
+</openerp>

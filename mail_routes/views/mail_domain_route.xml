@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<openerp>
+<odoo>
     <data>
 
         <!-- MAIL DOMAIN ROUTE VIEWS -->
@@ -43,4 +43,4 @@
         <menuitem id="mail_domain_route_menu" name="Rutas de salida" action="mail_domain_route_action" parent="base.menu_email" sequence="10"/>
 
     </data>
-</openerp>
+</odoo>

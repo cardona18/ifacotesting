@@ -13,7 +13,6 @@ import subprocess
 import sys
 import uuid
 from lxml import etree as ET
-from M2Crypto import RSA
 from suds import WebFault
 from suds.client import Client
 from types import *
@@ -77,30 +76,27 @@ class CFDISignTask(models.TransientModel):
           snum = snum[snum.index('=') + 1:]
           self.__config['snum'] = ''.join(part[1:] for part in re.findall('..',snum))
 
-    def stamp_xml(self, xml):
+    def sign_xml(self, xml, options = { 'generarCBB': False, 'generarTXT': False, 'generarPDF': False}):
 
       if not self.__config['key_file'] or not self.__config['cert_file']:
         self.prepare()
 
-      keys = RSA.load_key('%s.pem' % self.__config['key_file'])
+
+      f = open('%s.pem' % self.__config['key_file'], 'r')
+      keys = RSA.importKey(f.read())
       cert_file = open(self.__config['cert_file'], 'r')
       cert = base64.b64encode(cert_file.read())
       xdoc = ET.fromstring(xml)
-
-      xdoc.attrib['Certificado'] = cert
-      xdoc.attrib['NoCertificado'] = self.__config['snum']
-
-      xsl_root = ET.parse('%s/utils/xslt33/cadenaoriginal_3_3.xslt' % os.path.dirname(__file__))
+      xsl_root = ET.parse('%s/utils/xslt32/cadenaoriginal_3_2.xslt' % os.path.dirname(__file__))
       xsl = ET.XSLT(xsl_root)
       original_string = xsl(xdoc)
-      digest = hashlib.new('sha256', str(original_string)).digest()
-      stamp = base64.b64encode(keys.sign(digest, "sha256"))
+      digest = hashlib.new('sha1', str(original_string)).digest()
+      stamp = base64.b64encode(keys.sign(digest, "sha1"))
 
-      xdoc.attrib['Sello'] = stamp
-
-      return '<?xml version="1.0" encoding="UTF-8"?>\n%s' % ET.tostring(xdoc, encoding='UTF-8')
-
-    def sign_xml(self, xml, options = { 'generarCBB': False, 'generarTXT': False, 'generarPDF': False}):
+      xdoc.attrib['sello'] = stamp
+      xdoc.attrib['certificado'] = cert
+      xdoc.attrib['noCertificado'] = self.__config['snum']
+      signed_xml = '<?xml version="1.0" encoding="UTF-8"?>\n%s' % ET.tostring(xdoc, encoding='UTF-8')
 
       ws_response = WsResponse()
 
@@ -108,7 +104,7 @@ class CFDISignTask(models.TransientModel):
 
         client = Client(self.__config['url'], timeout=10)
 
-        options['text2CFDI'] = base64.b64encode(xml)
+        options['text2CFDI'] = base64.b64encode(signed_xml)
         self.__ws_options.update(options)
         response = client.service.requestTimbrarCFDI(self.__ws_options)
 
@@ -116,11 +112,11 @@ class CFDISignTask(models.TransientModel):
           if attribute in response:
             setattr(ws_response, attribute, response[attribute])
 
-      except WebFault, e:
+      except WebFault as e:
         setattr(ws_response, 'error_code', e.fault.faultcode)
         setattr(ws_response, 'error', e.fault.faultstring)
         setattr(ws_response, 'request', client.last_sent())
-      except Exception, e:
+      except Exception as e:
         setattr(ws_response, 'error_code', 'LOST_CONNECTION')
         setattr(ws_response, 'error', e.message)
 
@@ -129,40 +125,8 @@ class CFDISignTask(models.TransientModel):
     def execute(self, _command):
         try:
             return subprocess.check_output(_command, shell=True, stderr=subprocess.STDOUT)
-        except Exception, e:
+        except Exception as e:
             _logger.error('EXECUTE ERROR: %s', e)
-
-    def prepare_ws_config(self):
-
-      server_config = self.env['cfdi.server.config'].create({})
-      self.__config['url'] = server_config['default_service_url']
-      self.__ws_options['UserID'] = server_config['default_user']
-      self.__ws_options['UserPass'] = server_config['default_password']
-      self.__ws_options['emisorRFC'] = self.company_id.rfc
-
-    def cfdi_cancel(self, uuid):
-
-      ws_response = WsResponse()
-
-      try:
-
-        client = Client(self.__config['url'], timeout=10)
-
-        self.__ws_options.update({'uuid': uuid})
-        response = client.service.requestCancelarCFDI(self.__ws_options)
-        setattr(ws_response, 'result', True)
-
-      except WebFault, e:
-        setattr(ws_response, 'error_code', e.fault.faultcode)
-        setattr(ws_response, 'error', e.fault.faultstring)
-        setattr(ws_response, 'request', client.last_sent())
-        setattr(ws_response, 'result', False)
-      except Exception, e:
-        setattr(ws_response, 'error_code', 'LOST_CONNECTION')
-        setattr(ws_response, 'error', e.message)
-        setattr(ws_response, 'result', False)
-
-      return ws_response
 
 class WsResponse():
   """

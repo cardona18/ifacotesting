@@ -25,8 +25,13 @@
                     <button name="on_hold_gi" string="Marcar por hacer" groups="stock.group_stock_user" type="object" class="oe_highlight" states="draft"/>
                 </xpath>
 
+<<<<<<< HEAD
                 <xpath expr="//field[@name='move_ids_without_package']" position="replace">
                     <field name="move_ids_without_package" attrs="{'readonly': ['|', ('show_operations', '=', True), '&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" context="{'picking_type_code': picking_type_code, 'default_picking_id': id, 'form_view_ref':'stock.view_move_picking_form', 'address_in_id': partner_id, 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}">
+=======
+                <xpath expr="//field[@name='move_lines']" position="replace">
+                    <field name="move_lines" attrs="{'readonly': ['|', ('show_operations', '=', True), '&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" context="{'picking_type_code': picking_type_code, 'default_picking_id': id, 'form_view_ref':'stock.view_move_picking_form', 'address_in_id': partner_id, 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}">
+>>>>>>> da089c15f15b6c20950b70e3dfeb43ab8ba1fdf5
                         <tree decoration-danger="state != 'done' and quantity_done &gt; reserved_availability and show_reserved_availability" decoration-muted="scrapped == True or state == 'cancel' or (state == 'done' and is_locked == True)" string="Stock Moves" editable="bottom">
                             <field name="name" invisible="1"/>
                             <field name="date_expected" invisible="1"/>
@@ -55,7 +60,11 @@
                     </field>
                 </xpath>
 
+<<<<<<< HEAD
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[2]/field[@name='move_ids_without_package']/tree[1]/field[@name='product_id']" position="after">
+=======
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[2]/field[@name='move_lines']/tree[1]/field[@name='product_id']" position="after">
+>>>>>>> da089c15f15b6c20950b70e3dfeb43ab8ba1fdf5
                     <field name="price_unit"/>
                 </xpath>
 
@@ -85,6 +94,7 @@
                     <attribute name="options">{'no_create':True, 'create_edit': false}</attribute>
                 </xpath>
 
+<<<<<<< HEAD
                 <xpath expr="//field[@name='move_ids_without_package']/tree//field[@name='product_id']" position="attributes">
                     <attribute name="options">{'no_create':True, 'create_edit': false}</attribute>
                 </xpath>
@@ -94,6 +104,17 @@
                 </xpath>
 
                 <xpath expr="//field[@name='move_ids_without_package']/tree//field[@name='location_dest_id']" position="attributes">
+=======
+                <xpath expr="//field[@name='move_line_ids']/tree//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create':True, 'create_edit': false}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='move_line_ids']/tree//field[@name='location_id']" position="attributes">
+                    <attribute name="options">{'no_create':True, 'create_edit': false}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='move_line_ids']/tree//field[@name='location_dest_id']" position="attributes">
+>>>>>>> da089c15f15b6c20950b70e3dfeb43ab8ba1fdf5
                     <attribute name="options">{'no_create':True, 'create_edit': false}</attribute>
                 </xpath>
 

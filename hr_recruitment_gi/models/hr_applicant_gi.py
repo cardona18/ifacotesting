@@ -18,9 +18,6 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.exceptions import UserError
 from openerp.exceptions import ValidationError
 
-reload(sys)
-sys.setdefaultencoding('utf8')
-
 _logger = logging.getLogger(__name__)
 
 class hr_applicant_gi(models.Model):
@@ -159,7 +156,6 @@ class hr_applicant_gi(models.Model):
 
     @api.multi
     def Examen_M(self):
-        _logger.warning("Que demonios")
         if self.sudo().request_emp_id:
             if self.request_emp_id.state:
                 self.request_emp_id.state = 'approved'
@@ -183,11 +179,6 @@ class hr_applicant_gi(models.Model):
 
     @api.multi
     def Incorporacion(self):
-        _logger.warning("#####################################")
-        _logger.warning("#####################################")
-        _logger.warning("#######---Incorporacion---###########")
-        _logger.warning("#####################################")
-        _logger.warning("#####################################")
         self.partner_name = self.name
         stage_req = self.env['hr.employee.request'].search([('job_id', '=', self.job_id.id)], limit=1)
 
@@ -204,8 +195,7 @@ class hr_applicant_gi(models.Model):
             self.request_emp_id.state = 'recruitment'
 
         self.state = 'Incorporacion'
-        if not self.emp_id:
-            self.create_employee_from_applicant()
+        self.create_employee_from_applicant()
         stage = self.env['hr.recruitment.stage'].search([('name', '=', 'Incorporación')], limit=1)
         self.stage_id = stage.id
 
@@ -236,51 +226,35 @@ class hr_applicant_gi(models.Model):
 
                 _logger.warning(self.stage_id.name)
                 if self.stage_id.name == "Preselección":
-                    self.partner_name = self.name
                     self.state = 'Preselección' 
 
                 if self.stage_id.name == "Primera entrevista":
-                    self.partner_name = self.name
                     self.state = 'Primera_entrevista'
 
                 if self.stage_id.name == "Segunda entrevista":
-                    self.partner_name = self.name
                     self.state = 'Segunda_entrevista'
 
                 if self.stage_id.name == "Examen médico":
+                    if self.sudo().request_emp_id:
+                        if self.request_emp_id.state:
+                            self.request_emp_id.state = 'approved'
 
-                    apro_apl = self.env['hr.aprov.aplicant'].search([('aplicant_id', '=', self.id)], limit=1)
-                    _logger.warning("Hola")
+                        self.state = 'Examen_M'
 
-                    if apro_apl == False:
+                        id_order_line = self.env['hr.aprov.aplicant'].create({
+                             'aplicant_id': self.id,
+                        })
 
-                        if self.sudo().request_emp_id:
-                            if self.request_emp_id.state:
-                                self.request_emp_id.state = 'approved'
+                        template = self.env['mail.template'].search([('name', '=', 'New patient')], limit=1)
 
-                            self.partner_name = self.name
-                            self.state = 'Examen_M'
-
-
-                            id_order_line = self.env['hr.aprov.aplicant'].create({
-                                 'aplicant_id': self.id,
-                            })
-
-                            template = self.env['mail.template'].search([('name', '=', 'New patient')], limit=1)
-
-                            template.send_mail(self.id, force_send=True)
-                        else:
-                            raise ValidationError('No existe una requisición de personal asociada')
-
+                        template.send_mail(self.id, force_send=True)
+                    else:
+                        raise ValidationError('No existe una requisición de personal asociada')
 
                 if self.stage_id.name == "Propuesta salarial":
-                    self.partner_name = self.name
                     raise ValidationError('Debe de ser aprobado por medicina laboral para proseguir con la incorporación')
 
                 if self.stage_id.name == "Incorporación":
-                    self.partner_name = self.name
-                    if not self.emp_id:
-                        self.create_employee_from_applicant()
                     self.state = 'Incorporacion'
 
                 vals['name'] = self.stage_id.name 

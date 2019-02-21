@@ -16,15 +16,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr', 'gi_base', 'hr_recruitment'],
+    'depends': ['base','hr', 'hr_recruitment'],
 
     # always loaded
     'data': [
         'security/security.xml',
-        'security/ir.model.access.csv',
+        #'security/ir.model.access.csv',
         'views/hr_job_gi.xml',
-        # 'views/hr_publish_job_gi.xml',
-        'views/hr_applicant_gi.xml',
+        #'views/hr_publish_job_gi.xml',
+        'views/hr_applicant_gi.xml', 
         'views/hr_employee_gi.xml',
         'views/hr_department_gi.xml',
         'views/templates/hr_recruiment_mails.xml',

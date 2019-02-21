@@ -19,11 +19,6 @@
                         <field name="key_file" filename="key_filename"/>
                         <field name="key_filename" invisible="1"/>
                         <field name="cert_pass" password="1"/>
-                        <label for="cfdi_cancel"/>
-                        <div>
-                            <field name="cfdi_cancel" class="oe_inline"/>
-                            <button string="Activar" type="object" name="cfdi_cancel_enable" class="oe_link" attrs="{'invisible': [('cfdi_cancel', '=', True)]}"/>
-                        </div>
                     </group>
                 </xpath>
 
