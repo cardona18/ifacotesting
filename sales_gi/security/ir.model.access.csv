@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-sale_bidding_group_sale_manager,sale_bidding,sales_gi.model_sale_bidding,sales_team.group_sale_manager,1,1,1,1
-sale_shipping_guide_group_sale_manager,sale_shipping_guide,sales_gi.model_sale_shipping_guide,sales_team.group_sale_manager,1,1,1,1
-stock_shipping_label_group_sale_manager,stock_shipping_label,sales_gi.model_stock_shipping_label,sales_team.group_sale_manager,1,1,1,1
-fleet_vehicle_group_sale_manager,fleet_vehicle,fleet.model_fleet_vehicle,sales_team.group_sale_manager,1,1,0,0

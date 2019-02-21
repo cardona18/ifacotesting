@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<openerp>
-    <data>
-
-        <menuitem id="siagi_invoice_main_menu" name="SIAGI" parent="account.menu_finance" sequence="5"/>
-
-    </data>
-</openerp>
-
