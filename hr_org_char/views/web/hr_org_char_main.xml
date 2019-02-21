@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- GENERAL ROUTE TEMPLATES -->
+
+        <template id="sele_emplo_char">
+
+            <html lang="es">
+                        <head>
+
+                            <title>Org Chart</title>
+                            <link href="/hr_org_char/static/src/js/jquery-orgchart/demo/demo.css" rel="stylesheet" type="text/css"/>
+                            <link href="/hr_org_char/static/src/js/jquery-orgchart/jquery.orgchart.css" rel="stylesheet" type="text/css"/>
+                            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                            <script src="/hr_org_char/static/src/js/jquery-orgchart/jquery.orgchart.js"></script>
+                            <script>
+                            $(function() {
+                                $("#organisation").orgChart({container: $("#main"), interactive: true, fade: true, speed: 'slow'});
+                            });
+                            </script>
+                        </head>
+
+                        <body>
+
+                            <div id="left" style="display:none;">
+
+                                <ul id="organisation">
+                                    <li>
+                                        <t t-esc="empl.name"/>
+                                        <br/>
+                                        <img t-att-src="url_img+str(empl.id)"/>
+                                        <br/>
+                                        <t t-esc="empl.job_id.name"/>
+
+                                        <ul>
+                                            <t t-raw="tree_str"/>
+         
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            
+                            </div>
+
+                            <div id="content" style="text-aling:center;">
+                            
+                                <h1 style="text-aling:center; color: #7c795d; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0;">Organigrama Grupo Ifaco</h1>
+                            
+                                <div id="main">
+                                </div>
+                                
+                            </div>
+                                
+                      </body>
+
+            </html>
+        </template>
+
+    </data>
+</openerp>

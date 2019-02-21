@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="shipment_cfdi">
+            <cfdi:Comprobante
+                xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
+                xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                Version="3.3"
+                t-att-Fecha="date"
+                t-att-Folio="record._get_string_cfdi(folio, 25)"
+                t-att-Serie="record._get_string_cfdi(serie, 40)"
+                Sello=""
+                t-att-NoCertificado="certificate_number"
+                t-att-Certificado="certificate"
+                SubTotal="0.00"
+                Moneda="MXN"
+                TipoCambio="1"
+                Total="0.00"
+                TipoDeComprobante="T"
+                t-att-LugarExpedicion="supplier.zip"
+                t-att-Confirmacion="confirmation">
+                <cfdi:Emisor
+                    t-att-Rfc="supplier.vat"
+                    t-att-Nombre="record._get_string_cfdi(supplier.name, 254)"
+                    t-att-RegimenFiscal="fiscal_position.l10n_mx_edi_code"/>
+                <cfdi:Receptor
+                    t-att-Rfc="customer.l10n_mx_edi_get_customer_rfc()"
+                    t-att-Nombre="record._get_string_cfdi(customer.commercial_partner_id.name, 254)"
+                    t-att-ResidenciaFiscal="customer.country_id.l10n_mx_edi_code if customer.country_id.l10n_mx_edi_code != 'MEX' else False"
+                    t-att-NumRegIdTrib="receiver_reg_trib"
+                    t-att-UsoCFDI="use_cfdi"/>
+                <cfdi:Conceptos>
+                    <t t-foreach="record.invoice_line_ids" t-as="line">
+                        <cfdi:Concepto
+                            t-att-ClaveProdServ="line.product_id.l10n_mx_edi_code_sat_id.code"
+                            t-att-NoIdentificacion="record._get_string_cfdi(line.product_id.default_code or '')"
+                            t-att-Cantidad="line.quantity"
+                            t-att-ClaveUnidad="line.uom_id.l10n_mx_edi_code_sat_id.code"
+                            t-att-Unidad="record._get_string_cfdi(line.uom_id.name, 20)"
+                            t-att-Descripcion="record._get_string_cfdi(line.name, 1000)"
+                            ValorUnitario="0.00"
+                            Importe="0.00"
+                            Descuento="0.00">
+                        </cfdi:Concepto>
+                    </t>
+                </cfdi:Conceptos>
+
+            </cfdi:Comprobante>
+
+        </template>
+    </data>
+</odoo>

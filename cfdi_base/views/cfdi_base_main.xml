@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <menuitem id="cfdi_config_main_menu" name="Timbrado" parent="base.menu_custom" sequence="60"/>
+
+    </data>
+</openerp>

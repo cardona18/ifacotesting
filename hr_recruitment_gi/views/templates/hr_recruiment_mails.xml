@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="hr_request_gi_send_template" model="mail.template">
+            <field name="name">Notify remaining authorization</field>
+            <field name="subject">Nueva Requisición de personal</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">it-notifications@gi.com</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="hr_recruitment_gi.model_hr_employee_request"/>
+            <field name="body_html"><![CDATA[Tienes una requisición de personal del departamendo de '${object.department_id.name or ''}' pendiente de revisar]]></field>
+        </record>
+
+        <record id="hr_request_gi_authorize_template" model="mail.template">
+            <field name="name">Notify rejected request</field>
+            <field name="subject">Requisición cancelada</field>
+            <field name="email_from">${object.create_uid.email}</field>
+            <field name="email_to">${object.create_uid.email}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="hr_recruitment_gi.model_hr_employee_request"/>
+            <field name="body_html"><![CDATA[<p>${object.current_emplo.name or ''} ha cancelado la requisición del puesto"${object.job_id.name or ''}"</p>
+            ]]></field>
+        </record>
+
+        <record id="hr_request_gi_increment_req" model="mail.template">
+            <field name="name">Notify increment request</field>
+            <field name="subject">Requisición de aumento de personal</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.director_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="hr_recruitment_gi.model_hr_employee_request"/>
+            <field name="body_html"><![CDATA[<p> ${object.current_emplo.name or ''} </p> Ha solicitado un aumento de personal de ${object.incre_workplace or ''} vacantes para el puesto ${object.job_id.name or ''} en el departamento de ${object.job_id.department_id.name or ''}.
+            ]]></field>
+        </record>
+
+        <record id="hr_request_gi_increment_req_tem" model="mail.template">
+            <field name="name">Notify increment request temporary</field>
+            <field name="subject">Requisición de aumento de personal</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">${object.director_email or ''}</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="hr_recruitment_gi.model_hr_employee_request"/>
+            <field name="body_html"><![CDATA[<p> ${object.current_emplo.name or ''} </p> Ha solicitado un aumento de personal temporal de ${object.incre_workplace or ''} vacantes para el puesto ${object.job_id.name or ''} en el departamento de ${object.department_id.name or ''}.
+            ]]></field>
+        </record>
+
+
+        <record id="hr_request_gi_new_job" model="mail.template">
+            <field name="name">Notify new job gi</field>
+            <field name="subject">Nuevo puesto de trabajo</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">pruebas@gi.com</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="hr.model_hr_job"/>
+            <field name="body_html"><![CDATA[<p> ${object.create_uid.name or ''} </p> ha creado un puesto de trabajo nuevo llamado ${object.name or ''}
+            ]]></field>
+        </record>
+
+        <record id="hr_request_gi_new_patient" model="mail.template">
+            <field name="name">New patient</field>
+            <field name="subject">Nueva autorización medica</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">pruebas@gi.com</field>
+            <field name="lang">${object.create_uid.lang or ''}</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="body_html"><![CDATA[<p> ${object.create_uid.name or ''} </p> Ha solicitado la autorización medica el paciente ${object.name or ''}
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

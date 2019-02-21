@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PARTNER INHERIT VIEWS -->
+
+        <record id="res_partner_sales_form" model="ir.ui.view">
+            <field name="name">res.partner.sales.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='sales_purchases']" position="after">
+
+                    <page name="sales_gi" string="Ventas" attrs="{'invisible': [('customer', '=', False)]}">
+
+                        <group col="2">
+
+                            <group string="Venta">
+                                <field name="expiration_months"/>
+                                <field name="payment_method_id"/>
+                                <field name="sale_invoice_usage"/>
+                                <field name="download_format"/>
+                            </group>
+
+                            <group string="Contacto">
+                                <field name="cfdi_mail"/>
+                                <field name="cfdi_mail_alt"/>
+                            </group>
+
+                            <group string="Fracciones" colspan="2">
+                                <field name="lgsA226_ids" nolabel="1"/>
+                            </group>
+
+                        </group>
+
+                    </page>
+
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+</openerp>

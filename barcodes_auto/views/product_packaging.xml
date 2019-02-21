@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+
+        <record model="ir.ui.view" id="product_packaging_form_gi">
+            <field name="name">product_packaging_barcode</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//label[@for='name']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" groups="stock.group_stock_manager" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" groups="stock.group_stock_manager"/>
+                        </button>
+                        <button name="calculate_barcode_dum" type="object" string="Generar codigo DUM"  icon="fa-barcode" groups="stock.group_stock_manager"/>
+                    </div>
+                </xpath>
+
+
+                <xpath expr="//field[@name='barcode']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+
+              
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

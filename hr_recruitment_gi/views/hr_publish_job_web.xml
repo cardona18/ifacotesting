@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- Publicación de vacantes VIEWS -->
+
+        <record id="hr_publish_job_web_action" model="ir.actions.act_window">
+            <field name="name">Publicación de vacantes</field>
+            <field name="res_model">hr.publish.job.web</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_publish_job_web_form">
+            <field name="name">hr_publish_job_web_form</field>
+            <field name="model">hr.publish.job.web</field>
+            <field name="arch" type="xml">
+                <form name="Publicación de vacantes">
+                    <group>
+                        <field name="name"/>
+                        <field name="img_job" filename="img_job_name" groups="hr_recruitment_gi.group_rsp"/>
+                        <field name="img_job_name" invisible="1"/>
+                        <field name='equ_job' groups="hr_recruitment_gi.group_rsp"/>
+                        <field name='experi_job' groups="hr_recruitment_gi.group_rsp"/>
+                        <field name='fun_job' groups="hr_recruitment_gi.group_rsp"/>
+                        <field name='Knowle_job' groups="hr_recruitment_gi.group_rsp"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_publish_job_web_tree">
+            <field name="name">"hr_publish_job_web_tree"</field>
+            <field name="model">hr.publish.job.web</field>
+            <field name="arch" type="xml">
+                <tree name="Publicación de vacantes">
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="hr_publish_job_web_menu" name="Publicación de vacantes" action="hr_publish_job_web_action" parent="hr_recruitment.menu_hr_recruitment_root" sequence="1"/>
+
+    </data>
+</openerp>

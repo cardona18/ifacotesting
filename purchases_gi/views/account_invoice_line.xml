@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+
+<!--         <record model="ir.ui.view" id="account_invoice_line_form">
+            <field name="name">account_invoice_supplier_form_gi</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='reference_type']" position="before">
+                    <field name="order_id"/>
+                    <field name="different_dates"/>
+                </xpath>
+            </field>
+        </record> -->
+
+    </data>
+</openerp>

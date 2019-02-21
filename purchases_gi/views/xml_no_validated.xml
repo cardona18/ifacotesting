@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="xml_no_validated_form">
+            <field name="name">"xml_no_validated_form"</field>
+            <field name="model">xml.no.validated</field>
+            <field name="arch" type="xml">
+                <!-- <form create="false" edit="false" name="XML con errores"> -->
+                <form  name="XML con errores">
+                    <!-- <header>
+                        <button name="create_invoice" type="object" string="Verificar la factura" class="oe_highlight" icon="gtk-stop"/>
+                    </header> -->
+                    <sheet>
+                        <group>
+                            <field name='error_name' readonly="1"/>
+                            <field name='total_xml' readonly="1"/>
+                        </group>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div> 
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="xml_no_validated_tree">
+            <field name="name">"xml_no_validated_form"</field>
+            <field name="model">xml.no.validated</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" name="XML con errores">
+                    <field name="error_name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="xml_no_validated_action" model="ir.actions.act_window">
+            <field name="name">Incidencias XML</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">xml.no.validated</field>
+            <field name="src_model">purchase.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_order_id': active_id}</field>
+            <field name="domain">[('order_id', '=', active_id)]</field>
+            <field name="view_id" eval="xml_no_validated_tree"/>
+        </record>
+
+
+<!--         <menuitem id="xml_no_validated_menu" name="XML NO VALIDATED" action="xml_no_validated_action" sequence="10"/>
+ -->
+    </data>
+</openerp>

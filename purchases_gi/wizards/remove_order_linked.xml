@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- REMOVE ORDER LINKED -->
+
+        <act_window id="remove_order_linked_action" name="Cancelar o desvincular solicitudes" res_model="remove.order.linked" view_mode="form" target="new"/>
+
+        <record model="ir.ui.view" id="remove_order_linked_form_view">
+            <field name="name">remove_order_linked_form</field>
+            <field name="model">remove.order.linked</field>
+            <field name="arch" type="xml">
+                <form string="Cancelar o desvincular solicitudes">
+                    <group>
+                        <field name="what_to_do" class="oe_field_purchases_requests" />
+                        <field name="purchases_request" class="oe_field_purchases_requests" widget="many2many_tags" options="{'no_create':True, 'create_edit': false,'no_open': false}"/>
+                    </group>
+                    <footer>
+                        <button name="remove_purchase_request_in_order" widget="many2many_tags" type="object" string="Cancelar o desvincular solicitudes" class="oe_highlight"/>
+                        o 
+                        <button special="cancel" string="Cancelar"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- <menuitem id="remove_order_linked_menu" name="REMOVE ORDER LINKED" sequence="10" action="remove_order_linked_action" /> -->
+
+    </data>
+</openerp>

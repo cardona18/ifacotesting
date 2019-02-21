@@ -1,0 +1,24 @@
+<openerp>
+    <data>
+
+        <!-- MAIL SEND EVALUATION  -->
+
+        <record id="hr_evaluation_360_send_template" model="mail.template">
+            <field name="name">New provider</field>
+            <field name="subject">Nuevo proveedor</field>
+            <field name="email_from">it-notifications@gi.com</field>
+            <field name="email_to">pruebas@gi.com</field>
+            <field name="lang">${object.create_uid.name or ''}</field>
+            <field name="model_id" ref="purchases_gi.model_res_partner"/>
+            <field name="body_html"><![CDATA[
+
+                <h1>Se a creado un nuevo proveedor llamado '${object.name or ''}' en '${object.company_id.name or ''}'</h1>
+                <h3>
+                Fue creado por el usuario '${object.create_uid.name or ''}'.
+                </h3>
+
+                ]]></field>
+        </record>
+
+    </data>
+</openerp>

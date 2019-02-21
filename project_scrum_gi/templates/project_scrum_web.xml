@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- SCRUM BOARD MONITOR -->
+
+        <template id="project_scrum_board_template">
+
+            <html lang="es">
+            <head>
+              <title>Scrum activity monitor</title>
+
+              <!-- JS Includes -->
+              <script type="text/javascript" src="/project_scrum_gi/static/src/js/charts/Chart.bundle.js"/>
+              <script type="text/javascript" src="/project_scrum_gi/static/src/js/jquery/jquery-1.10.2.js"/>
+
+
+              <!-- Style Includes -->
+              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+              <style>
+                  body{
+                    text-align: center;
+                    background: rgba(245, 245, 245, 0.84);
+                  }
+
+                  table{
+                    width: 100%;
+                    margin: auto;
+                  }
+
+                  .td_container{
+                    width: 30%;
+                  }
+
+                  .sprint_goal{
+                    font-size: 35px;
+                    padding-top: 10px;
+                  }
+
+                  .scrum_task{
+                    width: 97%;
+                    margin-bottom: 5px;
+                    display: none;
+                  }
+
+                  th{
+                    font-size: 20px;
+                    text-align: center;
+                    padding-bottom: 5px;
+                  }
+              </style>
+            </head>
+            <body>
+                <table>
+                    <tr>
+                        <td colspan="2" align="center" class="sprint_goal" id="sprint_title">
+                            <t t-esc="sprint.name"/> - <t t-esc="sprint.goal"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <table>
+                  <tr>
+                    <th>Sprint</th>
+                    <th>Proyecto</th>
+                    <th>Tareas</th>
+                  </tr>
+                  <tr>
+                      <td align="center" class="td_container">
+                        <div style="width: 90%;">
+                            <canvas id="sprint-chart"/>
+                        </div>
+                      </td>
+                      <td align="center" class="td_container">
+                        <div style="width: 90%;">
+                            <canvas id="project-chart"/>
+                        </div>
+                      </td>
+                      <td valign="top" align="center">
+                          <div id="task-bar"></div>
+                      </td>
+                  </tr>
+                </table>
+
+                <script>
+
+                window.chartColors = {
+                    red: 'rgb(255, 99, 132)',
+                    orange: 'rgb(255, 159, 64)',
+                    yellow: 'rgb(255, 205, 86)',
+                    green: 'rgb(75, 192, 192)',
+                    blue: 'rgb(54, 162, 235)',
+                    purple: 'rgb(153, 102, 255)',
+                    grey: 'rgb(201, 203, 207)'
+                };
+
+                var config = {
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            data: [1, 0],
+                            backgroundColor: [
+                                window.chartColors.yellow,
+                                window.chartColors.orange
+                            ],
+                            label: 'Dataset 1'
+                        }],
+                        labels: [
+                            "",
+                            ""
+                        ]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                };
+
+                function startMonitor() {
+
+                    $.ajax({
+                      type: "POST",
+                      url: '/web/project_scrum/monitor_data',
+                      data: {
+                         project_id: <t t-esc="project_id"/>,
+                         sprint_id: <t t-esc="sprint.id"/>
+                      },
+                      success: function(response){
+                        var jresponse = $.parseJSON(response);
+
+                        document.getElementById("sprint_title").innerHTML = jresponse.title;
+
+                        window.spChart.data.datasets[0].data = jresponse.data;
+                        window.spChart.data.datasets[0].backgroundColor = jresponse.background;
+                        window.spChart.data.labels = jresponse.labels;
+                        window.spChart.update();
+
+                        window.projectChart.data.datasets[0].data = jresponse.pdata;
+                        window.projectChart.data.datasets[0].backgroundColor = jresponse.pbackground;
+                        window.projectChart.data.labels = jresponse.plabels;
+                        window.projectChart.update();
+
+                      }
+                    });
+
+                    $.ajax({
+                      type: "POST",
+                      url: '/web/project_scrum/monitor_tasks',
+                      data: {
+                         project_id: <t t-esc="project_id"/>,
+                         stage_id: <t t-esc="task_type_id"/>
+                      },
+                      success: function(response){
+                        document.getElementById("task-bar").innerHTML = response;
+
+                        $( ".scrum_task:last-child" ).show( "slow", function() {
+                            $( this ).prev().show( "slow", arguments.callee );
+                        });
+                      }
+                    });
+
+                    var t = setTimeout(function(){ startMonitor() }, 30000);
+                }
+
+                window.onload = function() {
+
+                    var sctx = document.getElementById("sprint-chart").getContext("2d");
+                    window.spChart = new Chart(sctx, config);
+
+                    var pctx = document.getElementById("project-chart").getContext("2d");
+                    window.projectChart = new Chart(pctx, config);
+
+                    startMonitor();
+                };
+
+                </script>
+
+            </body>
+            </html>
+
+        </template>
+
+        <template id="project_scrum_tasks_template">
+
+            <t t-foreach="tasks" t-as="task">
+              <div class="panel panel-primary scrum_task">
+                <div class="panel-body">
+                  <t t-esc="task.user_id.name"/>
+                  <br/>
+                  <t t-esc="task.name"/>
+                </div>
+              </div>
+            </t>
+
+        </template>
+
+    </data>
+</openerp>

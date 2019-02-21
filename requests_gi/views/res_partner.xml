@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- RES PARTNER VIEWS -->
+
+        <record id="res_partner_requests_gi_form" model="ir.ui.view">
+            <field name="name">res_partner_requests_gi_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[last()]" position="after">
+                    <page name="requests" string="Solicitudes" groups="requests_gi.group_requests_manage_request">
+                        <group col="2">
+
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

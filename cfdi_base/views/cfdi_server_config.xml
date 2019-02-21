@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- CFDI SERVER CONFIG VIEWS -->
+
+        <record id="cfdi_server_config_action" model="ir.actions.act_window">
+            <field name="name">Servidor de timbrado</field>
+            <field name="res_model">cfdi.server.config</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <record id="cfdi_server_config_form" model="ir.ui.view">
+            <field name="name">cfdi_server_config_form</field>
+            <field name="model">cfdi.server.config</field>
+
+            <field name="arch" type="xml">
+                <form string="CFDI SERVER CONFIG" class="oe_form_configuration">
+                    <sheet>
+                        <div>
+                            <button string="Apply"
+                                    type="object"
+                                    name="execute"
+                                    class="oe_highlight" />
+                            or
+                            <button string="Cancel"
+                                    type="object"
+                                    name="cancel"
+                                    class="oe_link" />
+                        </div>
+
+                        <group string="Servidor">
+                            <field name="default_service_url"/>
+                            <field name="default_user"/>
+                            <field name="default_password" password="1"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="cfdi_server_config_menu" name="Servidor de timbrado" action="cfdi_server_config_action" parent="cfdi_config_main_menu" sequence="10"/>
+
+    </data>
+</openerp>

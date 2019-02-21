@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- IR CONF SQLSERVER VIEWS -->
+
+        <record id="ir_conf_sqlserver_action" model="ir.actions.act_window">
+            <field name="name">SQL Server</field>
+            <field name="res_model">ir.conf.sqlserver</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="ir_conf_sqlserver_form">
+            <field name="name">ir_conf_sqlserver_form</field>
+            <field name="model">ir.conf.sqlserver</field>
+            <field name="arch" type="xml">
+                <form name="SQL Server">
+                    <group>
+                        <field name="name"/>
+                        <field name="server_addr"/>
+                        <field name="server_user"/>
+                        <field name="server_pass" password="True"/>
+                        <field name="server_port"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="ir_conf_sqlserver_tree">
+            <field name="name">ir_conf_sqlserver_tree</field>
+            <field name="model">ir.conf.sqlserver</field>
+            <field name="arch" type="xml">
+                <tree name="SQL Server">
+                    <field name='name'/>
+                    <field name="server_addr"/>
+                    <field name="server_user"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

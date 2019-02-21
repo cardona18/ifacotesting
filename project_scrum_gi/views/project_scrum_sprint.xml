@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <!-- PROJECT SCRUM SPRINT VIEWS -->
+
+        <record id="project_scrum_sprint_action" model="ir.actions.act_window">
+            <field name="name">Sprint</field>
+            <field name="res_model">project.scrum.sprint</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="project_scrum_sprint_form">
+            <field name="name">project_scrum_sprint_form</field>
+            <field name="model">project.scrum.sprint</field>
+            <field name="arch" type="xml">
+                <form name="Sprint">
+                    <header>
+                        <button name="close_action" type="object" string="Cerrar" states="open" icon="fa-archive"/>
+                        <button name="open_action" type="object" string="Abrir" states="closed" icon="fa-undo"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+
+                        <div class="oe_button_box" name="button_box">
+                            <button name="project_scrum_gi.sprint_project_task_request" type="action" class="oe_stat_button" icon="fa-tasks" context="{'default_project_id': project_id }">
+                                <field string="Backlog" name="task_count" widget="statinfo"/>
+                            </button>
+                            <button name="project_scrum_gi.project_scrum_us_request" type="action" class="oe_stat_button" icon="fa-list" context="{'default_project_id': project_id }">
+                                <field string="Historias" name="stories_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="goal"/>
+                            <field name="project_id"/>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_scrum_sprint_tree">
+            <field name="name">"project_scrum_sprint_tree"</field>
+            <field name="model">project.scrum.sprint</field>
+            <field name="arch" type="xml">
+                <tree name="Sprint">
+                    <field name='name'/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="project_scrum_sprint_menu" name="Sprint" action="project_scrum_sprint_action" parent="project_scrum_main_menu" sequence="10"/>
+
+    </data>
+</openerp>

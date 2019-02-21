@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="invoice_import_form_inherit" model="ir.ui.view">
+            <field name="name">invoice_import.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group//group[last()]" position="inside">
+
+                    <label for="siagi_state"/>
+                    <div>
+                        <field name="siagi_state" class="oe_inline" states="open,paid,cancel" readonly="1"/>
+                        <button string="Reintentar" type="object" name="retry_siagi_state" class="oe_link" attrs="{'invisible': ['|', ('siagi_state', '!=', 'ER'), ('state', '=', 'draft')]}"/>
+                    </div>
+
+                    <label for="siagi_origin_inv" attrs="{'invisible': [('type', '!=', 'out_refund')]}"/>
+                    <div attrs="{'invisible': [('type', '!=', 'out_refund')]}">
+                        <field name="siagi_origin_inv" class="oe_inline" readonly="1"/>
+                        <button string="Buscar" type="object" name="search_siagi_origin_inv" class="oe_link" attrs="{'invisible': [('refund_invoice_id', '!=', False)]}"/>
+                        <field name="refund_invoice_id" invisible="1"/>
+                    </div>
+
+                </xpath>
+                <xpath expr="//field[@name='date_due']" position="after">
+                    <field name="order_num"/>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='name']" position="after">
+                    <field name="shipment_num"/>
+                    <field name="predial_account"/>
+                    <field name="product_uom_cfdi"/>
+                    <field name="product_cbss"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="invoice_import_filter_inherit" model="ir.ui.view">
+            <field name="name">invoice.import.filter.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <separator/>
+                    <filter string="SIAGI" name="invoice_import_siagi" domain="[('origin', 'like', 'SIAGI/')]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- INVOICE MENU ITEM -->
+
+        <record id="invoice_import_siagi_action" model="ir.actions.server">
+            <field name="name">Facturas de cliente</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                'name': 'Facturas de cliente',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'account.invoice',
+                'views':  [(env.ref('account.invoice_tree').id, 'tree'), (env.ref('account.invoice_form').id, 'form')],
+                'context': {'type':'out_invoice', 'journal_type': 'sale'},
+                'domain': [('type', '=', 'out_invoice'), ('origin', 'like', 'SIAGI/')],
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                }
+            </field>
+        </record>
+
+        <menuitem id="siagi_invoice_imported_menu" name="Facturas" action="invoice_import_siagi_action" parent="siagi_invoice_main_menu" sequence="20"/>
+
+        <!-- CREDIT NOTES MENU ITEM -->
+
+        <record id="credit_note_import_siagi_action" model="ir.actions.server">
+            <field name="name">Notas de crédito</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                'name': 'Notas de crédito',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'account.invoice',
+                'views':  [(env.ref('account.invoice_tree').id, 'tree'), (env.ref('account.invoice_form').id, 'form')],
+                'context': {'default_type': 'out_refund', 'type':'out_refund', 'journal_type': 'sale'},
+                'domain': [('type', '=', 'out_refund'), ('origin', 'like', 'SIAGI')],
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                }
+            </field>
+        </record>
+
+        <menuitem id="siagi_credit_notes_imported_menu" name="Notas de crédito" action="credit_note_import_siagi_action" parent="siagi_invoice_main_menu" sequence="30"/>
+
+    </data>
+</odoo>
+

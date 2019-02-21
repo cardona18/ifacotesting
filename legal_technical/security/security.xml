@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="group_lt_user" model="res.groups">
+        <field name="name">Usuario</field>
+        <field name="category_id" ref="base.module_category_técnico_legal"/>
+    </record>
+
+    <record id="group_lt_manager" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="base.module_category_técnico_legal"/>
+        <field name="implied_ids" eval="[(4, ref('group_lt_user'))]"/>
+    </record>
+
+</data>
+</odoo>

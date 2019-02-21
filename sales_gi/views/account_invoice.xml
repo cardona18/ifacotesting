@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- ACCOUNT INVOICE INHERIT VIEWS -->
+
+        <record id="sales_gi_form_inherit" model="ir.ui.view">
+            <field name="name">sales.gi.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_info']//field[@name='name']" position="after">
+                    <field name="shipment_invoice"/>
+                </xpath>
+
+                <xpath expr="//header//button[last()]" position="after">
+                    <button string="Cancelar traslado" type="object" name="cancel_shipment_invoice" attrs="{'invisible': ['|', ('shipment_invoice', '=', False), ('state', '!=', 'paid')]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='date_due']" position="after">
+                    <field name="delivery_date"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="download_invoice_files_action" model="ir.actions.server">
+            <field name="name">Descargar</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="binding_model_id" ref="account.model_account_invoice"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_download_invoice_files()</field>
+        </record>
+
+    </data>
+</odoo>

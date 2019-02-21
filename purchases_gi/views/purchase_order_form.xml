@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record id="purchase.purchase_rfq" model="ir.actions.act_window" >
+            <field name="name">Solicitudes de cotización</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,calendar</field>
+            <field name="domain">['|',('employee_assig.user_id','=',uid),('is_a_purchases_order','=', False)]</field>
+            <field name="context">{'search_default_is_a_purchases_order_false': 1}</field>
+
+
+        </record>
+
+        <record id="purchase.purchase_form_action" model="ir.actions.act_window" >
+            <field name="name">Orden de compra</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,calendar</field>
+            <field name="domain">[('state','not in',('draft','sent','bid','confirmed','approve'))]</field>
+            <field name="context">{'search_default_no_relate_state': 1}</field>
+        </record>
+
+        <!-- <delete id="purchase_requisition.purchase_order_form_inherit" model="ir.ui.view"/> -->
+
+        <record id="view_purchase_order_gi_search" model="ir.ui.view">
+            <field name="name">hr.purchase_order_form_gi_search</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="after">
+
+                    <group expand="0" string="Group By">
+                        <filter string="No vinculadas" domain="[('state','!=','related')]" name="no_relate_state" help="No visualizar solicitudes vinculadas"/>
+                        <filter string="Relacionadas" domain="[]" context="{'group_by':'order_related'}" name="order_related_gru" help="ordenes vinculadas"/>
+                        <filter string="Solicitudes no hechas ordenes compra" domain="[('is_a_purchases_order','=',False)]" name="is_a_purchases_order_false" help="No solicitudes de presupuesto ya echas ordenes de compra"/>
+                    </group>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="order_purchase_receptions_action" model="ir.actions.act_window">
+            <field name="name">Entradas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.reception</field>
+            <field name="src_model">purchase.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_order_id': active_id}</field>
+            <field name="domain">[('order_id', '=', active_id)]</field>
+            <field name="view_id" eval="ref('purchases_gi.purchase_reception_tree')"/>
+        </record>
+
+
+        <record id="view_xml_action" model="ir.actions.act_window">
+            <field name="name">XML por validar</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">xml.no.validated</field>
+            <field name="src_model">purchase.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_order_id': active_id}</field>
+            <field name="domain">[('order_id', '=', active_id)]</field>
+            <field name="view_id" eval="ref('purchases_gi.xml_no_validated_tree')"/>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_purchase_order_form_gi">
+            <field name="name">purchase_order_form_gi</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_ref']" position="after">
+                    <field name="type_origin" class="oe_field_name" readonly="1"/>
+                    <field name="date_create_order" class="oe_field_name" readonly="1" states="or_purchase_create,approved,cancel,done"/>
+                    <field name="delivery_addresses" class="oe_field_name" states="merged_order,or_purchase_create,approved,cancel,done,purchase"/>
+                    <field name="r_addresses" class="oe_field_name" readonly="1" states="merged_order,or_purchase_create,approved,cancel,done,purchase" options="{'no_create':True, 'create_edit': false,'no_open': True}"/>
+                    <field name="purchase_consignee" class="oe_field_name" states="merged_order,or_purchase_create,approved,cancel,done,purchase"/>
+                    <field name="boarding_ways" class="oe_field_name" states="merged_order,or_purchase_create,approved,cancel,done,purchase" attrs="{'required':[('state', 'in', ('or_purchase_create','approved'))]}"/>
+                    <field name="use_cfdi" class="oe_field_name" states="merged_order,or_purchase_create,approved,cancel,done,purchase"  attrs="{'required':[('state', 'in', ('or_purchase_create','approved'))]}" widget="selection"/>
+                    <field name="payment_method" class="oe_field_name" states="merged_order,or_purchase_create,approved,cancel,done,purchase"  attrs="{'required':[('state', 'in', ('or_purchase_create','approved'))]}" widget="selection"/>
+                    <field name="way_to_pay" class="oe_field_name" states="merged_order,or_purchase_create,approved,cancel,done,purchase"  attrs="{'required':[('state', 'in', ('or_purchase_create','approved'))]}" widget="selection"/>
+
+
+                    <field name="state_order" class="oe_field_name" states="merged_order,or_purchase_create,approved,cancel,done,purchase" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='button_draft']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_unlock']" position="attributes">
+                    <attribute name="groups">purchase.group_purchase_user</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='date_order']" position="attributes">
+                    <attribute name="string">Fecha de cotización</attribute>
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button type="action" name="purchases_gi.order_purchase_receptions_action" class="oe_stat_button" icon="fa-sign-in">
+                        <field name="reception_count" widget="statinfo" string="Entradas"/>
+                    </button>
+                </xpath>
+
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                    <attribute name="required">1</attribute>
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='analytic_tag_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                </xpath>
+
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="purchases_gi.view_xml_action" type="action" class="oe_stat_button" icon="fa-money">
+                        <field string="XMl con incidencias" name="get_xml_no_val" widget="statinfo"/>
+                        <field name="xml_no_ids" invisible="1"/>
+                    </button>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="create_of_draft" invisible="1"/>
+                    <field name="is_a_purchases_order" invisible="1"/>
+                    <field name="current_sequence" string="Referencia" invisible="1"/>
+                    <field name="sequence_order" class="oe_field_name" attrs="{'invisible': [('is_a_purchases_order','=',False)]}" readonly="1"/>
+                    <field name="sequence_cot_order" class="oe_field_name" attrs="{'invisible': [('is_a_purchases_order','=',False)]}" readonly="1"/>
+                    <field name="order_related" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+
+                <!--Fin secuencias-->
+
+                <!--
+                                <xpath expr="//notebook/page[3]/group/group[2]/field[6]" position="attributes">
+                                    <attribute name="invisible">1</attribute>
+                                </xpath> -->
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="requisition_id" class="oe_field_name" attrs="{'readonly': [('state', 'in', ('related','approved','cancel'))]}"/>
+                    <field name="create_directly"/>
+                    <field name="approved_bloq" invisible="1"/>
+                    <!-- <field name="change_purchase" invisible="1"/> -->
+                </xpath>
+
+                <xpath expr="//field[@name='notes']" position="replace">
+                    <group>
+                        <field name="notes" string="Notas"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//button[@id='draft_confirm']" position="after">
+                    <!--  <button name="authorize_order_requisition" type="object" states="bid" string="Elegir cotización" class="oe_highlight" groups="purchase.group_purchase_manager" icon="fa-check" attrs="{'invisible': ['|',('approved_bloq', '=' , True)]}"/> -->
+
+                    <button name="wkf_bid_received" type="object" states="sent" string="Recibir cotización" class="oe_highlight" groups="purchase.group_purchase_manager, purchases_gi.group_assistant" icon="fa-money"/>
+                    <button name="change_to_orden" type="object" string="Cambiar cotización a order" class="oe_stat_button" icon="fa-money" groups="base.group_system"/>
+
+                    <button name="create_operation" type="object" string="Crear operación" class="oe_stat_button" icon="fa-money" groups="purchases_gi.group_receptionist_con_ser, purchases_gi.group_receptionist_pro"/>
+                </xpath>
+
+                <xpath expr="//button[1]" position="before">
+                    <button name="authorize_order_requisition" type="object" states="draft" string="Crear orden de compra" class="b_color_red" groups="purchase.group_purchase_manager,purchases_gi.group_assistant" icon="fa-check-circle" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[1]" position="before">
+                    <button name="complete_order_requisition" type="object" states="or_purchase_create,merged_order" string="Completar orden de compra" class="b_color_red" groups="purchase.group_purchase_manager,purchases_gi.group_assistant" icon="fa-check-circle"/>
+                </xpath>
+
+                <xpath expr="//button[@id='draft_confirm']" position="attributes">
+                    <attribute name="groups">purchase.group_purchase_manager</attribute>
+                    <attribute name="string">Elegir cotización</attribute>
+                    <attribute name="states">sent</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@id='bid_confirm']" position="attributes">
+                    <attribute name="groups">purchase.group_purchase_manager</attribute>
+                    <attribute name="string">Elegir cotización</attribute>
+                    <attribute name="states">sent</attribute>
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="attrs">{'invisible': [('approved_bloq', '=' , True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//button[@id='bid_confirm']" position="attributes">
+                    <attribute name="groups">purchase.group_purchase_manager</attribute>
+                    <attribute name="string">Elegir cotización</attribute>
+                    <attribute name="states">sent</attribute>
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="attrs">{'invisible': [('approved_bloq', '=' , True)]}</attribute>
+                </xpath>
+
+                <!--   <xpath expr="//button[@name='action_cancel_draft']" position="attributes">
+                      <attribute name="groups">purchase.group_purchase_manager</attribute>
+                      <attribute name="states">none</attribute>
+                  </xpath> -->
+
+                <!--  <xpath expr="//button[@name='action_cancel']" position="attributes">
+                     <attribute name="groups">purchase.group_purchase_manager</attribute>
+                     <attribute name="states">sent,bid,confirmed,approved,except_picking,except_invoice</attribute>
+                 </xpath> -->
+
+                <xpath expr="//field[@name='invoice_count']" position="replace">
+                    <field name="invoice_count_gi" widget="statinfo" string="Facturas"/>
+                </xpath>
+
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="employee_assig" groups="purchase.group_purchase_manager" options="{'no_create':True, 'create_edit': false,'no_open': True}" attrs="{'readonly': [('state', 'in', ('related','approved','cancel'))]}"/>
+
+                    <field name="picking_ids" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,bid,approve,done" statusbar_colors="{&quot;except_picking&quot;:&quot;red&quot;,&quot;except_invoice&quot;:&quot;red&quot;,&quot;confirmed&quot;:&quot;blue&quot;}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='currency_id']" position="attributes">
+                    <attribute name="string">Moneda de cotización</attribute>
+                </xpath>
+
+                <!--  <xpath expr="//button[@name='wkf_send_rfq']" position="attributes">
+                     <attribute name="string">Enivar por correo al proveedor</attribute>
+                 </xpath>
+
+                 <xpath expr="//button[@name='wkf_send_rfq'][2]" position="attributes">
+                     <attribute name="string">Re-enivar por correo al proveedor</attribute>
+                 </xpath>
+
+
+                 <xpath expr="//button[@name='wkf_send_rfq'][3]" position="attributes">
+                     <attribute name="string">Enivar por correo al proveedor</attribute>
+                 </xpath>
+  -->
+                <xpath expr="//button[@name='action_rfq_send']" position="attributes">
+                    <attribute name="groups">purchases_gi.group_assistant</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_picking']" position="attributes">
+                    <attribute name="groups">purchases_gi.group_receptionist_pro</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="replace">
+                    <button name="button_cancel_gi" type="object" string="Cancelar" class="oe_highlight"  icon="fa-compress" groups="purchases_gi.group_assistant" attrs="{'invisible': [('state', 'in', ('draft','cancel'))]}"/>
+                </xpath>
+                <!--#Permite modifcar ordenes
+                <xpath expr="//button[@name='button_cancel_gi']" position="after">
+                    <button name="change_purchase_order" type="object" string="Modificar Orden de Compra" class="oe_highlight" attrs="{'invisible': ['|',('change_purchase', '=', True),('state','!=','purchase')]}" icon="fa-compress" groups="purchase.group_purchase_manager" confirm="Estas seguro que deseas modificar una orden de compra?"/>
+                    <button name="return_purchase_order" type="object" string="Regresar a Orden de Compra" class="oe_highlight" attrs="{'invisible': ['|',('change_purchase', '=', False),('state','!=','purchase')]}" icon="fa-compress" groups="purchase.group_purchase_manager"/>
+                </xpath>
+                -->
+                <xpath expr="//button[@name='print_quotation']" position="attributes">
+                    <attribute name="string">Imprimir la solicitud al proveedor</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='print_quotation'][2]" position="attributes">
+                    <attribute name="string">Re-imprimir al proveedor</attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page[2]" position="attributes">
+                    <attribute name="string">Solicitud de cotización</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('related','approved','cancel'))]}</attribute>
+                </xpath>
+
+
+                <xpath expr="//form/sheet" position="attributes">
+                    <attribute name="class">order_no_sheet</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_ref']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_a_purchases_order', '=', True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="after">
+                    <field name="delivered" invisible="1"/>
+                    <field name="remaining" invisible="1"/>
+                    <!--  <field name="change_purchase" invisible="1"/> -->
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="discount"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                    <attribute name="track_visibility">onchenge</attribute>
+                </xpath>
+                <!--Restricciones lineas de compra-->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                    <attribute name="track_visibility">onchenge</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                    <attribute name="track_visibility">onchenge</attribute>
+                </xpath>
+                <!--
+                <xpath expr="//field[@name='order_line']/tree/field[@name='date_planned']" position="attributes">
+                     <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                </xpath>
+                -->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                    <attribute name="track_visibility">onchenge</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='taxes_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                    <attribute name="domain">[('type_tax_use','=','purchase'),('company_id','=',company_id)]</attribute>
+                    <attribute name="track_visibility">onchenge</attribute>
+                </xpath>
+                <!--
+                            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                                <field name="state_line_order" invisible="1"/>
+                            </xpath>
+
+                            <xpath expr="//field[@name='order_line']/tree/field[@name='company_id']" position="replace">
+                                <field name="company_id" invisible="1" readonly="0"/>
+                            </xpath>
+                            -->
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="priceless" attrs="{'readonly': [('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase'))]}"/>
+                    <field name="additional_costs" attrs="{'readonly': [('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase'))]}"/>
+                </xpath>
+
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <!--<attribute name="attrs">{'readonly': ['|',('state', 'in', ('related','approved','cancel','is_a_purchases_order','purchase')),('priceless', '=',True)]}</attribute>-->
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('done','or_purchase_create','purchase','cancel'))]}</attribute>
+                    <attribute name="track_visibility">onchenge</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='delivery_addresses']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('approved','related','done','cancel'))]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='purchase_consignee']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'in', ('approved','related','done','cancel'))]}</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='requisition_id']" position="attributes">
+                    <attribute name="string">Solicitud de compras</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_planned']" position="replace">
+                    <field name="date_planned" widget="date"/>
+                </xpath>
+
+                <field name="payment_term_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+
+                <xpath expr="//field[@name='notes']" position="replace">
+                        <div>Términos y condiciones</div>
+                        <div class="oe_grey" colspan="4">
+                            El pago de la contra-prestación se encuentra condicionado a que El CONTRATISTA se mantenga al corriente de sus obligaciones fiscales,
+                            por lo que deberá entregar la Opinión de Cumplimiento de Obligaciones Fiscales que emite el Sistema de Administración Tributaria.
+                            Cada factura emitida por el CONTRATISTA deberá tener impresa la orden de compra en el apartado donde se señala “la información de
+                            cliente”, o hacer referencia al número señalado en la orden de compra que le fue asignado por el CONTRATANTE El CONTRATISTA se
+                            obliga a enviar la factura al correo cfd_proveedores@grupoifaco.com con la orden de compra entre corchetes, en asunto para que se
+                            pueda dar el trámite correspondiente de no hacerlo por este medio y a esta dirección de correo no se dará tramite alguno a la factura.
+                            Toda entrega de material/producto tiene que realizarse en un horario de 8am a 3pm y por ningún motivo de podrá hacer en horario
+                            diferente al señalado.
+                        </div>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!--Actualización de nombres menús-->
+        <record model="ir.ui.menu" id="purchase.menu_purchase_rfq">
+            <field name="name">Solicitudes de cotización</field>
+            <field name="string">Solicitudes de cotización</field>
+            <field name="display_name">Solicitudes de cotización</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record model="ir.ui.menu" id="purchase.menu_purchase_form_action">
+            <field name="name">Ordenes de compra</field>
+            <field name="string">Ordenes de compra</field>
+            <field name="display_name">Ordenes de compra</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="purchase_order_tree_gi">
+            <field name="name">purchase_order_tree</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="field_parent">child_ids</field>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree colors="#00BCD4:state=='related';#FF0000:state=='cancel';#2766af:state=='merged_order';#00981b:state=='approved'">
+                        <field name="current_sequence" string="Referencia"/>
+                        <field name="partner_id"/>
+                        <field name="requisition_id"/>
+                        <field name="employee_assig"/>
+                        <field name="state"/>
+                        <field name="order_related" invisible="1"/>
+                    </tree>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

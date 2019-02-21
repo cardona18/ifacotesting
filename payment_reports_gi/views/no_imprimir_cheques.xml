@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_no_imprimir_cheques_gi">
+            <field name="name">view_no_imprimir_cheques_form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account_check_printing.view_account_payment_form_inherited"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='print_checks']" position="replace"/>
+            </field>
+        </record>
+    </data>
+</odoo>
