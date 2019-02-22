@@ -216,7 +216,7 @@
                      <attribute name="states">sent,bid,confirmed,approved,except_picking,except_invoice</attribute>
                  </xpath> -->
 
-                <xpath expr="//field[@name='invoice_count']" position="replace">
+                <xpath expr="//field[@name='invoice_count']" position="after">
                     <field name="invoice_count_gi" widget="statinfo" string="Facturas"/>
                 </xpath>
 

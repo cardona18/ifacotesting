@@ -83,7 +83,16 @@ class stock_picking(models.Model):
                             for line_id in move_line.move_line_ids:
 
                                 if line_id.qty_done > 0.0:
-                                    reception_id = self.env['purchase.reception'].create({'product_id': line_id.product_id.id, 'order_id': purchases_order.id, 'qty': line_id.qty_done, 'get_qty': line_id.qty_done, 'state': 'received','date_request': fields.Date.today(), 'move_line': line_id.id, 'company_id' : self.company_id.id, 'picking_id':self.id, 'purchase_line_id': move_line.purchase_line_id.id})
+                                    reception_id = self.env['purchase.reception'].create({'product_id': line_id.product_id.id,
+                                                                                          'order_id': purchases_order.id,
+                                                                                          'qty': line_id.qty_done,
+                                                                                          'get_qty': line_id.qty_done,
+                                                                                          'state': 'received',
+                                                                                          'date_request': fields.Date.today(),
+                                                                                          'move_line': line_id.id,
+                                                                                          'company_id' : self.company_id.id,
+                                                                                          'picking_id':self.id,
+                                                                                          'purchase_line_id': move_line.purchase_line_id.id})
 
                                     folio_sequence = self.env['ir.sequence'].sudo().search([('name', '=', 'reception'),('company_id','=', self.company_id.id)], limit=1)
 

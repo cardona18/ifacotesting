@@ -66,9 +66,9 @@ class purchase_requisition_gi(models.Model):
                 return employee
             else:
 
-                if current_job_id.category_job == 'is_director':
-                    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
-                    return boss_of_employee
+               # if current_job_id.category_job == 'is_director':
+                #    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
+                 #   return boss_of_employee
 
                 if current_job_id.category_job == 'is_manager':
                     boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
@@ -76,28 +76,28 @@ class purchase_requisition_gi(models.Model):
 
                 #Jefes con gerente y jefes que pueden aprobar
 
-                if current_job_id.category_job == 'is_boss' and current_job_id.job_id_boss.category_job != 'is_director':
-                    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
-                    return boss_of_employee
+                #if current_job_id.category_job == 'is_boss' and current_job_id.job_id_boss.category_job != 'is_director':
+                 #   boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
+                  #  return boss_of_employee
 
-                if current_job_id.category_job == 'is_boss' and current_job_id.job_id_boss.category_job == 'is_director':
-                    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
-                    return boss_of_employee
+                #if current_job_id.category_job == 'is_boss' and current_job_id.job_id_boss.category_job == 'is_director':
+                 #   boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
+                  #  return boss_of_employee
 
 
                 #Operarios y contribuidores individuales
 
-                if current_job_id.job_id_boss.category_job == 'is_boss' and current_job_id.job_id_boss.job_id_boss.category_job != 'is_director':
-                    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.job_id_boss.id)])
-                    return boss_of_employee
+                #if current_job_id.job_id_boss.category_job == 'is_boss' and current_job_id.job_id_boss.job_id_boss.category_job != 'is_director':
+                 #   boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.job_id_boss.id)])
+                  #  return boss_of_employee
 
-                if current_job_id.job_id_boss.category_job == 'is_boss' and current_job_id.job_id_boss.job_id_boss.category_job == 'is_director':
-                    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
-                    return boss_of_employee
+               # if current_job_id.job_id_boss.category_job == 'is_boss' and current_job_id.job_id_boss.job_id_boss.category_job == 'is_director':
+                #    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
+                 #   return boss_of_employee
 
-                if current_job_id.job_id_boss.category_job == 'is_manager' and current_job_id.job_id_boss.job_id_boss.category_job == 'is_director':
-                    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
-                    return boss_of_employee
+               # if current_job_id.job_id_boss.category_job == 'is_manager' and current_job_id.job_id_boss.job_id_boss.category_job == 'is_director':
+                #    boss_of_employee = self.env['hr.employee'].search([('job_id', '=', current_job_id.job_id_boss.id)])
+                 #   return boss_of_employee
 
 
 
@@ -170,13 +170,13 @@ class purchase_requisition_gi(models.Model):
         self.description = description
 
 
-    def _allowed_dst_ids(self):
-        """
-        Regresa solo gerentes y directores para indicar quien usará los productos.
-        """
-        jobs = self.env['hr.job'].sudo().search([('category_job', 'in', ('is_manager','is_director'))])
-        employees = self.env['hr.employee'].sudo().search([('job_id', 'in', [job.id for job in jobs] )])
-        return [('id', 'in', [employee.id for employee in employees])]
+   # def _allowed_dst_ids(self):
+    #    """
+     #   Regresa solo gerentes y directores para indicar quien usará los productos.
+      #  """
+       # jobs = self.env['hr.job'].sudo().search([('category_job', 'in', ('is_manager','is_director'))])
+        #employees = self.env['hr.employee'].sudo().search([('job_id', 'in', [job.id for job in jobs] )])
+        #return [('id', 'in', [employee.id for employee in employees])]
 
 
     def get_employee_department_id(self):
@@ -285,13 +285,13 @@ class purchase_requisition_gi(models.Model):
     employee_id = fields.Many2one(
         'hr.employee',
         string='Empleado que lo usará',
-        domain=_allowed_dst_ids
+        #domain=_allowed_dst_ids
     )
 
     employee_approve = fields.Many2one(
         'hr.employee',
         string='Empleado que aprueba',
-        default=get_employee_approve,
+        #default=get_employee_approve,
         track_visibility="onchenge"
     )
 

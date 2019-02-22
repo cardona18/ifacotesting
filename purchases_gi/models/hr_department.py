@@ -20,5 +20,5 @@ class hr_department_gi(models.Model):
 	employee_assigned = fields.Many2one(
 		'hr.employee',
 		string='Personal de compras asignado',
-		track_visibility="onchenge", required=True
+		track_visibility="onchenge",
 	)

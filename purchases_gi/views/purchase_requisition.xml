@@ -2,7 +2,7 @@
 <openerp>
     <data>
 
-        <record id="view_purchase_requisition_filter_gi" model="ir.ui.view">
+     <!--   <record id="view_purchase_requisition_filter_gi" model="ir.ui.view">
             <field name="name">purchase.requisition.list.select</field>
             <field name="model">purchase.requisition</field>
             <field name="arch" type="xml">
@@ -26,7 +26,7 @@
                     </group>
                 </search>
             </field>
-        </record>
+        </record> -->
 
         <record model="ir.actions.act_window" id="action_purchase_requisition_to_so">
             <field name="name">Request for Quotation</field>
@@ -45,8 +45,8 @@
             <field name="view_mode">tree,form,graph</field>
             <field name="domain">[]</field>
             <field name="context">{"search_default_user_id":uid}</field>
-            <field name="search_view_id" ref="purchases_gi.view_purchase_requisition_filter_gi"/>
-            <!-- <field name="context">{'department_id': my_department_id}</field> -->
+            <!--<field name="search_view_id" ref="purchases_gi.view_purchase_requisition_filter_gi"/>
+            <! <field name="context">{'department_id': my_department_id}</field> -->
         </record>
 
 

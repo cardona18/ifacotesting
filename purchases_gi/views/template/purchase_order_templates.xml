@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="purchase.report_purchaseorder_document">
+  <!--  <template id="purchase.report_purchaseorder_document">
         <html lang="es">
 
             <t t-call="web.external_layout">
@@ -256,5 +256,5 @@
                 <t t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang"/>
             </t>
         </t>
-    </template>
+    </template>-->
 </odoo>

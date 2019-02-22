@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © <2017> <Juan Carlos Vazquez Beas (jcvazquez@grupoifaco.com.mx)>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import datetime
+from datetime import datetime, date
 import sys, logging
 from odoo import fields, models, api
 
@@ -77,7 +77,7 @@ class stock_picking(models.Model):
 
     date_planned = fields.Date(
         string='Fecha planificada',
-        default=datetime.today(),
+        default=date.today(),
         required=False,
     )
 
