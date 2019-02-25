@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!--
         <record model="ir.ui.menu" id="invoice_import.siagi_invoice_main_menu">
             <field name="groups_id" eval="[(4, ref('account.group_account_user'))]"/>
         </record>
-
+        -->
 
         <!--
         Consultor de ventas
@@ -14,7 +15,7 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance'))]"/>
             <field name="comment">Rol de consultor de ventas.</field>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables')),(4, ref('account_reports.menu_action_followups')),(4, ref('account.menu_finance_receivables_follow_up')),(4, ref('account.menu_finance'))]"/>
+            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables')),(4, ref('account.menu_finance'))]"/>
         </record>
         <!--
         Consultor de compras
@@ -34,9 +35,7 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="implied_ids" eval="[(4, ref('base.module_category_accounting_and_finance')),(4, ref('account_gi.consultant_sales')),(4, ref('account_gi.consultant_purchase')),(4, ref('account.group_account_invoice'))]"/>
             <field name="comment">Rol de contador</field>
-            <field name="menu_access" eval="[(4, ref('account.menu_finance_receivables_master_data')),
-            (4, ref('account.menu_finance_payables_master_data')),
-            (4, ref('account.menu_board_journal_1')),
+            <field name="menu_access" eval="[(4, ref('account.menu_board_journal_1')),
             (4, ref('account.menu_finance_entries')),
             (4, ref('account.menu_finance_entries_accounting_entries')),
             (4, ref('account.menu_action_move_journal_line_form')),
@@ -62,15 +61,12 @@
             (4, ref('account_accountant.account_tag_menu')),
             (4, ref('account_accountant.menu_account_group')),
             (4, ref('account.menu_finance')),
-            (4, ref('account.menu_finance_receivables_master_data')),
-            (4, ref('account.menu_finance_payables_master_data')),
             (4, ref('account.menu_action_account_moves_all')),
             (4, ref('account.menu_action_account_form')),
             (4, ref('account.menu_action_payment_term_form')),
             (4, ref('account_accountant.menu_product_product_categories')),
             (4, ref('account_budget.menu_budget_post_form')),
             (4, ref('account_asset.menu_action_account_asset_asset_list_normal_purchase')),
-            (4, ref('analytic_tag_dimension.AccountAnalyticDimension_menu')),
             (4, ref('account.menu_action_invoice_in_refund')),
             (4, ref('account_gi.menu_account_res_reasons_types')),
             (4, ref('account_gi.menu_account_res_cancel_types')),

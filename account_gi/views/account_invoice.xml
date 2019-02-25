@@ -12,9 +12,9 @@
                     <button name="account_gi.account_invoice_cancel_action" type="action" states="draft,open" string="Cancelar" groups="account.group_account_manager"/>
                 </xpath> -->
 
-                <xpath expr="//button[@name='145']" position="replace">
+                <!-- <xpath expr="//button[@name='145']" position="replace">
                     <button name="145" id="account_invoice_payment_btn" type="action" states="open" string="Register Payment" groups="account.group_account_manager,account_gi.accountant" class="oe_highlight"/>
-                </xpath>
+                </xpath> -->
 
                 <xpath expr="//button[@name='action_invoice_open']" position="replace">
                     <button name="action_invoice_open_gi" type="object" states="draft" string="Validate" class="oe_highlight" groups="account.group_account_manager,account_gi.accountant"/>

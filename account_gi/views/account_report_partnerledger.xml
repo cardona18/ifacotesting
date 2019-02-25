@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>  
-    <data>  
+    <data>
+        <!--
         <template id="report_partnerledger_gi" inherit_id="account.report_partnerledger">
             <xpath expr="//t[@t-name='account.report_partnerledger']" position="replace">
                     <t t-name="account.report_partnerledger">
@@ -103,6 +104,6 @@
            
             </xpath>
         </template>
-
+        -->
     </data>
 </odoo>

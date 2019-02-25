@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>  
-    <data>  
+    <data>
+        <!--
         <template id="report_trialbalance_gi" inherit_id="account.report_trialbalance">
             <xpath expr="//t[@t-name='account.report_trialbalance']" position="replace">
                 <t t-name="account.report_trialbalance">
@@ -64,11 +65,12 @@
                                                 <span t-att-style="style" t-esc="account['balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                             </td>
 
-                                           <!--  <td class="text-right">
+                                           COMENTAR INICIO AQUI
+                                           <td class="text-right">
                                                 <t t-if="account['qty_currency']">
                                                     <span t-att-style="style" t-esc="account['qty_currency']"/>
                                                 </t>
-                                            </td> -->
+                                            </td> COMENTAR FINAL AQUI
 
                                             <td class="text-right">
                                                 <t t-if="account['currency']">
@@ -86,6 +88,6 @@
            
             </xpath>
         </template>
-
+        -->
     </data>
 </odoo>

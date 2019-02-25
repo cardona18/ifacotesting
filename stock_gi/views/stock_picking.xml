@@ -113,7 +113,7 @@
                 </xpath>
 
                 <xpath expr="//field[@name='price_unit']" position="after">
-                    <field name="purchase_line_id"/>
+                    <!-- <field name="purchase_line_id"/> -->
                 </xpath>
 
 
