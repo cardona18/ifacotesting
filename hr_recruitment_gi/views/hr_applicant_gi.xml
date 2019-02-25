@@ -172,13 +172,13 @@
             <field name="sequence">5</field>
         </record>
 
-        <record model="hr.recruitment.stage" id="hr_recruitment.stage_job6">
+ <!--       <record model="hr.recruitment.stage" id="hr_recruitment.stage_job6">
             <field name="name">Incorporación</field>
             <field name="sequence">6</field>
             <field name="fold">True</field>
         </record>
 
-        <!-- <record model="hr.recruitment.stage" id="hr_recruitment.stage_job7">
+         <record model="hr.recruitment.stage" id="hr_recruitment.stage_job7">
             <field name="name">Descarte</field>
             <field name="sequence">7</field>
             <field name="fold">True</field>
