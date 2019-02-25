@@ -463,7 +463,7 @@ class purchase_requisition_gi(models.Model):
         self.origin = requisition.name
         self.partner_ref = requisition.name # to control vendor bill based on agreement reference
         self.notes = requisition.description
-        self.date_order = requisition.date_end or fields.Datetime.now()
+        self.date_order = requisition.date_end or fields.Date.now()
         self.picking_type_id = requisition.picking_type_id.id
 
         if requisition.type_id.line_copy != 'copy':

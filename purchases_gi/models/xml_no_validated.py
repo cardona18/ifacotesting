@@ -5,7 +5,7 @@ import logging
 import sys
 import string
 import base64
-from datetime import datetime
+from datetime import date
 from lxml import etree
 import lxml.etree as ET
 from lxml.etree import XMLSyntaxError
@@ -107,7 +107,7 @@ class xml_no_validated(models.Model):
 
         base_path = '%s/filestore' % config['data_dir']
         repo_path = '%s/%s' % (base_path, self._name.replace('.', '_'))
-        date_path = '%s/%s' % (repo_path, datetime.today().isoformat()[:10])
+        date_path = '%s/%s' % (repo_path, date.today().isoformat()[:10])
 
         if not os.access(base_path, os.W_OK):
             _logger.error("No hay permisos de escritura en: %s", base_path)
@@ -203,14 +203,14 @@ class xml_no_validated(models.Model):
                     if account_tax_id:
                         # Crea linead de factura
                         account_invoice_line_ids.append((0, 0, {'name': item.attrib['Descripcion'],
-                                                                'date_planned': datetime.now(),
+                                                                'date_planned': date.now(),
                                                                 'account_id': acco_acco_line_id.id,
                                                                 'quantity': float(quantity),
                                                                 'price_unit': float(unit_value),
                                                                 'invoice_line_tax_ids': [(6, 0, [account_tax_id.id])]}))
                     else:
                         account_invoice_line_ids.append((0, 0, {'name': item.attrib['Descripcion'],
-                                                                'date_planned': datetime.now(),
+                                                                'date_planned': date.now(),
                                                                 'account_id': acco_acco_line_id.id,
                                                                 'quantity': float(quantity),
                                                                 'price_unit': float(unit_value)}))
@@ -219,7 +219,7 @@ class xml_no_validated(models.Model):
                 else:
                     # Crea linead de factura
                     account_invoice_line_ids.append((0, 0, {'name': item.attrib['Descripcion'],
-                                                            'date_planned': datetime.now(),
+                                                            'date_planned': date.now(),
                                                             'account_id': acco_acco_line_id.id,
                                                             'quantity': float(quantity),
                                                             'price_unit': float(unit_value)}))
