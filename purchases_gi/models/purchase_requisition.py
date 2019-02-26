@@ -115,7 +115,7 @@ class purchase_requisition_gi(models.Model):
             raise ValidationError(' Tienes mas de un empleado asociado a tu usuario del ERP')
 
 
-        current_job_id = (employee[0].job_id if employee else self.env['hr.jowb'])
+        current_job_id = (employee[0].job_id if employee else self.env['hr.job'])
 
         if employee.purchase_especial:
                 return employee
