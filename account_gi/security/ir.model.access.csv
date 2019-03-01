@@ -155,12 +155,6 @@ legal_technical.res_partner_group_lt_manager,res_partner,base.model_res_partner,
 hr_recruitment.access_res_partner_hr_user,res.partner.user,base.model_res_partner,hr_recruitment.group_hr_recruitment_user,1,1,0,1
 crm.access_res_partner,res.partner.crm.user,base.model_res_partner,sales_team.group_sale_salesman,1,1,0,0
 ,,,,,,,
-hr_expense.access_uom_uom_hr_expense_user,product.uom.hr.expense.user,product.model_uom_uom,hr_expense.group_hr_expense_user,1,0,0,0
-mrp.access_uom_uom_mrp_manager,product.uom mrp_manager,product.model_uom_uom,mrp.group_mrp_manager,1,0,0,0
-sale.access_uom_uom_sale_manager,product.uom salemanager,product.model_uom_uom,sales_team.group_sale_manager,1,0,0,0
-purchase.access_uom_uom_purchase_manager,product.uom purchase_manager,product.model_uom_uom,purchase.group_purchase_manager,1,0,0,0
-stock.access_uom_uom_stock_manager,product.uom stock_manager,product.model_uom_uom,stock.group_stock_manager,1,0,0,0
-,,,,,,,
 stock.access_product_category_stock_manager,product.category stock_manager,product.model_product_category,stock.group_stock_manager,1,0,0,0
 purchase.access_product_category_purchase_manager,product.category purchase_manager,product.model_product_category,purchase.group_purchase_manager,1,0,0,0
 sale.access_product_category_sale_manager,product.category salemanager,product.model_product_category,sales_team.group_sale_manager,1,0,0,0
