@@ -25,7 +25,7 @@
         'views/account_invoice.xml',
         #'views/account_invoice_report.xml',
         'views/cfdiv33_report.xml',
-        'views/res_config_settings_views.xml',
+        #'views/res_config_settings_views.xml',
         'views/ir_conf_sqlserver.xml',
         'views/account_payment.xml',
         'views/stock_picking_type.xml', 
