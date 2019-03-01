@@ -23,7 +23,7 @@
                 <xpath expr="//field[@name='ref']" position="after">
                     <field name="partner_id" readonly="0"/>
                     <field name="company_id" readonly="0"/>
-                   <field name="type_product" invisible="1"/>
+                    <field name="type_product" invisible="1"/>
                 </xpath>
 
                 <xpath expr="//field[@name='alert_date']" position="after">
@@ -50,21 +50,23 @@
                         <field name="write_uid" readonly="1"/>
                         <field name="write_date" readonly="1"/>
                     </group>
-               </xpath>
+                </xpath>
 
             </field>
         </record>
 
+        <!--
         <record id="search_product_lot_filter_inherit_gi" model="ir.ui.view">
-        <field name="name">stock.production.lot.search.inherit.gi</field>
-        <field name="model">stock.production.lot</field>
-        <field name="inherit_id" ref="stock.search_product_lot_filter"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='product_id']" position="after">
-                <filter string="Productos almacenables" domain="[('type_product','=','product')]"/>
-            </xpath>
-        </field>
-     </record>
+            <field name="name">stock.production.lot.search.inherit.gi</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.search_product_lot_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <filter string="Productos almacenables" domain="[('type_product','=','product')]"/>
+                </xpath>
+            </field>
+        </record>
+        -->
 
         <record id="stock.action_production_lot_form" model="ir.actions.act_window">
             <field name="domain">[('type_product','=','product')]</field>

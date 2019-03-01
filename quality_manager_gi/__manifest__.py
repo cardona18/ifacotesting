@@ -18,16 +18,16 @@
     'version': '11.1.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','quality','hr','quality_mrp','product','stock'],
+    'depends': ['base','quality','hr','quality_mrp','product','stock','stock_landed_costs'],
 
     # always loaded
     'data': [
         'views/quality_point.xml',
-        'views/quality_check_view_form_small_gi.xml',
+        #'views/quality_check_view_form_small_gi.xml',
         'views/stock_production_lot.xml',
         'views/product_template.xml',
         'views/hr_employee.xml',
-        'views/quality_check.xml',
+        #'views/quality_check.xml',
         'views/stock_move_line.xml',
     ]
 }

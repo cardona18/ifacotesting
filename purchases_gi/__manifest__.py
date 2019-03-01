@@ -20,7 +20,7 @@
     'version': '11.1.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','res_partner_gi','hr','data_filemanager','purchase','stock','mrp_plm','purchase_requisition','stock_gi'],
+    'depends': ['base','res_partner_gi','hr','hr_org_char','data_filemanager','purchase','stock','mrp_plm','purchase_requisition','stock_gi'],
 
     # always loaded
     'data': [

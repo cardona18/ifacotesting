@@ -17,7 +17,7 @@ from odoo import fields, models, api, _
 from odoo.tools import DEFAULT_SERVER_TIME_FORMAT
 from odoo.tools.xml_utils import _check_with_xsd
 
-from odoo.addons.l10n_mx_edi.models.account_invoice import CFDI_TEMPLATE
+#from odoo.addons.l10n_mx_edi.models.account_invoice import CFDI_TEMPLATE
 from odoo.addons.l10n_mx_edi.models.account_invoice import CFDI_TEMPLATE_33
 from odoo.addons.l10n_mx_edi.models.account_invoice import CFDI_XSLT_CADENA
 from odoo.addons.l10n_mx_edi.models.account_invoice import create_list_html

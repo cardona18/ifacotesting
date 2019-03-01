@@ -31,13 +31,13 @@
         'res_partner_gi',
         'product_gi',
         'legal_technical',
-        'ireport_custom'
+        'ireport_custom',
+        'quality_manager_gi'
     ],
 
     # always loaded
     'data': [
         'security/security.xml',
-        'security/ir.model.access.csv',
         'data/shipment_cfdi.xml',
         'wizards/sale_shipping_guide_wizard.xml',
         'wizards/sale_bidding_codes_wizard.xml',
@@ -49,5 +49,6 @@
         'views/sale_bidding.xml',
         'views/sale_shipping_guide.xml',
         'views/sale_order.xml',
+        'security/ir.model.access.csv',
     ]
 }

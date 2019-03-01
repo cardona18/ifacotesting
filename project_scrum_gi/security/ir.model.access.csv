@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_create,perm_write,perm_unlink
-project_scrum_us_project_user,project_scrum_us,model_project_scrum_us,project.group_project_user,1,0,0,0
-project_scrum_sprint_project_user,project_scrum_sprint,model_project_scrum_sprint,project.group_project_user,1,0,0,0

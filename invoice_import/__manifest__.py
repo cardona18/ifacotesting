@@ -16,14 +16,14 @@
     'version': '0.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','web','l10n_mx_edi','mssql_proxy','sale'],
+    'depends': ['base','web','l10n_mx_edi','mrp','mssql_proxy','sale'],
 
     # always loaded
     'data': [
         'views/invoice_import_main.xml',
         'wizards/siagi_invoice_wizard.xml',
         'views/account_invoice.xml',
-        'views/account_invoice_report.xml',
+        #'views/account_invoice_report.xml',
         'views/cfdiv33_report.xml',
         'views/res_config_settings_views.xml',
         'views/ir_conf_sqlserver.xml',
