@@ -193,44 +193,44 @@ class siagi_invoice_wizard(models.TransientModel):
         except Exception as e:
             _logger.error('EXECUTE ERROR: %s', e)
 
-
-    @api.multi
-    def create_import_wizard(self):
-
-        wizard_id = self.create({})
-
-        pending_invoices  = json.loads(self.execute('php /opt/php_files/invoice_query.php PEN %s' % wizard_id.company_id.invoice_db).decode('utf-8'))
-        invoice_ref = self.env['account.invoice']
-
-        self.env['siagi.invoice.line'].search([]).unlink()
-
-        for docid in pending_invoices:
-
-            dtype = docid[:1]
-            code = docid[1:]
-
-            exists = invoice_ref.search([
-                ('company_id', '=', wizard_id.company_id.id),
-                ('origin', '=', 'SIAGI/%s' % code)
-            ])
-
-            if exists.id:
-                continue
-
-            self.env['siagi.invoice.line'].create({
-                'wizard_id': wizard_id.id,
-                'name': code,
-                'itype': dtype,
-                'invoice_date': pending_invoices[docid]['date']
-            })
-
-        return {
-            'name': 'Importar',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'siagi.invoice.wizard',
-            'res_id': wizard_id.id,
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'context': self.env.context
-        }
+    #
+    # @api.multi
+    # def create_import_wizard(self):
+    #
+    #     wizard_id = self.create({})
+    #
+    #     pending_invoices  = json.loads(self.execute('php /opt/php_files/invoice_query.php PEN %s' % wizard_id.company_id.invoice_db).decode('utf-8'))
+    #     invoice_ref = self.env['account.invoice']
+    #
+    #     self.env['siagi.invoice.line'].search([]).unlink()
+    #
+    #     for docid in pending_invoices:
+    #
+    #         dtype = docid[:1]
+    #         code = docid[1:]
+    #
+    #         exists = invoice_ref.search([
+    #             ('company_id', '=', wizard_id.company_id.id),
+    #             ('origin', '=', 'SIAGI/%s' % code)
+    #         ])
+    #
+    #         if exists.id:
+    #             continue
+    #
+    #         self.env['siagi.invoice.line'].create({
+    #             'wizard_id': wizard_id.id,
+    #             'name': code,
+    #             'itype': dtype,
+    #             'invoice_date': pending_invoices[docid]['date']
+    #         })
+    #
+    #     return {
+    #         'name': 'Importar',
+    #         'view_type': 'form',
+    #         'view_mode': 'form',
+    #         'res_model': 'siagi.invoice.wizard',
+    #         'res_id': wizard_id.id,
+    #         'type': 'ir.actions.act_window',
+    #         'target': 'new',
+    #         'context': self.env.context
+    #     }
