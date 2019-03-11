@@ -25,7 +25,7 @@
                 'product',
                 'stock',
                 'product_expiry',
-                'stock_landed_costs'],-
+                'stock_landed_costs'],
 
     # always loaded
     'data': [
