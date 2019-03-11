@@ -18,7 +18,14 @@
     'version': '11.1.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','quality','hr','quality_mrp','product','stock','stock_landed_costs'],
+    'depends': ['base',
+                'quality',
+                'hr',
+                'quality_mrp',
+                'product',
+                'stock',
+                'product_expiry',
+                'stock_landed_costs'],-
 
     # always loaded
     'data': [
