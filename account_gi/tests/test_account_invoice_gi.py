@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # © <2018> < ()>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+print("Hello world!")
 import logging
 from odoo.tests import common
 from datetime import datetime, date, time, timedelta
